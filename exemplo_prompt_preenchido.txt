@@ -1,0 +1,269 @@
+=============================================================================
+EXEMPLO DE PROMPT PREENCHIDO - Charizard ex
+=============================================================================
+
+INFORMAÇÕES BÁSICAS DA CARTA
+=============================================================================
+
+Nome da Carta: Charizard ex
+Número da Carta: 199/165
+Nome Completo (com coleção): Charizard ex - Obsidian Flames Special Illustration Rare
+
+Coleção/Set: Obsidian Flames (Chamas Obsidianas)
+Ano de Lançamento: 2023
+Raridade: Special Illustration Rare (SIR)
+Cor do Badge de Raridade (bg-dark / bg-warning text-dark / bg-danger / bg-success): bg-danger
+
+Tipo do Pokémon: Pokémon ex - Fire
+Idioma: English
+Fabricante: The Pokémon Company International
+Ilustrador/Artista (escolha um):
+  [X] Ilustrador
+  [ ] Artista
+
+=============================================================================
+CAMPOS OPCIONAIS DE IDENTIFICAÇÃO
+=============================================================================
+
+Edição (opcional, ex: Miscellaneous Promotional Card):
+Versão (opcional, ex: USA 2000 - Galaxy Foil):
+Lançamento (opcional, ex: Janeiro de 2024): Agosto de 2023
+Registro AAA (para GBA):
+  [X] Sim
+  [ ] Não
+
+=============================================================================
+INFORMAÇÕES DE GRADUAÇÃO
+=============================================================================
+
+Graduadora:
+  [ ] Manafix
+  [X] GBA
+
+Certificado: P0000301
+Nota Final: 10
+Descrição da Nota (ex: Mint, Heavy Played, Near Mint): Gem Mint
+
+Campo de Data (escolha um):
+  [ ] Data da Certificação:
+  [X] Data da Avaliação: 15/11/2025
+  [ ] Programa:
+
+=============================================================================
+NOTAS DETALHADAS POR COMPONENTE
+=============================================================================
+
+Centering (Centralização): 10
+  Cor do Badge (bg-success / bg-warning text-dark / bg-secondary / bg-dark): bg-success
+
+Corners (Cantos): 10
+  Cor do Badge: bg-success
+
+Edges (Bordas): 10
+  Cor do Badge: bg-success
+
+Surface (Superfície): 10
+  Cor do Badge: bg-success
+
+=============================================================================
+RANKING/POPULAÇÃO
+=============================================================================
+
+Mesma Nota: 1
+Nota Maior: 0
+Total/População: 1
+Label (Total ou População): População
+
+=============================================================================
+FOTOS DA CARTA
+=============================================================================
+
+URL Foto Frente (Cloudinary):
+https://res.cloudinary.com/dyhjjms8y/image/upload/v1234567890/charizard_f.jpg
+
+URL Foto Verso (Cloudinary):
+https://res.cloudinary.com/dyhjjms8y/image/upload/v1234567890/charizard_v.jpg
+
+=============================================================================
+LINKS DE REFERÊNCIA
+=============================================================================
+
+Link Laudo Oficial (Manafix ou GBA):
+https://gbagrading.com.br/card-details/12345678
+
+Link MyP Cards (opcional):
+https://mypcards.com/pokemon/produto/123456/charizard-ex
+
+Link TCGPlayer (opcional):
+https://www.tcgplayer.com/product/charizard-ex
+
+Link Liga Pokémon (opcional):
+https://www.ligapokemon.com.br/?view=cards/card&card=Charizard%20ex
+
+Link Price Charting (opcional):
+https://www.pricecharting.com/game/pokemon-obsidian-flames/charizard-ex-199
+
+=============================================================================
+CONFIGURAÇÕES DE ESTRUTURA
+=============================================================================
+
+Estrutura de Links:
+  [X] Opção A: Links dentro da seção de graduação (padrão Mew e Armarouge)
+  [ ] Opção B: Seção separada "Links de Referência" (padrão Pikachu)
+
+Incluir Observação sobre Data da Perícia:
+  [X] Sim
+  [ ] Não
+
+Formato do Footer:
+  [X] "Laudo gerado em: 25/12/2025"
+  [ ] "Laudo gerado para: [CERTIFICADO]"
+
+=============================================================================
+DESCRIÇÃO DA ESCALA DE GRADUAÇÃO
+=============================================================================
+
+Descrição da Escala:
+A GBA (Grupo Brasileiro de Autenticação) utiliza escala de 1 a 10 com registro
+AAA para autenticidade. A nota 10 (Gem Mint) indica carta em estado pristino,
+perfeita em todos os aspectos, sem qualquer imperfeição visível mesmo sob
+inspeção detalhada. É a nota máxima possível.
+
+=============================================================================
+OBSERVAÇÕES TÉCNICAS DETALHADAS
+=============================================================================
+
+CENTERING (Centralização)
+Ícone [X] ✓ (positivo)  [ ] ⚠ (neutro)  [ ] ! (atenção)
+Cor [X] success  [ ] secondary  [ ] warning
+
+Observação:
+Centralização perfeita. Imagem exatamente centrada com margens simétricas e
+uniformes em todos os lados. Alinhamento impecável entre frente e verso.
+
+CORNERS (Cantos)
+Ícone [X] ✓ (positivo)  [ ] ⚠ (neutro)  [ ] ! (atenção)
+Cor [X] success  [ ] secondary  [ ] warning
+
+Observação:
+Cantos em estado pristino. Sem qualquer whitening, desgaste ou imperfeição.
+Pontas perfeitamente preservadas com geometria impecável.
+
+EDGES (Bordas)
+Ícone [X] ✓ (positivo)  [ ] ⚠ (neutro)  [ ] ! (atenção)
+Cor [X] success  [ ] secondary  [ ] warning
+
+Observação:
+Bordas perfeitas em toda a extensão. Sem whitening, desgaste ou marcas de
+manuseio. Corte limpo e preciso. Estado impecável.
+
+SURFACE (Superfície)
+Ícone [X] ✓ (positivo)  [ ] ⚠ (neutro)  [ ] ! (atenção)
+Cor [X] success  [ ] secondary  [ ] warning
+
+Observação:
+Superfície holográfica em estado perfeito. Brilho uniforme e vibrante. Sem
+arranhões, impressões digitais ou marcas. Cores nítidas e impressão impecável.
+
+AUTENTICIDADE
+Ícone [X] ✓ (positivo)  [ ] ⚠ (neutro)  [ ] ! (atenção)
+Cor [X] success  [ ] secondary  [ ] warning
+Registro AAA (se GBA): AAA
+
+Observação:
+Carta autêntica verificada e registrada como AAA pela GBA. Padrão de impressão,
+holografia, papel e características de produção compatíveis com carta oficial
+de 2023 da The Pokémon Company International.
+
+=============================================================================
+HISTÓRICO DE PROVENIÊNCIA
+=============================================================================
+
+Número de Eventos no Histórico: 3
+
+EVENTO 1
+Data/Período: Agosto de 2023
+Título: Lançamento - Obsidian Flames
+Expandido por padrão: [X] Sim  [ ] Não
+
+Descrição detalhada:
+Charizard ex (199/165) faz parte da coleção Obsidian Flames, lançada em agosto
+de 2023. Esta é uma Special Illustration Rare (SIR), numerada acima do total
+da coleção base (199/165), caracterizando uma das cartas mais raras e valiosas
+do set.
+
+A ilustração mostra Charizard em uma cena dramática com efeitos de fogo, criada
+especialmente para esta versão SIR. É uma das chase cards mais desejadas da
+coleção.
+
+EVENTO 2
+Data/Período: Setembro de 2023
+Título: Aquisição
+Expandido por padrão: [ ] Sim  [X] Não
+
+Descrição detalhada:
+Carta obtida pelo atual proprietário através de compra em loja especializada
+em setembro de 2023, um mês após o lançamento. A carta foi imediatamente
+colocada em sleeve e toploader, mantendo-se em condição pristina desde então.
+
+EVENTO 3
+Data/Período: 15 de Novembro de 2025
+Título: Graduação GBA
+Expandido por padrão: [ ] Sim  [X] Não
+
+Descrição detalhada:
+Graduadora: GBA (Grupo Brasileiro de Autenticação)
+Nota Geral: 10 (Gem Mint)
+Registro: AAA
+Certificado: P0000301
+Data da Avaliação: 15/11/2025
+Notas Detalhadas: Centering: 10 | Corners: 10 | Edges: 10 | Surface: 10
+
+População: 1 carta com esta nota (única nota 10 no sistema GBA)
+
+Observações: Carta encapsulada em case rígido padrão GBA com proteção UV e
+label de graduação. Estado de conservação excepcional confirmado pela
+avaliação técnica.
+
+=============================================================================
+INFORMAÇÕES SOBRE O ARTISTA/ILUSTRADOR
+=============================================================================
+
+Nome do Artista/Ilustrador: aky CG Works
+
+Breve Descrição:
+aky CG Works é o estúdio creditado pela arte desta carta Special Illustration
+Rare.
+
+Características/Trabalhos (lista de bullet points):
+- Estúdio conhecido por renderizações 3D de alta qualidade para o Pokémon TCG
+- Responsável por diversas cartas "ex" e "V" nas eras Scarlet & Violet e Sword & Shield
+- Esta Special Illustration Rare é uma das obras mais impressionantes do estúdio
+- Especializado em criar cenas dinâmicas com efeitos dramáticos de luz e fogo
+- A arte do Charizard ex é considerada uma das melhores da coleção Obsidian Flames
+
+=============================================================================
+NOTAS SOBRE A GRADUADORA
+=============================================================================
+
+Lista de informações sobre a graduadora (bullet points):
+- GBA (Grupo Brasileiro de Autenticação) é uma graduadora brasileira especializada em TCG
+- Sistema de graduação de 1-10 com registro de autenticidade AAA
+- A nota 10 (Gem Mint) é extremamente rara e indica estado absolutamente perfeito
+- População de 1 carta indica que esta é a única com nota 10 no sistema GBA
+- Notas perfeitas (10/10) em todos os componentes são excepcionais
+- A autenticidade AAA da carta foi verificada durante o processo de graduação
+
+=============================================================================
+INFORMAÇÕES ADICIONAIS
+=============================================================================
+
+Nome do arquivo (kebab-case, ex: charizard-ex.html): charizard-ex.html
+
+Observações especiais ou instruções adicionais:
+Esta é uma carta de altíssimo valor com nota perfeita. Destacar a raridade
+da população (única 10) e o estado pristino em todos os componentes.
+
+=============================================================================
+FIM DO EXEMPLO
+=============================================================================

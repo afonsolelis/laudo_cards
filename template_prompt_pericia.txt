@@ -1,0 +1,294 @@
+=============================================================================
+TEMPLATE DE PROMPT PARA CRIAÇÃO DE NOVA PERÍCIA
+=============================================================================
+
+INSTRUÇÕES:
+1. Preencha todos os campos abaixo com as informações da carta
+2. Copie todo o conteúdo preenchido
+3. Cole no Claude Code e diga: "Criar perícia com esses dados"
+4. O Claude usará a skill pericia-template para gerar a página automaticamente
+
+=============================================================================
+INFORMAÇÕES BÁSICAS DA CARTA
+=============================================================================
+
+Nome da Carta:
+Número da Carta:
+Nome Completo (com coleção):
+
+Coleção/Set:
+Ano de Lançamento:
+Raridade:
+Cor do Badge de Raridade (bg-dark / bg-warning text-dark / bg-danger / bg-success):
+
+Tipo do Pokémon:
+Idioma:
+Fabricante:
+Ilustrador/Artista (escolha um):
+  [ ] Ilustrador
+  [ ] Artista
+
+=============================================================================
+CAMPOS OPCIONAIS DE IDENTIFICAÇÃO
+=============================================================================
+
+Edição (opcional, ex: Miscellaneous Promotional Card):
+Versão (opcional, ex: USA 2000 - Galaxy Foil):
+Lançamento (opcional, ex: Janeiro de 2024):
+Registro AAA (para GBA):
+  [ ] Sim
+  [ ] Não
+
+=============================================================================
+INFORMAÇÕES DE GRADUAÇÃO
+=============================================================================
+
+Graduadora:
+  [ ] Manafix
+  [ ] GBA
+
+Certificado:
+Nota Final:
+Descrição da Nota (ex: Mint, Heavy Played, Near Mint):
+
+Campo de Data (escolha um):
+  [ ] Data da Certificação:
+  [ ] Data da Avaliação:
+  [ ] Programa:
+
+url:
+
+=============================================================================
+NOTAS DETALHADAS POR COMPONENTE
+=============================================================================
+
+Centering (Centralização):
+  Cor do Badge (bg-success / bg-warning text-dark / bg-secondary / bg-dark):
+
+Corners (Cantos):
+  Cor do Badge:
+
+Edges (Bordas):
+  Cor do Badge:
+
+Surface (Superfície):
+  Cor do Badge:
+
+=============================================================================
+RANKING/POPULAÇÃO
+=============================================================================
+
+Mesma Nota:
+Nota Maior:
+Total/População:
+Label (Total ou População):
+
+=============================================================================
+FOTOS DA CARTA
+=============================================================================
+
+URL Foto Frente (Cloudinary):
+
+URL Foto Verso (Cloudinary):
+
+=============================================================================
+LINKS DE REFERÊNCIA
+=============================================================================
+
+Link Laudo Oficial (Manafix ou GBA):
+
+Link MyP Cards (opcional):
+
+Link TCGPlayer (opcional):
+
+Link Liga Pokémon (opcional):
+
+Link Price Charting (opcional):
+
+=============================================================================
+CONFIGURAÇÕES DE ESTRUTURA
+=============================================================================
+
+Estrutura de Links:
+  [ ] Opção A: Links dentro da seção de graduação (padrão Mew e Armarouge)
+  [ ] Opção B: Seção separada "Links de Referência" (padrão Pikachu)
+
+Incluir Observação sobre Data da Perícia:
+  [ ] Sim
+  [ ] Não
+
+Formato do Footer:
+  [ ] "Laudo gerado em: [DATA]"
+  [ ] "Laudo gerado para: [CERTIFICADO]"
+
+=============================================================================
+DESCRIÇÃO DA ESCALA DE GRADUAÇÃO
+=============================================================================
+
+Exemplo Manafix:
+"A Manafix utiliza escala de 1 a 10 com designações: MP (Moderately Played),
+HP (Heavy Played), DMG (Damaged). A nota 3 HP indica desgaste significativo
+que afeta a apresentação visual da carta."
+
+Exemplo GBA:
+"A GBA (Grupo Brasileiro de Autenticação) utiliza escala de 1 a 10 com
+registro AAA para autenticidade. A nota 9 (Mint) indica carta em excelente
+estado de conservação, com mínimas imperfeições visíveis apenas sob
+inspeção detalhada."
+
+Descrição da Escala:
+
+
+=============================================================================
+OBSERVAÇÕES TÉCNICAS DETALHADAS
+=============================================================================
+
+CENTERING (Centralização)
+Ícone [ ] ✓ (positivo)  [ ] ⚠ (neutro)  [ ] ! (atenção)
+Cor [ ] success  [ ] secondary  [ ] warning
+
+Observação:
+
+
+
+CORNERS (Cantos)
+Ícone [ ] ✓ (positivo)  [ ] ⚠ (neutro)  [ ] ! (atenção)
+Cor [ ] success  [ ] secondary  [ ] warning
+
+Observação:
+
+
+
+EDGES (Bordas)
+Ícone [ ] ✓ (positivo)  [ ] ⚠ (neutro)  [ ] ! (atenção)
+Cor [ ] success  [ ] secondary  [ ] warning
+
+Observação:
+
+
+
+SURFACE (Superfície)
+Ícone [ ] ✓ (positivo)  [ ] ⚠ (neutro)  [ ] ! (atenção)
+Cor [ ] success  [ ] secondary  [ ] warning
+
+Observação:
+
+
+
+AUTENTICIDADE
+Ícone [ ] ✓ (positivo)  [ ] ⚠ (neutro)  [ ] ! (atenção)
+Cor [ ] success  [ ] secondary  [ ] warning
+Registro AAA (se GBA):
+
+Observação:
+
+
+
+=============================================================================
+HISTÓRICO DE PROVENIÊNCIA
+=============================================================================
+
+Número de Eventos no Histórico:
+
+EVENTO 1
+Data/Período:
+Título:
+Expandido por padrão: [ ] Sim  [ ] Não
+
+Descrição detalhada:
+
+
+
+
+
+EVENTO 2
+Data/Período:
+Título:
+Expandido por padrão: [ ] Sim  [ ] Não
+
+Descrição detalhada:
+
+
+
+
+
+EVENTO 3
+Data/Período:
+Título:
+Expandido por padrão: [ ] Sim  [ ] Não
+
+Descrição detalhada:
+
+
+
+
+
+EVENTO 4 (opcional)
+Data/Período:
+Título:
+Expandido por padrão: [ ] Sim  [ ] Não
+
+Descrição detalhada:
+
+
+
+
+
+EVENTO 5 (opcional)
+Data/Período:
+Título:
+Expandido por padrão: [ ] Sim  [ ] Não
+
+Descrição detalhada:
+
+
+
+
+
+=============================================================================
+INFORMAÇÕES SOBRE O ARTISTA/ILUSTRADOR
+=============================================================================
+
+Nome do Artista/Ilustrador:
+
+Breve Descrição:
+
+
+
+Características/Trabalhos (lista de bullet points):
+-
+-
+-
+-
+-
+
+=============================================================================
+NOTAS SOBRE A GRADUADORA
+=============================================================================
+
+Lista de informações sobre a graduadora (bullet points):
+-
+-
+-
+-
+-
+
+=============================================================================
+INFORMAÇÕES ADICIONAIS
+=============================================================================
+
+Nome do arquivo (kebab-case, ex: charizard-ex.html):
+
+Observações especiais ou instruções adicionais:
+
+
+
+=============================================================================
+FIM DO TEMPLATE
+=============================================================================
+
+Após preencher, copie tudo e cole no Claude Code dizendo:
+"Criar perícia com esses dados"
+
+A skill pericia-template processará automaticamente e gerará a página HTML
+completa em pages/[nome-arquivo].html
