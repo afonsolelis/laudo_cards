@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{NOME_CARTA}} ({{NUMERO_CARTA}}) - Laudo de Perícia</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="../index.html">Cartas Graduadas</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="../index.html">Voltar ao Portfólio</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Header Section -->
+    <section class="bg-dark text-white py-4 border-bottom border-secondary">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-8">
+                    <h1 class="h3 mb-2">Laudo de Perícia Técnica</h1>
+                    <p class="mb-0 text-secondary">{{NOME_CARTA_COMPLETO}}</p>
+                </div>
+                <div class="col-md-4 text-md-end">
+                    <span class="badge bg-secondary fs-6">Cert: {{CERTIFICADO}}</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Card Details -->
+    <div class="container my-5">
+        <!-- Fotos e Identificação -->
+        <div class="row mb-4">
+            <div class="col-lg-6 mb-3 mb-lg-0">
+                <!-- Fotos da Carta -->
+                <div class="card shadow border-secondary h-100">
+                    <div class="card-header bg-secondary text-white">
+                        <h5 class="mb-0">Fotos da Carta</h5>
+                    </div>
+                    <div class="card-body bg-white p-0">
+                        <div class="row g-0">
+                            <div class="col-6">
+                                <div class="p-3 border-end">
+                                    <img src="{{URL_FOTO_FRENTE}}" alt="{{NOME_CARTA}} - Frente" class="w-100 rounded border" style="height: 400px; object-fit: contain; cursor: pointer;" data-bs-toggle="modal" data-bs-target="#modalFrente">
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="p-3">
+                                    <img src="{{URL_FOTO_VERSO}}" alt="{{NOME_CARTA}} - Verso" class="w-100 rounded border" style="height: 400px; object-fit: contain; cursor: pointer;" data-bs-toggle="modal" data-bs-target="#modalVerso">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-6">
+                <div class="card shadow border-secondary h-100">
+                    <div class="card-header bg-secondary text-white">
+                        <h5 class="mb-0">Identificação</h5>
+                    </div>
+                    <div class="card-body bg-white">
+                        <table class="table table-sm table-borderless mb-0">
+                            <tbody>
+                                <tr>
+                                    <td class="fw-bold text-dark" style="width: 40%;">Nome:</td>
+                                    <td>{{NOME_CARTA}}</td>
+                                </tr>
+                                <tr>
+                                    <td class="fw-bold text-dark">Número:</td>
+                                    <td>{{NUMERO_CARTA}}</td>
+                                </tr>
+                                <tr>
+                                    <td class="fw-bold text-dark">Coleção:</td>
+                                    <td>{{COLECAO}}</td>
+                                </tr>
+                                <tr>
+                                    <td class="fw-bold text-dark">Ano:</td>
+                                    <td>{{ANO}}</td>
+                                </tr>
+                                <tr>
+                                    <td class="fw-bold text-dark">Raridade:</td>
+                                    <td><span class="badge {{BADGE_COR_RARIDADE}}">{{RARIDADE}}</span></td>
+                                </tr>
+                                <tr>
+                                    <td class="fw-bold text-dark">Tipo:</td>
+                                    <td>{{TIPO}}</td>
+                                </tr>
+                                <tr>
+                                    <td class="fw-bold text-dark">Idioma:</td>
+                                    <td>{{IDIOMA}}</td>
+                                </tr>
+                                <!-- OPCIONAL: Campos adicionais (Edição, Versão, Lançamento, etc) -->
+                                <!-- EXEMPLO:
+                                <tr>
+                                    <td class="fw-bold text-dark">Edição:</td>
+                                    <td>{{EDICAO}}</td>
+                                </tr>
+                                <tr>
+                                    <td class="fw-bold text-dark">Versão:</td>
+                                    <td>{{VERSAO}}</td>
+                                </tr>
+                                -->
+                                <tr>
+                                    <td class="fw-bold text-dark">Fabricante:</td>
+                                    <td>{{FABRICANTE}}</td>
+                                </tr>
+                                <tr>
+                                    <td class="fw-bold text-dark">{{ARTISTA_LABEL}}:</td>
+                                    <td>{{ARTISTA_NOME}}</td>
+                                </tr>
+                                <!-- OPCIONAL: Registro AAA (apenas GBA) -->
+                                <!-- EXEMPLO:
+                                <tr>
+                                    <td class="fw-bold text-dark">Registro:</td>
+                                    <td><span class="badge bg-success">AAA</span></td>
+                                </tr>
+                                -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Graduação -->
+        <div class="card shadow border-secondary mb-4">
+            <div class="card-header bg-dark text-white">
+                <h5 class="mb-0">Graduação {{GRADUADORA_NOME}}</h5>
+            </div>
+            <div class="card-body bg-white">
+                <div class="text-center mb-3">
+                    <h2 class="display-4 text-dark mb-0">{{NOTA_FINAL}}</h2>
+                    <p class="text-secondary mb-0" style="font-size: 1.1rem;">{{NOTA_DESCRICAO}}</p>
+                </div>
+                <hr>
+                <div class="mb-3">
+                    <div class="text-secondary mb-1" style="font-size: 0.95rem;">Graduadora:</div>
+                    <strong style="font-size: 1.1rem;">{{GRADUADORA_NOME_COMPLETO}}</strong>
+                </div>
+                <div class="mb-3">
+                    <div class="text-secondary mb-1" style="font-size: 0.95rem;">Certificado:</div>
+                    <strong class="font-monospace" style="font-size: 1.1rem;">{{CERTIFICADO}}</strong>
+                </div>
+                <!-- CAMPO VARIÁVEL: Data da Certificação / Data da Avaliação / Programa -->
+                <div class="mb-3">
+                    <div class="text-secondary mb-1" style="font-size: 0.95rem;">{{DATA_LABEL}}:</div>
+                    <strong style="font-size: 1.1rem;">{{DATA_VALOR}}</strong>
+                </div>
+                <hr>
+                <div class="text-secondary mb-2" style="font-size: 1rem;">Ranking de Graduação:</div>
+                <div class="row g-2 mb-3">
+                    <div class="col-4">
+                        <div class="border rounded p-3 text-center">
+                            <div class="fw-bold text-dark" style="font-size: 1.5rem;">{{RANKING_MESMA_NOTA}}</div>
+                            <div class="text-secondary" style="font-size: 0.9rem;">Mesma Nota</div>
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="border rounded p-3 text-center">
+                            <div class="fw-bold text-dark" style="font-size: 1.5rem;">{{RANKING_NOTA_MAIOR}}</div>
+                            <div class="text-secondary" style="font-size: 0.9rem;">Nota Maior</div>
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="border rounded p-3 text-center">
+                            <div class="fw-bold text-dark" style="font-size: 1.5rem;">{{RANKING_TOTAL}}</div>
+                            <div class="text-secondary" style="font-size: 0.9rem;">{{RANKING_TOTAL_LABEL}}</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- OPÇÃO 1: Links dentro da seção de graduação (padrão Mew e Armarouge) -->
+                <a href="{{LINK_LAUDO_OFICIAL}}" target="_blank" class="btn btn-dark btn-sm w-100 mb-2">
+                    Ver Laudo Oficial {{GRADUADORA_NOME}}
+                </a>
+                <!-- Links adicionais opcionais -->
+                <!-- EXEMPLO:
+                <a href="{{LINK_MYP}}" target="_blank" class="btn btn-secondary btn-sm w-100 mb-2">
+                    Ver na MyP Cards
+                </a>
+                <a href="{{LINK_TCGPLAYER}}" target="_blank" class="btn btn-secondary btn-sm w-100 mb-2">
+                    Ver no TCGPlayer
+                </a>
+                <a href="{{LINK_LIGA_POKEMON}}" target="_blank" class="btn btn-secondary btn-sm w-100 mb-2">
+                    Ver na Liga Pokémon
+                </a>
+                <a href="{{LINK_PRICE_CHARTING}}" target="_blank" class="btn btn-secondary btn-sm w-100">
+                    Ver no Price Charting
+                </a>
+                -->
+            </div>
+        </div>
+
+        <!-- OPÇÃO 2: Seção separada de Links de Referência (padrão Pikachu) -->
+        <!-- DESCOMENTE SE PREFERIR USAR ESTA ESTRUTURA:
+        <div class="card shadow border-secondary mb-4">
+            <div class="card-header bg-secondary text-white">
+                <h5 class="mb-0">Links de Referência e Consulta de Preços</h5>
+            </div>
+            <div class="card-body bg-white">
+                <div class="row g-2">
+                    <div class="col-md-6">
+                        <a href="{{LINK_TCGPLAYER}}" target="_blank" class="btn btn-outline-dark w-100">
+                            <i class="bi bi-cart3"></i> TCGPlayer (EUA)
+                        </a>
+                    </div>
+                    <div class="col-md-6">
+                        <a href="{{LINK_PRICE_CHARTING}}" target="_blank" class="btn btn-outline-dark w-100">
+                            <i class="bi bi-graph-up"></i> Price Charting
+                        </a>
+                    </div>
+                    <div class="col-md-6">
+                        <a href="{{LINK_LIGA_POKEMON}}" target="_blank" class="btn btn-outline-dark w-100">
+                            <i class="bi bi-info-circle"></i> Liga Pokémon Brasil
+                        </a>
+                    </div>
+                    <div class="col-md-6">
+                        <a href="{{LINK_MYP}}" target="_blank" class="btn btn-outline-dark w-100">
+                            <i class="bi bi-shop"></i> MYP Cards
+                        </a>
+                    </div>
+                </div>
+                <div class="alert alert-light border mt-3 mb-0">
+                    <p class="small mb-0"><strong>Nota:</strong> Os links acima direcionam para fontes externas de consulta de preços e informações sobre a carta. Os valores podem variar conforme o mercado e a condição da carta.</p>
+                </div>
+            </div>
+        </div>
+        -->
+
+        <!-- Perícia Section -->
+        <div class="card shadow border-secondary mb-4">
+            <div class="card-header bg-secondary text-white">
+                <h5 class="mb-0">Análise de Condição - {{GRADUADORA_NOME}}</h5>
+            </div>
+            <div class="card-body bg-white">
+                <div class="alert alert-secondary mb-4">
+                    <h6 class="alert-heading fw-bold mb-2">Escala {{GRADUADORA_NOME}}</h6>
+                    <p class="small mb-0">{{DESCRICAO_ESCALA}}</p>
+                </div>
+
+                <div class="mb-4">
+                    <div class="d-flex justify-content-between align-items-center mb-2">
+                        <span class="fw-bold text-dark">Classificação Geral:</span>
+                        <span class="badge {{BADGE_COR_NOTA}} fs-6">{{NOTA_FINAL}} - {{NOTA_DESCRICAO}}</span>
+                    </div>
+                    <div class="progress" style="height: 25px;">
+                        <div class="progress-bar {{PROGRESS_BAR_COR}}" role="progressbar" style="width: {{PORCENTAGEM_NOTA}}%;" aria-valuenow="{{PORCENTAGEM_NOTA}}" aria-valuemin="0" aria-valuemax="100">
+                            <span class="fw-bold">{{NOTA_FINAL}}/10</span>
+                        </div>
+                    </div>
+                </div>
+
+                <h6 class="text-dark mb-3">Análise Detalhada por Componente</h6>
+
+                <div class="card mb-2 border">
+                    <div class="card-body py-2 px-3">
+                        <div class="row align-items-center">
+                            <div class="col-8">
+                                <span class="small">Centering (Centralização)</span>
+                            </div>
+                            <div class="col-4 text-end">
+                                <span class="badge {{BADGE_COR_CENTERING}}">{{NOTA_CENTERING}}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card mb-2 border">
+                    <div class="card-body py-2 px-3">
+                        <div class="row align-items-center">
+                            <div class="col-8">
+                                <span class="small">Corners (Cantos)</span>
+                            </div>
+                            <div class="col-4 text-end">
+                                <span class="badge {{BADGE_COR_CORNERS}}">{{NOTA_CORNERS}}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card mb-2 border">
+                    <div class="card-body py-2 px-3">
+                        <div class="row align-items-center">
+                            <div class="col-8">
+                                <span class="small">Edges (Bordas)</span>
+                            </div>
+                            <div class="col-4 text-end">
+                                <span class="badge {{BADGE_COR_EDGES}}">{{NOTA_EDGES}}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card mb-3 border">
+                    <div class="card-body py-2 px-3">
+                        <div class="row align-items-center">
+                            <div class="col-8">
+                                <span class="small">Surface (Superfície)</span>
+                            </div>
+                            <div class="col-4 text-end">
+                                <span class="badge {{BADGE_COR_SURFACE}}">{{NOTA_SURFACE}}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <h6 class="text-dark mb-3">Observações Técnicas</h6>
+
+                <!-- Adicione os alerts com as observações técnicas aqui -->
+                <!-- EXEMPLO:
+                <div class="alert alert-light border mb-2">
+                    <div class="d-flex">
+                        <span class="text-success me-2">✓</span>
+                        <div>
+                            <strong class="small d-block">Centering ({{NOTA_CENTERING}}/10)</strong>
+                            <span class="small text-secondary">{{OBSERVACAO_CENTERING}}</span>
+                        </div>
+                    </div>
+                </div>
+                -->
+
+                <div class="alert alert-light border mb-0">
+                    <div class="d-flex">
+                        <span class="text-success me-2">✓</span>
+                        <div>
+                            <strong class="small d-block">Autenticidade{{REGISTRO_AAA_LABEL}}</strong>
+                            <span class="small text-secondary">{{OBSERVACAO_AUTENTICIDADE}}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- History Section -->
+        <div class="card shadow border-secondary">
+            <div class="card-header bg-dark text-white">
+                <h5 class="mb-0">{{TITULO_HISTORICO}}</h5>
+            </div>
+            <div class="card-body bg-white">
+                <div class="accordion accordion-flush" id="accordionHistory">
+                    <!-- Timeline Items -->
+                    <!-- ADICIONE OS ITENS DE TIMELINE AQUI -->
+                    <!-- EXEMPLO:
+                    <div class="accordion-item border-bottom">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button bg-light" type="button" data-bs-toggle="collapse" data-bs-target="#collapse1">
+                                <div>
+                                    <strong class="d-block">{{DATA_EVENTO}}</strong>
+                                    <span class="small text-secondary">{{TITULO_EVENTO}}</span>
+                                </div>
+                            </button>
+                        </h2>
+                        <div id="collapse1" class="accordion-collapse collapse show" data-bs-parent="#accordionHistory">
+                            <div class="accordion-body bg-white small">
+                                {{CONTEUDO_EVENTO}}
+                            </div>
+                        </div>
+                    </div>
+                    -->
+                </div>
+
+                <!-- Informações sobre o Artista/Ilustrador -->
+                <div class="alert alert-dark mt-4 mb-3">
+                    <h6 class="alert-heading small fw-bold">Sobre o {{ARTISTA_LABEL}} - {{ARTISTA_NOME}}</h6>
+                    <p class="small mb-2">{{ARTISTA_DESCRICAO}}</p>
+                    <ul class="mb-0 small">
+                        <!-- ADICIONE OS ITENS SOBRE O ARTISTA AQUI -->
+                    </ul>
+                </div>
+
+                <!-- Notas sobre a Graduação -->
+                <div class="alert alert-secondary mb-0">
+                    <h6 class="alert-heading small fw-bold">Notas sobre a Graduação {{GRADUADORA_NOME}}</h6>
+                    <ul class="mb-0 small">
+                        <!-- ADICIONE AS NOTAS SOBRE A GRADUADORA AQUI -->
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- OPCIONAL: Observação Importante sobre data da perícia -->
+        <!-- EXEMPLO:
+        <div class="alert alert-info mt-4">
+            <h6 class="alert-heading fw-bold mb-2">Observação Importante</h6>
+            <p class="small mb-0">O estado de conservação, as notas de graduação e a população apresentados neste laudo refletem a condição da carta na data da {{TIPO_AVALIACAO}} realizada pela {{GRADUADORA_NOME}} em <strong>{{DATA_PERICIA}}</strong>. Estes dados podem sofrer alterações ao longo do tempo conforme novas cartas são graduadas e adicionadas ao sistema.</p>
+        </div>
+        -->
+
+        <div class="text-center mt-4">
+            <a href="../index.html" class="btn btn-dark btn-lg">Voltar ao Portfólio</a>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-4 mt-5 border-top border-secondary">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <p class="mb-0 text-secondary">&copy; 2025 Cartas Pokémon TCG Graduadas</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <p class="mb-0 text-secondary">{{FOOTER_TEXTO}}</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Modal Frente -->
+    <div class="modal fade" id="modalFrente" tabindex="-1" aria-labelledby="modalFrenteLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content bg-dark">
+                <div class="modal-header border-secondary">
+                    <h5 class="modal-title text-white" id="modalFrenteLabel">{{NOME_CARTA}} - Frente</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Fechar"></button>
+                </div>
+                <div class="modal-body text-center p-0">
+                    <img src="{{URL_FOTO_FRENTE}}" alt="{{NOME_CARTA}} - Frente" class="img-fluid">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Verso -->
+    <div class="modal fade" id="modalVerso" tabindex="-1" aria-labelledby="modalVersoLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content bg-dark">
+                <div class="modal-header border-secondary">
+                    <h5 class="modal-title text-white" id="modalVersoLabel">{{NOME_CARTA}} - Verso</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Fechar"></button>
+                </div>
+                <div class="modal-body text-center p-0">
+                    <img src="{{URL_FOTO_VERSO}}" alt="{{NOME_CARTA}} - Verso" class="img-fluid">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

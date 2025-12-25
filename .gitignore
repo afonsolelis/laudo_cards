@@ -1,0 +1,26 @@
+# Claude Code local settings (não compartilhar)
+.claude/settings.local.json
+.claude/.auth.json
+
+# Mas permitir skills (compartilhar com o time)
+!.claude/skills/
+
+# Node modules (se houver)
+node_modules/
+
+# Arquivos temporários
+*.tmp
+*.log
+.DS_Store
+Thumbs.db
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Build/dist (se houver)
+dist/
+build/
