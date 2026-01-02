@@ -5,6 +5,64 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cartas Pokémon TCG Graduadas - Coleção Certificada</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* Compact card list styling */
+        #cardList .list-group-item {
+            padding: 0.6rem 0.85rem;
+            margin-bottom: 0.5rem;
+            transition: all 0.2s ease;
+            border-left: 3px solid transparent;
+        }
+
+        #cardList .list-group-item:hover {
+            transform: translateX(3px);
+            border-left-color: #0d6efd;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        #cardList img {
+            height: 70px;
+            object-fit: contain;
+            transition: transform 0.2s;
+        }
+
+        #cardList .list-group-item:hover img {
+            transform: scale(1.05);
+        }
+
+        #cardList h6 {
+            font-size: 0.95rem;
+            margin-bottom: 0.3rem;
+            font-weight: 600;
+        }
+
+        #cardList .badge {
+            font-size: 0.7rem;
+            padding: 0.25rem 0.45rem;
+            margin-right: 0.25rem;
+            margin-bottom: 0.15rem;
+        }
+
+        #cardList .row {
+            margin-left: 0;
+            margin-right: 0;
+        }
+
+        #cardList .col-md-2,
+        #cardList .col-md-5,
+        #cardList .col-md-3 {
+            padding-left: 0.5rem;
+            padding-right: 0.5rem;
+        }
+
+        #cardList small {
+            font-size: 0.75rem;
+        }
+
+        #cardList a {
+            font-weight: 500;
+        }
+    </style>
 </head>
 <body class="bg-light">
     <!-- Header -->
@@ -42,12 +100,54 @@
         <div class="container">
             <h2 class="text-dark mb-4">Cartas Graduadas</h2>
 
-            <div class="list-group">
+            <!-- Search Bar and Filters -->
+            <div class="mb-4">
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <input type="text" id="searchInput" class="form-control" placeholder="Buscar por nome, número, conjunto ou certificado..." aria-label="Buscar cartas">
+                    </div>
+                    <div class="col-md-3">
+                        <select id="graderFilter" class="form-select" aria-label="Filtrar por certificadora">
+                            <option value="">Todas as certificadoras</option>
+                            <option value="GBA">GBA</option>
+                            <option value="Manafix">Manafix</option>
+                            <option value="CAPY">CAPY</option>
+                        </select>
+                    </div>
+                    <div class="col-md-3">
+                        <select id="gradeFilter" class="form-select" aria-label="Filtrar por nota">
+                            <option value="">Todas as notas</option>
+                            <option value="10">10 (Gem Mint)</option>
+                            <option value="9">9 (Mint)</option>
+                            <option value="8.5">8.5 (NM-M+)</option>
+                            <option value="8">8 (NM)</option>
+                            <option value="7.5">7.5 (SP+)</option>
+                            <option value="3">3 (HP)</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row g-3 mt-1">
+                    <div class="col-md-6">
+                        <select id="sortOrder" class="form-select" aria-label="Ordenar cartas">
+                            <option value="default">Ordem padrão</option>
+                            <option value="name-asc">Nome (A-Z)</option>
+                            <option value="name-desc">Nome (Z-A)</option>
+                            <option value="grade-desc">Nota (maior para menor)</option>
+                            <option value="grade-asc">Nota (menor para maior)</option>
+                        </select>
+                    </div>
+                    <div class="col-md-6">
+                        <small id="resultCount" class="text-secondary d-block mt-2"></small>
+                    </div>
+                </div>
+            </div>
+
+            <div class="list-group" id="cardList">
                 <!-- Card 1: Pikachu ex Gold -->
-                <div class="list-group-item list-group-item-action border-secondary mb-2" role="button" tabindex="0" onclick="window.location.href='pages/pikachu-gold.html';" onkeypress="if (event.key === 'Enter' || event.key === ' ') { window.location.href='pages/pikachu-gold.html'; }">
+                <div class="list-group-item list-group-item-action border-secondary" role="button" tabindex="0" onclick="window.location.href='pages/pikachu-gold.html';" onkeypress="if (event.key === 'Enter' || event.key === ' ') { window.location.href='pages/pikachu-gold.html'; }">
                     <div class="row align-items-center">
-                        <div class="col-md-2 text-center mb-3 mb-md-0">
-                            <img src="https://res.cloudinary.com/dyhjjms8y/image/upload/v1766596666/1_aai0zf.jpg" alt="Pikachu ex (179/131) - Frente" class="img-fluid rounded border" style="height: 90px; object-fit: contain;" loading="lazy">
+                        <div class="col-md-2 text-center">
+                            <img src="https://res.cloudinary.com/dyhjjms8y/image/upload/v1766596666/1_aai0zf.jpg" alt="Pikachu ex (179/131) - Frente" class="img-fluid rounded border" loading="lazy">
                         </div>
                         <div class="col-md-5">
                             <h6 class="mb-1 fw-bold">Pikachu ex (179/131)</h6>
@@ -66,10 +166,10 @@
                 </div>
 
                 <!-- Card 2: Pikachu Shiny Chinese -->
-                <div class="list-group-item list-group-item-action border-secondary mb-2" role="button" tabindex="0" onclick="window.location.href='pages/pikachu-shiny-chinese.html';" onkeypress="if (event.key === 'Enter' || event.key === ' ') { window.location.href='pages/pikachu-shiny-chinese.html'; }">
+                <div class="list-group-item list-group-item-action border-secondary" role="button" tabindex="0" onclick="window.location.href='pages/pikachu-shiny-chinese.html';" onkeypress="if (event.key === 'Enter' || event.key === ' ') { window.location.href='pages/pikachu-shiny-chinese.html'; }">
                     <div class="row align-items-center">
-                        <div class="col-md-2 text-center mb-3 mb-md-0">
-                            <img src="https://res.cloudinary.com/dyhjjms8y/image/upload/v1766702554/1_ng40vt.jpg" alt="Pikachu Shiny (0706/09) - Frente" class="img-fluid rounded border" style="height: 90px; object-fit: contain;" loading="lazy">
+                        <div class="col-md-2 text-center">
+                            <img src="https://res.cloudinary.com/dyhjjms8y/image/upload/v1766702554/1_ng40vt.jpg" alt="Pikachu Shiny (0706/09) - Frente" class="img-fluid rounded border" loading="lazy">
                         </div>
                         <div class="col-md-5">
                             <h6 class="mb-1 fw-bold">Pikachu Shiny (0706/09)</h6>
@@ -88,10 +188,10 @@
                 </div>
 
                 <!-- Card 3: Pikachu V SWSH145 -->
-                <div class="list-group-item list-group-item-action border-secondary mb-2" role="button" tabindex="0" onclick="window.location.href='pages/pikachu-v-swsh145.html';" onkeypress="if (event.key === 'Enter' || event.key === ' ') { window.location.href='pages/pikachu-v-swsh145.html'; }">
+                <div class="list-group-item list-group-item-action border-secondary" role="button" tabindex="0" onclick="window.location.href='pages/pikachu-v-swsh145.html';" onkeypress="if (event.key === 'Enter' || event.key === ' ') { window.location.href='pages/pikachu-v-swsh145.html'; }">
                     <div class="row align-items-center">
-                        <div class="col-md-2 text-center mb-3 mb-md-0">
-                            <img src="https://res.cloudinary.com/dyhjjms8y/image/upload/v1766696741/1_fioxls.jpg" alt="Pikachu V (SWSH145) - Frente" class="img-fluid rounded border" style="height: 90px; object-fit: contain;" loading="lazy">
+                        <div class="col-md-2 text-center">
+                            <img src="https://res.cloudinary.com/dyhjjms8y/image/upload/v1766696741/1_fioxls.jpg" alt="Pikachu V (SWSH145) - Frente" class="img-fluid rounded border" loading="lazy">
                         </div>
                         <div class="col-md-5">
                             <h6 class="mb-1 fw-bold">Pikachu V (SWSH145)</h6>
@@ -110,10 +210,10 @@
                 </div>
 
                 <!-- Card 4: Poké Bola SWSH146 -->
-                <div class="list-group-item list-group-item-action border-secondary mb-2" role="button" tabindex="0" onclick="window.location.href='pages/poke-ball-swsh146.html';" onkeypress="if (event.key === 'Enter' || event.key === ' ') { window.location.href='pages/poke-ball-swsh146.html'; }">
+                <div class="list-group-item list-group-item-action border-secondary" role="button" tabindex="0" onclick="window.location.href='pages/poke-ball-swsh146.html';" onkeypress="if (event.key === 'Enter' || event.key === ' ') { window.location.href='pages/poke-ball-swsh146.html'; }">
                     <div class="row align-items-center">
-                        <div class="col-md-2 text-center mb-3 mb-md-0">
-                            <img src="https://res.cloudinary.com/dyhjjms8y/image/upload/v1766698815/1_qsnzc6.jpg" alt="Poké Bola (SWSH146) - Frente" class="img-fluid rounded border" style="height: 90px; object-fit: contain;" loading="lazy">
+                        <div class="col-md-2 text-center">
+                            <img src="https://res.cloudinary.com/dyhjjms8y/image/upload/v1766698815/1_qsnzc6.jpg" alt="Poké Bola (SWSH146) - Frente" class="img-fluid rounded border" loading="lazy">
                         </div>
                         <div class="col-md-5">
                             <h6 class="mb-1 fw-bold">Poké Bola (SWSH146)</h6>
@@ -132,10 +232,10 @@
                 </div>
 
                 <!-- Card 5: Armarouge -->
-                <div class="list-group-item list-group-item-action border-secondary mb-2" role="button" tabindex="0" onclick="window.location.href='pages/armarouge.html';" onkeypress="if (event.key === 'Enter' || event.key === ' ') { window.location.href='pages/armarouge.html'; }">
+                <div class="list-group-item list-group-item-action border-secondary" role="button" tabindex="0" onclick="window.location.href='pages/armarouge.html';" onkeypress="if (event.key === 'Enter' || event.key === ' ') { window.location.href='pages/armarouge.html'; }">
                     <div class="row align-items-center">
-                        <div class="col-md-2 text-center mb-3 mb-md-0">
-                            <img src="https://res.cloudinary.com/dyhjjms8y/image/upload/v1766189772/armarouge_115_q3wysl.jpg" alt="Armarouge Shiny (115/091) - Frente" class="img-fluid rounded border" style="height: 90px; object-fit: contain;" loading="lazy">
+                        <div class="col-md-2 text-center">
+                            <img src="https://res.cloudinary.com/dyhjjms8y/image/upload/v1766189772/armarouge_115_q3wysl.jpg" alt="Armarouge Shiny (115/091) - Frente" class="img-fluid rounded border" loading="lazy">
                         </div>
                         <div class="col-md-5">
                             <h6 class="mb-1 fw-bold">Armarouge Shiny (115/091)</h6>
@@ -154,10 +254,10 @@
                 </div>
 
                 <!-- Card 6: Mew Ancestral -->
-                <div class="list-group-item list-group-item-action border-secondary mb-2" role="button" tabindex="0" onclick="window.location.href='pages/mew-anciao.html';" onkeypress="if (event.key === 'Enter' || event.key === ' ') { window.location.href='pages/mew-anciao.html'; }">
+                <div class="list-group-item list-group-item-action border-secondary" role="button" tabindex="0" onclick="window.location.href='pages/mew-anciao.html';" onkeypress="if (event.key === 'Enter' || event.key === ' ') { window.location.href='pages/mew-anciao.html'; }">
                     <div class="row align-items-center">
-                        <div class="col-md-2 text-center mb-3 mb-md-0">
-                            <img src="https://res.cloudinary.com/dyhjjms8y/image/upload/v1766189317/mew_anciao_f_zwsbqf.jpg" alt="Mew Ancestral (IP/∞) - Frente" class="img-fluid rounded border" style="height: 90px; object-fit: contain;" loading="lazy">
+                        <div class="col-md-2 text-center">
+                            <img src="https://res.cloudinary.com/dyhjjms8y/image/upload/v1766189317/mew_anciao_f_zwsbqf.jpg" alt="Mew Ancestral (IP/∞) - Frente" class="img-fluid rounded border" loading="lazy">
                         </div>
                         <div class="col-md-5">
                             <h6 class="mb-1 fw-bold">Mew Ancestral (IP/∞)</h6>
@@ -176,10 +276,10 @@
                 </div>
 
                 <!-- Card 7: Mewtwo SVP 052 -->
-                <div class="list-group-item list-group-item-action border-secondary mb-2" role="button" tabindex="0" onclick="window.location.href='pages/mewtwo-svp052.html';" onkeypress="if (event.key === 'Enter' || event.key === ' ') { window.location.href='pages/mewtwo-svp052.html'; }">
+                <div class="list-group-item list-group-item-action border-secondary" role="button" tabindex="0" onclick="window.location.href='pages/mewtwo-svp052.html';" onkeypress="if (event.key === 'Enter' || event.key === ' ') { window.location.href='pages/mewtwo-svp052.html'; }">
                     <div class="row align-items-center">
-                        <div class="col-md-2 text-center mb-3 mb-md-0">
-                            <img src="https://res.cloudinary.com/dyhjjms8y/image/upload/v1766702878/1_izclfx.jpg" alt="Mewtwo (SVP 052) - Frente" class="img-fluid rounded border" style="height: 90px; object-fit: contain;" loading="lazy">
+                        <div class="col-md-2 text-center">
+                            <img src="https://res.cloudinary.com/dyhjjms8y/image/upload/v1766702878/1_izclfx.jpg" alt="Mewtwo (SVP 052) - Frente" class="img-fluid rounded border" loading="lazy">
                         </div>
                         <div class="col-md-5">
                             <h6 class="mb-1 fw-bold">Mewtwo (SVP 052)</h6>
@@ -198,10 +298,10 @@
                 </div>
 
                 <!-- Card 8: Lileep -->
-                <div class="list-group-item list-group-item-action border-secondary mb-2" role="button" tabindex="0" onclick="window.location.href='pages/lileep-coroa-estelar-145-capy-10.html';" onkeypress="if (event.key === 'Enter' || event.key === ' ') { window.location.href='pages/lileep-coroa-estelar-145-capy-10.html'; }">
+                <div class="list-group-item list-group-item-action border-secondary" role="button" tabindex="0" onclick="window.location.href='pages/lileep-coroa-estelar-145-capy-10.html';" onkeypress="if (event.key === 'Enter' || event.key === ' ') { window.location.href='pages/lileep-coroa-estelar-145-capy-10.html'; }">
                     <div class="row align-items-center">
-                        <div class="col-md-2 text-center mb-3 mb-md-0">
-                            <img src="https://res.cloudinary.com/dyhjjms8y/image/upload/v1766980034/1_ibbo9o.jpg" alt="Lileep (145/142) - Frente" class="img-fluid rounded border" style="height: 90px; object-fit: contain;" loading="lazy">
+                        <div class="col-md-2 text-center">
+                            <img src="https://res.cloudinary.com/dyhjjms8y/image/upload/v1766980034/1_ibbo9o.jpg" alt="Lileep (145/142) - Frente" class="img-fluid rounded border" loading="lazy">
                         </div>
                         <div class="col-md-5">
                             <h6 class="mb-1 fw-bold">Lileep (145/142)</h6>
@@ -220,10 +320,10 @@
                 </div>
 
                 <!-- Card 9: Eevee ex -->
-                <div class="list-group-item list-group-item-action border-secondary mb-2" role="button" tabindex="0" onclick="window.location.href='pages/eevee-ex-evol-prism-c001090.html';" onkeypress="if (event.key === 'Enter' || event.key === ' ') { window.location.href='pages/eevee-ex-evol-prism-c001090.html'; }">
+                <div class="list-group-item list-group-item-action border-secondary" role="button" tabindex="0" onclick="window.location.href='pages/eevee-ex-evol-prism-c001090.html';" onkeypress="if (event.key === 'Enter' || event.key === ' ') { window.location.href='pages/eevee-ex-evol-prism-c001090.html'; }">
                     <div class="row align-items-center">
-                        <div class="col-md-2 text-center mb-3 mb-md-0">
-                            <img src="https://res.cloudinary.com/dyhjjms8y/image/upload/v1766981038/1_tfc4th.jpg" alt="Eevee ex (167/131) - Frente" class="img-fluid rounded border" style="height: 90px; object-fit: contain;" loading="lazy">
+                        <div class="col-md-2 text-center">
+                            <img src="https://res.cloudinary.com/dyhjjms8y/image/upload/v1766981038/1_tfc4th.jpg" alt="Eevee ex (167/131) - Frente" class="img-fluid rounded border" loading="lazy">
                         </div>
                         <div class="col-md-5">
                             <h6 class="mb-1 fw-bold">Eevee ex (167/131)</h6>
@@ -242,10 +342,10 @@
                 </div>
 
                 <!-- Card 10: Flareon -->
-                <div class="list-group-item list-group-item-action border-secondary mb-2" role="button" tabindex="0" onclick="window.location.href='pages/flareon-shadow-blue-sea-c001087.html';" onkeypress="if (event.key === 'Enter' || event.key === ' ') { window.location.href='pages/flareon-shadow-blue-sea-c001087.html'; }">
+                <div class="list-group-item list-group-item-action border-secondary" role="button" tabindex="0" onclick="window.location.href='pages/flareon-shadow-blue-sea-c001087.html';" onkeypress="if (event.key === 'Enter' || event.key === ' ') { window.location.href='pages/flareon-shadow-blue-sea-c001087.html'; }">
                     <div class="row align-items-center">
-                        <div class="col-md-2 text-center mb-3 mb-md-0">
-                            <img src="https://res.cloudinary.com/dyhjjms8y/image/upload/v1766981922/1_drnfbs.jpg" alt="Flareon (#002/008) - Frente" class="img-fluid rounded border" style="height: 90px; object-fit: contain;" loading="lazy">
+                        <div class="col-md-2 text-center">
+                            <img src="https://res.cloudinary.com/dyhjjms8y/image/upload/v1766981922/1_drnfbs.jpg" alt="Flareon (#002/008) - Frente" class="img-fluid rounded border" loading="lazy">
                         </div>
                         <div class="col-md-5">
                             <h6 class="mb-1 fw-bold">Flareon (#002/008)</h6>
@@ -264,10 +364,10 @@
                 </div>
 
                 <!-- Card 11: Jolteon -->
-                <div class="list-group-item list-group-item-action border-secondary mb-2" role="button" tabindex="0" onclick="window.location.href='pages/jolteon-shadow-blue-sea-c001089.html';" onkeypress="if (event.key === 'Enter' || event.key === ' ') { window.location.href='pages/jolteon-shadow-blue-sea-c001089.html'; }">
+                <div class="list-group-item list-group-item-action border-secondary" role="button" tabindex="0" onclick="window.location.href='pages/jolteon-shadow-blue-sea-c001089.html';" onkeypress="if (event.key === 'Enter' || event.key === ' ') { window.location.href='pages/jolteon-shadow-blue-sea-c001089.html'; }">
                     <div class="row align-items-center">
-                        <div class="col-md-2 text-center mb-3 mb-md-0">
-                            <img src="https://res.cloudinary.com/dyhjjms8y/image/upload/v1766982999/1_aggsxh.jpg" alt="Jolteon (#005/008) - Frente" class="img-fluid rounded border" style="height: 90px; object-fit: contain;" loading="lazy">
+                        <div class="col-md-2 text-center">
+                            <img src="https://res.cloudinary.com/dyhjjms8y/image/upload/v1766982999/1_aggsxh.jpg" alt="Jolteon (#005/008) - Frente" class="img-fluid rounded border" loading="lazy">
                         </div>
                         <div class="col-md-5">
                             <h6 class="mb-1 fw-bold">Jolteon (#005/008)</h6>
@@ -286,10 +386,10 @@
                 </div>
 
                 <!-- Card 12: Vaporeon -->
-                <div class="list-group-item list-group-item-action border-secondary mb-2" role="button" tabindex="0" onclick="window.location.href='pages/vaporeon-shadow-blue-sea-c001088.html';" onkeypress="if (event.key === 'Enter' || event.key === ' ') { window.location.href='pages/vaporeon-shadow-blue-sea-c001088.html'; }">
+                <div class="list-group-item list-group-item-action border-secondary" role="button" tabindex="0" onclick="window.location.href='pages/vaporeon-shadow-blue-sea-c001088.html';" onkeypress="if (event.key === 'Enter' || event.key === ' ') { window.location.href='pages/vaporeon-shadow-blue-sea-c001088.html'; }">
                     <div class="row align-items-center">
-                        <div class="col-md-2 text-center mb-3 mb-md-0">
-                            <img src="https://res.cloudinary.com/dyhjjms8y/image/upload/v1766983457/1_dnehtl.jpg" alt="Vaporeon (#003/008) - Frente" class="img-fluid rounded border" style="height: 90px; object-fit: contain;" loading="lazy">
+                        <div class="col-md-2 text-center">
+                            <img src="https://res.cloudinary.com/dyhjjms8y/image/upload/v1766983457/1_dnehtl.jpg" alt="Vaporeon (#003/008) - Frente" class="img-fluid rounded border" loading="lazy">
                         </div>
                         <div class="col-md-5">
                             <h6 class="mb-1 fw-bold">Vaporeon (#003/008)</h6>
@@ -308,10 +408,10 @@
                 </div>
 
                 <!-- Card 13: Gastly -->
-                <div class="list-group-item list-group-item-action border-secondary mb-2" role="button" tabindex="0" onclick="window.location.href='pages/gastly-177-temporal-forces-gba-9.html';" onkeypress="if (event.key === 'Enter' || event.key === ' ') { window.location.href='pages/gastly-177-temporal-forces-gba-9.html'; }">
+                <div class="list-group-item list-group-item-action border-secondary" role="button" tabindex="0" onclick="window.location.href='pages/gastly-177-temporal-forces-gba-9.html';" onkeypress="if (event.key === 'Enter' || event.key === ' ') { window.location.href='pages/gastly-177-temporal-forces-gba-9.html'; }">
                     <div class="row align-items-center">
-                        <div class="col-md-2 text-center mb-3 mb-md-0">
-                            <img src="https://res.cloudinary.com/dyhjjms8y/image/upload/v1767051376/1_kz5kjr.jpg" alt="Gastly (177/162) - Frente" class="img-fluid rounded border" style="height: 90px; object-fit: contain;" loading="lazy">
+                        <div class="col-md-2 text-center">
+                            <img src="https://res.cloudinary.com/dyhjjms8y/image/upload/v1767051376/1_kz5kjr.jpg" alt="Gastly (177/162) - Frente" class="img-fluid rounded border" loading="lazy">
                         </div>
                         <div class="col-md-5">
                             <h6 class="mb-1 fw-bold">Gastly (177/162)</h6>
@@ -347,5 +447,124 @@
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        // Search, filter and sort functionality
+        const searchInput = document.getElementById('searchInput');
+        const graderFilter = document.getElementById('graderFilter');
+        const gradeFilter = document.getElementById('gradeFilter');
+        const sortOrder = document.getElementById('sortOrder');
+        const cardList = document.getElementById('cardList');
+        const resultCount = document.getElementById('resultCount');
+
+        function getCardName(card) {
+            const nameElement = card.querySelector('h6');
+            return nameElement ? nameElement.textContent.trim() : '';
+        }
+
+        function getCardGrade(card) {
+            // Find the badge element that contains the grade
+            const badgeElements = card.querySelectorAll('.badge');
+
+            for (let badge of badgeElements) {
+                const text = badge.textContent.trim();
+                // Look for patterns like "GBA 9", "CAPY 10", "Manafix 7.5"
+                const gradeMatch = text.match(/(?:GBA|CAPY|Manafix)\s+(\d+\.?\d*)/i);
+                if (gradeMatch) {
+                    return parseFloat(gradeMatch[1]);
+                }
+            }
+            return 0;
+        }
+
+        function sortCards() {
+            const sortValue = sortOrder.value;
+
+            // Get current cards from DOM
+            const cards = Array.from(cardList.getElementsByClassName('list-group-item'));
+
+            if (sortValue === 'default') {
+                // Don't sort, just filter
+                filterCards();
+                return;
+            }
+
+            switch(sortValue) {
+                case 'name-asc':
+                    cards.sort((a, b) => getCardName(a).localeCompare(getCardName(b)));
+                    break;
+                case 'name-desc':
+                    cards.sort((a, b) => getCardName(b).localeCompare(getCardName(a)));
+                    break;
+                case 'grade-desc':
+                    cards.sort((a, b) => {
+                        const gradeA = getCardGrade(a);
+                        const gradeB = getCardGrade(b);
+                        return gradeB - gradeA;
+                    });
+                    break;
+                case 'grade-asc':
+                    cards.sort((a, b) => {
+                        const gradeA = getCardGrade(a);
+                        const gradeB = getCardGrade(b);
+                        return gradeA - gradeB;
+                    });
+                    break;
+            }
+
+            // Clear the list and re-append in sorted order
+            cardList.innerHTML = '';
+            cards.forEach(card => cardList.appendChild(card));
+
+            // Re-apply filters after sorting
+            filterCards();
+        }
+
+        function filterCards() {
+            const searchTerm = searchInput.value.toLowerCase();
+            const graderValue = graderFilter.value;
+            const gradeValue = gradeFilter.value;
+            let visibleCount = 0;
+
+            const cards = cardList.getElementsByClassName('list-group-item');
+            Array.from(cards).forEach(card => {
+                const cardText = card.textContent.toLowerCase();
+                const matchesSearch = cardText.includes(searchTerm);
+                const matchesGrader = graderValue === '' || cardText.includes(graderValue.toLowerCase());
+
+                let matchesGrade = true;
+                if (gradeValue) {
+                    const cardGrade = getCardGrade(card);
+                    const targetGrade = parseFloat(gradeValue);
+                    matchesGrade = Math.abs(cardGrade - targetGrade) < 0.01; // Use small epsilon for float comparison
+                }
+
+                if (matchesSearch && matchesGrader && matchesGrade) {
+                    card.style.display = '';
+                    visibleCount++;
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+
+            // Update result count
+            const totalCards = cards.length;
+            if (searchTerm || graderValue || gradeValue) {
+                resultCount.textContent = `Mostrando ${visibleCount} de ${totalCards} cartas`;
+            } else {
+                resultCount.textContent = `${totalCards} cartas no total`;
+            }
+        }
+
+        // Event listeners
+        searchInput.addEventListener('input', filterCards);
+        graderFilter.addEventListener('change', filterCards);
+        gradeFilter.addEventListener('change', filterCards);
+        sortOrder.addEventListener('change', sortCards);
+
+        // Initialize count
+        const initialCards = cardList.getElementsByClassName('list-group-item');
+        resultCount.textContent = `${initialCards.length} cartas no total`;
+    </script>
 </body>
 </html>
