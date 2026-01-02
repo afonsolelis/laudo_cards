@@ -539,8 +539,8 @@
 
             for (let badge of badgeElements) {
                 const text = badge.textContent.trim();
-                // Look for patterns like "GBA 9", "CAPY 10", "Manafix 7.5"
-                const gradeMatch = text.match(/(?:GBA|CAPY|Manafix)\s+(\d+\.?\d*)/i);
+                // Look for patterns like "GBA 9", "CAPY 10", "Manafix 7.5", "CGC 7", "ACE 8", "BGS 9.5"
+                const gradeMatch = text.match(/(?:GBA|CAPY|Manafix|CGC|ACE|BGS)\s+(\d+\.?\d*)/i);
                 if (gradeMatch) {
                     return parseFloat(gradeMatch[1]);
                 }
