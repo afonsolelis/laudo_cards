@@ -115,6 +115,7 @@
                             <option value="CGC">CGC</option>
                             <option value="ACE">ACE</option>
                             <option value="BGS">BGS</option>
+                            <option value="PSA">PSA</option>
                         </select>
                     </div>
                     <div class="col-md-3">
@@ -499,6 +500,28 @@
                         </div>
                     </div>
                 </div>
+
+                <!-- Card 17: Zoroark GX -->
+                <div class="list-group-item list-group-item-action border-secondary" role="button" tabindex="0" onclick="window.location.href='pages/zoroark-gx-shining-legends-psa-9.html';" onkeypress="if (event.key === 'Enter' || event.key === ' ') { window.location.href='pages/zoroark-gx-shining-legends-psa-9.html'; }">
+                    <div class="row align-items-center">
+                        <div class="col-md-2 text-center">
+                            <img src="https://res.cloudinary.com/dyhjjms8y/image/upload/v1767371296/1_gnhkt1.jpg" alt="Zoroark GX (#53) - Frente" class="img-fluid rounded border" loading="lazy">
+                        </div>
+                        <div class="col-md-5">
+                            <h6 class="mb-1 fw-bold">Zoroark GX (#53)</h6>
+                            <div>
+                                <span class="badge bg-dark small">Shining Legends</span>
+                                <span class="badge bg-dark small">Ultra Rare (GX)</span>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <span class="badge bg-success">PSA 9 Mint</span>
+                        </div>
+                        <div class="col-md-3 small text-secondary">
+                            Cert: <a href="https://www.psacard.com/cert/59856688/" target="_blank" class="text-decoration-none">59856688</a>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -539,8 +562,8 @@
 
             for (let badge of badgeElements) {
                 const text = badge.textContent.trim();
-                // Look for patterns like "GBA 9", "CAPY 10", "Manafix 7.5", "CGC 7", "ACE 8", "BGS 9.5"
-                const gradeMatch = text.match(/(?:GBA|CAPY|Manafix|CGC|ACE|BGS)\s+(\d+\.?\d*)/i);
+                // Look for patterns like "GBA 9", "CAPY 10", "Manafix 7.5", "CGC 7", "ACE 8", "BGS 9.5", "PSA 9"
+                const gradeMatch = text.match(/(?:GBA|CAPY|Manafix|CGC|ACE|BGS|PSA)\s+(\d+\.?\d*)/i);
                 if (gradeMatch) {
                     return parseFloat(gradeMatch[1]);
                 }
