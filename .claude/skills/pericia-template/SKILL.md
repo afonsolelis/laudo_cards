@@ -25,12 +25,20 @@ Faça perguntas ao usuário usando o **AskUserQuestion** tool para coletar:
 - Número da carta
 - Coleção/Set
 - Ano de lançamento
-- Raridade
+- Raridade (use a padronização abaixo)
 - Tipo do Pokémon
 - Idioma
 - Fabricante
 - Ilustrador/Artista
 - URLs das fotos (frente e verso)
+
+**Padronização de Raridades:**
+Use sempre o formato misto português/inglês com abreviações padronizadas:
+- SAR: "Ilustração Especial Rara (SAR)"
+- AR: "Ilustração Rara (AR)"
+- HR: "Hyper Rare (HR)"
+- SR: "Shiny Rare (SR)"
+- UR: "Ultra Rare (UR)"
 
 **Informações de Graduação:**
 - Graduadora (Manafix ou GBA)
@@ -131,6 +139,7 @@ Antes de salvar, verifique:
 - ✅ Accordion do histórico tem IDs únicos (collapse1, collapse2, etc)
 - ✅ Primeiro item do histórico tem `collapse show` se apropriado
 - ✅ Cores dos badges correspondem às notas
+- ✅ Raridade usa o formato padronizado (SAR, AR, HR, SR, UR)
 - ✅ Nome do arquivo usa formato kebab-case (ex: pikachu-gold.html)
 
 ## Referências
@@ -156,6 +165,7 @@ Assistente:
 - **Consistência:** Mantenha o padrão das páginas existentes
 - **Formato de Data:** Sempre DD/MM/YYYY
 - **Nome de Arquivo:** Use kebab-case e seja descritivo
-- **Graduadoras:** Respeite as diferenças entre Manafix e GBA
+- **Graduadoras:** Respeite as diferenças entre Manafix, GBA, CAPY, CGC, ACE, BGS e PSA
 - **Bootstrap 5.3.0:** Use as classes corretas do Bootstrap
 - **Accordion IDs:** Devem ser únicos dentro da página
+- **Raridades:** SEMPRE use o formato padronizado misto (português + abreviação inglesa)

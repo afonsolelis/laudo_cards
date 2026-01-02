@@ -51,7 +51,7 @@
 |----------|-----------|---------|
 | `{{COLECAO}}` | Nome da coleção | Prismatic Evolutions (Evoluções Prismáticas) |
 | `{{ANO}}` | Ano de lançamento | 2025 |
-| `{{RARIDADE}}` | Texto da raridade | Hyper Rare (Gold) |
+| `{{RARIDADE}}` | Texto da raridade (use padronização) | Hyper Rare (HR) |
 | `{{BADGE_COR_RARIDADE}}` | Classe CSS para cor do badge | bg-warning text-dark |
 | `{{TIPO}}` | Tipo do Pokémon/carta | Pokémon ex Básico - Elétrico |
 | `{{IDIOMA}}` | Idioma da carta | Português |
@@ -250,13 +250,42 @@ cp template_pericia.html pages/nova-carta.html
 
 ---
 
+## Padronização de Raridades
+
+**IMPORTANTE:** Use sempre o formato misto português/inglês com abreviações padronizadas:
+
+| Raridade | Formato Padrão | Cor do Badge |
+|----------|----------------|--------------|
+| Special Art Rare | Ilustração Especial Rara (SAR) | bg-danger |
+| Art Rare | Ilustração Rara (AR) | bg-warning text-dark |
+| Hyper Rare | Hyper Rare (HR) | bg-warning text-dark |
+| Shiny Rare | Shiny Rare (SR) | bg-success |
+| Ultra Rare | Ultra Rare (UR) | bg-dark |
+| Promo | Promo + descrição | bg-dark / bg-warning |
+| Full Art | Full Art | bg-dark |
+| Common | Common + descrição | bg-success / bg-secondary |
+
+**Exemplos corretos:**
+- ✅ "Ilustração Especial Rara (SAR)"
+- ✅ "Ilustração Rara (AR)"
+- ✅ "Hyper Rare (HR)"
+- ✅ "Shiny Rare (SR)"
+- ✅ "Ultra Rare (UR)"
+
+**Exemplos INCORRETOS:**
+- ❌ "Special Art Rare" (sem tradução)
+- ❌ "Art Rare" (sem tradução)
+- ❌ "Ilustração Especial Rara (SIR)" (abreviação errada)
+- ❌ "Shiny Rare (S)" (abreviação incompleta)
+- ❌ "Ultra Rare (GX)" (abreviação específica de tipo)
+
+---
+
 ## Notas Importantes
 
 1. **Consistência de Datas:** Use o formato DD/MM/YYYY
-2. **Badges de Raridade:** Ajuste as cores conforme a raridade
-   - Promocional: bg-dark
-   - Shiny Rare: bg-dark
-   - Hyper Rare: bg-warning text-dark
-3. **URLs das Fotos:** Sempre teste se as URLs do Cloudinary estão acessíveis
-4. **Links Externos:** Verifique se todos os links estão funcionando antes de publicar
-5. **Accordion:** O primeiro item do histórico deve ter `collapse show` para iniciar aberto
+2. **Badges de Raridade:** Ajuste as cores conforme a raridade (veja tabela acima)
+3. **Formato de Raridade:** SEMPRE use a padronização mista (português + abreviação inglesa)
+4. **URLs das Fotos:** Sempre teste se as URLs do Cloudinary estão acessíveis
+5. **Links Externos:** Verifique se todos os links estão funcionando antes de publicar
+6. **Accordion:** O primeiro item do histórico deve ter `collapse show` para iniciar aberto
