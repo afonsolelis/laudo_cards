@@ -1,0 +1,39 @@
+# Resumo das Atividades - Sessão de Automação de Laudos
+
+## 1. Configuração do Ambiente
+- **.gitignore**: Adicionada a pasta `.tmp/` para ignorar arquivos temporários.
+- **Dependências**:
+  - Instalação de `tesseract-ocr`, `python3-opencv` e `python3-pip` no ambiente WSL.
+  - Instalação de `pytesseract` e `opencv-python-headless` via pip.
+- **Script Auxiliar (`helper.py`)**:
+  - Implementação de upload para Cloudinary com redimensionamento automático de imagens (limite do plano gratuito).
+  - Implementação de leitura de QR Code (OpenCV e Pyzbar).
+  - **Implementação de OCR (Tesseract)**: Adicionada função `get_text` com pré-processamento (crop toal, thresholding) para ler dados do rótulo quando o QR Code falha.
+
+## 2. Processamento da Carta: Bulbasaur (GBA)
+- **Imagens**:
+  - Processadas e enviadas para o Cloudinary (Frente e Verso).
+- **Extração de Dados**:
+  - **QR Code**: Tentativa de leitura falhou devido à resolução/foco da imagem original.
+  - **OCR**: Sucesso parcial. Leitura refinada para identificar:
+    - Certificado: P0000256
+    - Nota: 9 (Mint)
+    - Subgrades: Surface 10, Corners 10, Edges 9.75, Centering 8.5.
+  - **Pesquisa Manual**: Confirmação da coleção "Mega Evolução" (2025) e raridade.
+- **Geração de Página (`pages/bulbasaur-gba.html`)**:
+  - Página criada baseada no `template_pericia.html`.
+  - Preenchida com dados extraídos e imagens hospedadas.
+  - **Padronização**:
+    - Raridade ajustada para **"Ilustração Rara (AR)"** seguindo `SKILL.md`.
+    - Link de certificado ajustado para busca na home da GBA (fallback).
+
+## 3. Atualização do Portfólio (`index.html`)
+- **Nova Entrada**: Adicionado o card do Bulbasaur no topo da lista.
+- **Padronização Visual**:
+  - Nome formatado como `Bulbasaur (133/132)`.
+  - Badge de raridade ajustado para `bg-warning text-dark` com texto "Ilustração Rara (AR)".
+  - Badge de nota atualizado para `GBA 9 Mint`.
+
+## 4. Status Atual
+- **Bulbasaur**: Concluído ✔️
+- **Próximos Passos**: Processar restantes arquivos na pasta `.tmp` (Pikachu, Charizard, etc.) seguindo o mesmo fluxo padronizado.
