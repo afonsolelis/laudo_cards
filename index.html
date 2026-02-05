@@ -1517,6 +1517,33 @@
     const cardList = document.getElementById('cardList');
     const resultCount = document.getElementById('resultCount');
 
+    function enhanceCardLayout() {
+      const cards = Array.from(cardList.getElementsByClassName('list-group-item'));
+
+      cards.forEach(card => {
+        const row = card.querySelector('.row');
+        if (!row) {
+          return;
+        }
+
+        const imageCol = row.querySelector('.col-md-2');
+        const infoCol = row.querySelector('.col-md-5');
+
+        if (imageCol) {
+          imageCol.classList.add('card-media');
+        }
+
+        if (infoCol) {
+          infoCol.classList.add('card-info');
+          const tagContainer = infoCol.querySelector('div');
+          if (tagContainer && imageCol) {
+            tagContainer.classList.add('card-tags');
+            imageCol.appendChild(tagContainer);
+          }
+        }
+      });
+    }
+
     function getCardName(card) {
       const nameElement = card.querySelector('h6');
       return nameElement ? nameElement.textContent.trim() : '';
@@ -1623,6 +1650,7 @@
     sortOrder.addEventListener('change', sortCards);
 
     // Initialize count
+    enhanceCardLayout();
     const initialCards = cardList.getElementsByClassName('list-group-item');
     resultCount.textContent = `${initialCards.length} cartas no total`;
   </script>
