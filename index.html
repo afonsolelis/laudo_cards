@@ -1526,21 +1526,44 @@
           return;
         }
 
-        const imageCol = row.querySelector('.col-md-2');
-        const infoCol = row.querySelector('.col-md-5');
+        const image = row.querySelector('img');
+        const title = row.querySelector('h6');
+        const tagContainer = row.querySelector('.col-md-5 div');
+        const gradeBadge = row.querySelector('.col-md-2 .badge');
+        const certBlock = row.querySelector('.col-md-3');
 
-        if (imageCol) {
-          imageCol.classList.add('card-media');
+        const gridItem = document.createElement('div');
+        gridItem.className = 'card-grid-item';
+
+        if (image) {
+          const imageWrap = document.createElement('div');
+          imageWrap.appendChild(image);
+          gridItem.appendChild(imageWrap);
         }
 
-        if (infoCol) {
-          infoCol.classList.add('card-info');
-          const tagContainer = infoCol.querySelector('div');
-          if (tagContainer && imageCol) {
-            tagContainer.classList.add('card-tags');
-            imageCol.appendChild(tagContainer);
-          }
+        if (tagContainer) {
+          tagContainer.classList.add('card-tags');
+          gridItem.appendChild(tagContainer);
         }
+
+        if (title) {
+          title.classList.add('mb-0');
+          gridItem.appendChild(title);
+        }
+
+        if (gradeBadge) {
+          const gradeWrap = document.createElement('div');
+          gradeWrap.className = 'card-grade';
+          gradeWrap.appendChild(gradeBadge);
+          gridItem.appendChild(gradeWrap);
+        }
+
+        if (certBlock) {
+          gridItem.appendChild(certBlock);
+        }
+
+        row.innerHTML = '';
+        row.appendChild(gridItem);
       });
     }
 
