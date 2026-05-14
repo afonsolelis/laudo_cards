@@ -6,11 +6,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="../favicon.svg" type="image/svg+xml">
   <title>HOP'S ZACIAN EX - Descritivo</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
 </head>
 
 <body class="bg-light">
+    <a class="visually-hidden-focusable position-absolute top-0 start-0 m-2 p-2 bg-white text-dark rounded" href="#main">Pular para o conteúdo</a>
   <!-- Navigation -->
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container">
@@ -29,7 +30,7 @@
   </nav>
 
   <!-- Header Section -->
-  <section class="bg-dark text-white py-4 border-bottom border-secondary">
+  <section id="main" class="bg-dark text-white py-4 border-bottom border-secondary">
     <div class="container">
       <div class="row align-items-center">
         <div class="col-md-8">
@@ -58,16 +59,14 @@
               <div class="col-6">
                 <div class="p-3 border-end">
                   <img src="https://res.cloudinary.com/dyhjjms8y/image/upload/v1770086388/tagf_rgqafd.png"
-                    alt="HOP'S ZACIAN EX - Frente" class="w-100 rounded border"
-                    style="height: 400px; object-fit: contain; cursor: pointer;" data-bs-toggle="modal"
+                    alt="HOP'S ZACIAN EX - Frente" class="w-100 rounded border photo-thumb" data-bs-toggle="modal"
                     data-bs-target="#modalFrente">
                 </div>
               </div>
               <div class="col-6">
                 <div class="p-3">
                   <img src="https://res.cloudinary.com/dyhjjms8y/image/upload/v1770086387/tagv_ypvwzp.png"
-                    alt="HOP'S ZACIAN EX - Verso" class="w-100 rounded border"
-                    style="height: 400px; object-fit: contain; cursor: pointer;" data-bs-toggle="modal"
+                    alt="HOP'S ZACIAN EX - Verso" class="w-100 rounded border photo-thumb" data-bs-toggle="modal"
                     data-bs-target="#modalVerso">
                 </div>
               </div>
@@ -85,7 +84,7 @@
             <table class="table table-sm table-borderless mb-0">
               <tbody>
                 <tr>
-                  <td class="fw-bold text-dark" style="width: 40%;">Nome:</td>
+                  <td class="fw-bold text-dark col-label">Nome:</td>
                   <td>HOP'S ZACIAN EX</td>
                 </tr>
                 <tr>
@@ -151,37 +150,48 @@
       <div class="card-body bg-white">
         <div class="text-center mb-3">
           <h2 class="display-4 text-dark mb-0">8.5</h2>
-          <p class="text-secondary mb-0" style="font-size: 1.1rem;">NM MT+</p>
+          <p class="text-secondary mb-0 fs-strong">NM MT+</p>
         </div>
         <hr>
         <div class="mb-3">
-          <div class="text-secondary mb-1" style="font-size: 0.95rem;">Graduadora:</div>
-          <strong style="font-size: 1.1rem;">TAG - Technical Authentication & Grading, LLC</strong>
+          <div class="text-secondary mb-1 fs-label">Graduadora:</div>
+          <strong class="fs-strong">TAG - Technical Authentication & Grading, LLC</strong>
         </div>
         <div class="mb-3">
-          <div class="text-secondary mb-1" style="font-size: 0.95rem;">Certificado:</div>
-          <strong class="font-monospace" style="font-size: 1.1rem;">C8393724</strong>
+          <div class="text-secondary mb-1 fs-label">Certificado:</div>
+          <strong class="font-monospace fs-strong">C8393724</strong>
         </div>
         <div class="mb-3">
-          <div class="text-secondary mb-1" style="font-size: 0.95rem;">Data da Avaliação:</div>
-          <strong style="font-size: 1.1rem;">08/04/2025</strong>
+          <div class="text-secondary mb-1 fs-label">Data da Avaliação:</div>
+          <strong class="fs-strong">08/04/2025</strong>
         </div>
         <hr>
-        <a href="https://my.taggrading.com/card/C8393724" target="_blank" class="btn btn-dark btn-sm w-100 mb-2">
+        <a href="https://my.taggrading.com/card/C8393724" target="_blank" rel="noopener noreferrer" class="btn btn-dark btn-sm w-100 mb-2">
           Ver Certificado Oficial TAG
-        </a>
-        <a href="https://www.tcgplayer.com/product/1000000/pokemon-scarlet-violet-hop-s-zacian-ex-176-159" target="_blank"
-          class="btn btn-secondary btn-sm w-100 mb-2">
-          Ver no TCGPlayer
-        </a>
-        <a href="https://www.pricecharting.com/game/pokemon-scarlet-violet/hop-s-zacian-ex-176-159" target="_blank"
-          class="btn btn-secondary btn-sm w-100 mb-2">
-          Ver no PriceCharting
         </a>
       </div>
     </div>
 
-    <!-- Perícia Section -->
+    
+        <!-- Links de Referência e Consulta de Preços -->
+        <div class="card shadow border-secondary mb-4">
+            <div class="card-header bg-secondary text-white">
+                <h5 class="mb-0">Links de Referência e Consulta de Preços</h5>
+            </div>
+            <div class="card-body bg-white">
+                <div class="row g-2">
+                    <div class="col-md-6">
+                        <a href="https://www.tcgplayer.com/product/1000000/pokemon-scarlet-violet-hop-s-zacian-ex-176-159" target="_blank" rel="noopener noreferrer" class="btn btn-outline-dark w-100">TCGPlayer (EUA)</a>
+                    </div>
+                    <div class="col-md-6">
+                        <a href="https://www.pricecharting.com/game/pokemon-scarlet-violet/hop-s-zacian-ex-176-159" target="_blank" rel="noopener noreferrer" class="btn btn-outline-dark w-100">Price Charting</a>
+                    </div>
+                </div>
+                <div class="alert alert-light border mt-3 mb-0">
+                    <p class="small mb-0"><strong>Nota:</strong> Os links acima direcionam para fontes externas de consulta de preços. Os valores podem variar conforme o mercado e a condição da carta.</p>
+                </div>
+            </div>
+        </div><!-- Perícia Section -->
     <div class="card shadow border-secondary mb-4">
       <div class="card-header bg-secondary text-white">
         <h5 class="mb-0">Análise de Condição - TAG</h5>
@@ -197,7 +207,7 @@
             <span class="fw-bold text-dark">Classificação Geral:</span>
             <span class="badge bg-warning text-dark fs-6">8.5 - NM MT+</span>
           </div>
-          <div class="progress" style="height: 25px;">
+          <div class="progress progress-tall">
             <div class="progress-bar bg-warning text-dark" role="progressbar" style="width: 85%;" aria-valuenow="85"
               aria-valuemin="0" aria-valuemax="100">
               <span class="fw-bold">8.5/10</span>
@@ -464,7 +474,7 @@
     <!-- History Section -->
     <div class="card shadow border-secondary mb-4">
       <div class="card-header bg-dark text-white">
-        <h5 class="mb-0">Histórico e Contexto</h5>
+        <h5 class="mb-0">Histórico de Proveniência</h5>
       </div>
       <div class="card-body bg-white">
         <div class="accordion accordion-flush" id="accordionHistory">
@@ -617,7 +627,7 @@
     </div>
   </div>
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
 </body>
 
 </html>

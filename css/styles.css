@@ -81,3 +81,51 @@
         grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 }
+
+/* ============================================================
+   Atomic utility classes — consolidam estilos inline repetidos
+   nas páginas de perícia. Cada classe substitui um padrão
+   identificado pela auditoria de design system.
+   ============================================================ */
+
+/* Foto da carta/slab clicável (118x → 1 classe) */
+.photo-thumb {
+    height: 400px;
+    object-fit: contain;
+    cursor: pointer;
+}
+
+/* Tipografia para textos de destaque dentro de cards (234x → 1 classe) */
+.fs-strong { font-size: 1.1rem; }
+
+/* Tipografia para labels e textos auxiliares (175x → 1 classe) */
+.fs-label { font-size: 0.95rem; }
+
+/* Tipografia para números/figuras em destaque (13x → 1 classe) */
+.fs-figure { font-size: 1.5rem; }
+
+/* Tipografia para labels pequenos (12x → 1 classe) */
+.fs-small-label { font-size: 0.9rem; }
+
+/* Largura da coluna de label nas tabelas de identificação (59x → 1 classe) */
+.col-label { width: 40%; }
+
+/* Altura customizada da barra de progresso de graduação (57x → 1 classe) */
+.progress-tall { height: 25px; }
+
+/* Min-height para iframe do PriceCharting (31x → 1 classe) */
+.pricechart-frame { min-height: 600px; }
+
+/* Barra de progresso fina por componente (20x → 1 classe) */
+.progress-thin { height: 8px; }
+
+/* Cor temática "Ancião" — usada em badges/alerts de Pokémon antigos (3 ocorrências) */
+.badge-ancien {
+    background-color: #D2B48C !important;
+    color: #000;
+}
+.alert-ancien {
+    background-color: #F5DEB3;
+    border-color: #D2B48C;
+    color: #5D4037;
+}

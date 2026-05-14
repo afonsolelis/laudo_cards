@@ -4,9 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{NOME_CARTA}} ({{NUMERO_CARTA}}) - Descritivo</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
 </head>
 <body class="bg-light">
+    <a class="visually-hidden-focusable position-absolute top-0 start-0 m-2 p-2 bg-white text-dark rounded" href="#main">Pular para o conteúdo</a>
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container">
@@ -25,7 +26,7 @@
     </nav>
 
     <!-- Header Section -->
-    <section class="bg-dark text-white py-4 border-bottom border-secondary">
+    <section id="main" class="bg-dark text-white py-4 border-bottom border-secondary">
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-md-8">
@@ -53,12 +54,12 @@
                         <div class="row g-0">
                             <div class="col-6">
                                 <div class="p-3 border-end">
-                                    <img src="{{URL_FOTO_FRENTE}}" alt="{{NOME_CARTA}} - Frente" class="w-100 rounded border" style="height: 400px; object-fit: contain; cursor: pointer;" data-bs-toggle="modal" data-bs-target="#modalFrente">
+                                    <img src="{{URL_FOTO_FRENTE}}" alt="{{NOME_CARTA}} - Frente" class="w-100 rounded border photo-thumb" data-bs-toggle="modal" data-bs-target="#modalFrente">
                                 </div>
                             </div>
                             <div class="col-6">
                                 <div class="p-3">
-                                    <img src="{{URL_FOTO_VERSO}}" alt="{{NOME_CARTA}} - Verso" class="w-100 rounded border" style="height: 400px; object-fit: contain; cursor: pointer;" data-bs-toggle="modal" data-bs-target="#modalVerso">
+                                    <img src="{{URL_FOTO_VERSO}}" alt="{{NOME_CARTA}} - Verso" class="w-100 rounded border photo-thumb" data-bs-toggle="modal" data-bs-target="#modalVerso">
                                 </div>
                             </div>
                         </div>
@@ -75,7 +76,7 @@
                         <table class="table table-sm table-borderless mb-0">
                             <tbody>
                                 <tr>
-                                    <td class="fw-bold text-dark" style="width: 40%;">Nome:</td>
+                                    <td class="fw-bold text-dark col-label">Nome:</td>
                                     <td>{{NOME_CARTA}}</td>
                                 </tr>
                                 <tr>
@@ -143,61 +144,61 @@
             <div class="card-body bg-white">
                 <div class="text-center mb-3">
                     <h2 class="display-4 text-dark mb-0">{{NOTA_FINAL}}</h2>
-                    <p class="text-secondary mb-0" style="font-size: 1.1rem;">{{NOTA_DESCRICAO}}</p>
+                    <p class="text-secondary mb-0 fs-strong">{{NOTA_DESCRICAO}}</p>
                 </div>
                 <hr>
                 <div class="mb-3">
-                    <div class="text-secondary mb-1" style="font-size: 0.95rem;">Graduadora:</div>
-                    <strong style="font-size: 1.1rem;">{{GRADUADORA_NOME_COMPLETO}}</strong>
+                    <div class="text-secondary mb-1 fs-label">Graduadora:</div>
+                    <strong class="fs-strong">{{GRADUADORA_NOME_COMPLETO}}</strong>
                 </div>
                 <div class="mb-3">
-                    <div class="text-secondary mb-1" style="font-size: 0.95rem;">Certificado:</div>
-                    <strong class="font-monospace" style="font-size: 1.1rem;">{{CERTIFICADO}}</strong>
+                    <div class="text-secondary mb-1 fs-label">Certificado:</div>
+                    <strong class="font-monospace fs-strong">{{CERTIFICADO}}</strong>
                 </div>
                 <!-- CAMPO VARIÁVEL: Data da Certificação / Data da Avaliação / Programa -->
                 <div class="mb-3">
-                    <div class="text-secondary mb-1" style="font-size: 0.95rem;">{{DATA_LABEL}}:</div>
-                    <strong style="font-size: 1.1rem;">{{DATA_VALOR}}</strong>
+                    <div class="text-secondary mb-1 fs-label">{{DATA_LABEL}}:</div>
+                    <strong class="fs-strong">{{DATA_VALOR}}</strong>
                 </div>
                 <hr>
                 <div class="text-secondary mb-2" style="font-size: 1rem;">Ranking de Graduação:</div>
                 <div class="row g-2 mb-3">
                     <div class="col-4">
                         <div class="border rounded p-3 text-center">
-                            <div class="fw-bold text-dark" style="font-size: 1.5rem;">{{RANKING_MESMA_NOTA}}</div>
-                            <div class="text-secondary" style="font-size: 0.9rem;">Mesma Nota</div>
+                            <div class="fw-bold text-dark fs-figure">{{RANKING_MESMA_NOTA}}</div>
+                            <div class="text-secondary fs-small-label">Mesma Nota</div>
                         </div>
                     </div>
                     <div class="col-4">
                         <div class="border rounded p-3 text-center">
-                            <div class="fw-bold text-dark" style="font-size: 1.5rem;">{{RANKING_NOTA_MAIOR}}</div>
-                            <div class="text-secondary" style="font-size: 0.9rem;">Nota Maior</div>
+                            <div class="fw-bold text-dark fs-figure">{{RANKING_NOTA_MAIOR}}</div>
+                            <div class="text-secondary fs-small-label">Nota Maior</div>
                         </div>
                     </div>
                     <div class="col-4">
                         <div class="border rounded p-3 text-center">
-                            <div class="fw-bold text-dark" style="font-size: 1.5rem;">{{RANKING_TOTAL}}</div>
-                            <div class="text-secondary" style="font-size: 0.9rem;">{{RANKING_TOTAL_LABEL}}</div>
+                            <div class="fw-bold text-dark fs-figure">{{RANKING_TOTAL}}</div>
+                            <div class="text-secondary fs-small-label">{{RANKING_TOTAL_LABEL}}</div>
                         </div>
                     </div>
                 </div>
 
                 <!-- OPÇÃO 1: Links dentro da seção de graduação (padrão Mew e Armarouge) -->
-                <a href="{{LINK_LAUDO_OFICIAL}}" target="_blank" class="btn btn-dark btn-sm w-100 mb-2">
+                <a href="{{LINK_LAUDO_OFICIAL}}" target="_blank" rel="noopener noreferrer" class="btn btn-dark btn-sm w-100 mb-2">
                     Ver Laudo Oficial {{GRADUADORA_NOME}}
                 </a>
                 <!-- Links adicionais opcionais -->
                 <!-- EXEMPLO:
-                <a href="{{LINK_MYP}}" target="_blank" class="btn btn-secondary btn-sm w-100 mb-2">
+                <a href="{{LINK_MYP}}" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm w-100 mb-2">
                     Ver na MyP Cards
                 </a>
-                <a href="{{LINK_TCGPLAYER}}" target="_blank" class="btn btn-secondary btn-sm w-100 mb-2">
+                <a href="{{LINK_TCGPLAYER}}" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm w-100 mb-2">
                     Ver no TCGPlayer
                 </a>
-                <a href="{{LINK_LIGA_POKEMON}}" target="_blank" class="btn btn-secondary btn-sm w-100 mb-2">
+                <a href="{{LINK_LIGA_POKEMON}}" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm w-100 mb-2">
                     Ver na Liga Pokémon
                 </a>
-                <a href="{{LINK_PRICE_CHARTING}}" target="_blank" class="btn btn-secondary btn-sm w-100">
+                <a href="{{LINK_PRICE_CHARTING}}" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm w-100">
                     Ver no Price Charting
                 </a>
                 -->
@@ -213,22 +214,22 @@
             <div class="card-body bg-white">
                 <div class="row g-2">
                     <div class="col-md-6">
-                        <a href="{{LINK_TCGPLAYER}}" target="_blank" class="btn btn-outline-dark w-100">
+                        <a href="{{LINK_TCGPLAYER}}" target="_blank" rel="noopener noreferrer" class="btn btn-outline-dark w-100">
                             <i class="bi bi-cart3"></i> TCGPlayer (EUA)
                         </a>
                     </div>
                     <div class="col-md-6">
-                        <a href="{{LINK_PRICE_CHARTING}}" target="_blank" class="btn btn-outline-dark w-100">
+                        <a href="{{LINK_PRICE_CHARTING}}" target="_blank" rel="noopener noreferrer" class="btn btn-outline-dark w-100">
                             <i class="bi bi-graph-up"></i> Price Charting
                         </a>
                     </div>
                     <div class="col-md-6">
-                        <a href="{{LINK_LIGA_POKEMON}}" target="_blank" class="btn btn-outline-dark w-100">
+                        <a href="{{LINK_LIGA_POKEMON}}" target="_blank" rel="noopener noreferrer" class="btn btn-outline-dark w-100">
                             <i class="bi bi-info-circle"></i> Liga Pokémon Brasil
                         </a>
                     </div>
                     <div class="col-md-6">
-                        <a href="{{LINK_MYP}}" target="_blank" class="btn btn-outline-dark w-100">
+                        <a href="{{LINK_MYP}}" target="_blank" rel="noopener noreferrer" class="btn btn-outline-dark w-100">
                             <i class="bi bi-shop"></i> MYP Cards
                         </a>
                     </div>
@@ -256,7 +257,7 @@
                         <span class="fw-bold text-dark">Classificação Geral:</span>
                         <span class="badge {{BADGE_COR_NOTA}} fs-6">{{NOTA_FINAL}} - {{NOTA_DESCRICAO}}</span>
                     </div>
-                    <div class="progress" style="height: 25px;">
+                    <div class="progress progress-tall">
                         <div class="progress-bar {{PROGRESS_BAR_COR}}" role="progressbar" style="width: {{PORCENTAGEM_NOTA}}%;" aria-valuenow="{{PORCENTAGEM_NOTA}}" aria-valuemin="0" aria-valuemax="100">
                             <span class="fw-bold">{{NOTA_FINAL}}/10</span>
                         </div>
@@ -448,6 +449,6 @@
         </div>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
 </body>
 </html>

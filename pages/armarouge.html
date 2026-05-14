@@ -5,10 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="../favicon.svg" type="image/svg+xml">
     <title>Armarouge (115/091) - Documentação Técnica</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
     <link href="../css/styles.css" rel="stylesheet">
 </head>
-<body class="bg-light d-flex flex-column min-vh-100">
+<body class="bg-light">
+    <a class="visually-hidden-focusable position-absolute top-0 start-0 m-2 p-2 bg-white text-dark rounded" href="#main">Pular para o conteúdo</a>
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container">
@@ -27,7 +28,7 @@
     </nav>
 
     <!-- Header Section -->
-    <section class="bg-dark text-white py-4 border-bottom border-secondary">
+    <section id="main" class="bg-dark text-white py-4 border-bottom border-secondary">
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-md-8">
@@ -42,7 +43,7 @@
     </section>
 
     <!-- Card Details -->
-    <div class="container my-5 flex-grow-1">
+    <div class="container my-5">
         <!-- Fotos e Identificação -->
         <div class="row mb-4">
             <div class="col-lg-6 mb-3 mb-lg-0">
@@ -55,12 +56,12 @@
                         <div class="row g-0">
                             <div class="col-6">
                                 <div class="p-3 border-end">
-                                    <img src="https://res.cloudinary.com/dyhjjms8y/image/upload/v1766189772/armarouge_115_q3wysl.jpg" alt="Armarouge - Frente" class="w-100 rounded border" style="height: 400px; object-fit: contain; cursor: pointer;" data-bs-toggle="modal" data-bs-target="#modalFrente">
+                                    <img src="https://res.cloudinary.com/dyhjjms8y/image/upload/v1766189772/armarouge_115_q3wysl.jpg" alt="Armarouge - Frente" class="w-100 rounded border photo-thumb" data-bs-toggle="modal" data-bs-target="#modalFrente">
                                 </div>
                             </div>
                             <div class="col-6">
                                 <div class="p-3">
-                                    <img src="https://res.cloudinary.com/dyhjjms8y/image/upload/v1766189773/armarouge_115_v_qalfj1.jpg" alt="Armarouge - Verso" class="w-100 rounded border" style="height: 400px; object-fit: contain; cursor: pointer;" data-bs-toggle="modal" data-bs-target="#modalVerso">
+                                    <img src="https://res.cloudinary.com/dyhjjms8y/image/upload/v1766189773/armarouge_115_v_qalfj1.jpg" alt="Armarouge - Verso" class="w-100 rounded border photo-thumb" data-bs-toggle="modal" data-bs-target="#modalVerso">
                                 </div>
                             </div>
                         </div>
@@ -77,7 +78,7 @@
                         <table class="table table-sm table-borderless mb-0">
                             <tbody>
                                 <tr>
-                                    <td class="fw-bold text-dark" style="width: 40%;">Nome:</td>
+                                    <td class="fw-bold text-dark col-label">Nome:</td>
                                     <td>Armarouge</td>
                                 </tr>
                                 <tr>
@@ -135,23 +136,23 @@
             <div class="card-body bg-white">
                 <div class="text-center mb-3">
                     <h2 class="display-4 text-dark mb-0">9</h2>
-                    <p class="text-secondary mb-0" style="font-size: 1.1rem;">Mint</p>
+                    <p class="text-secondary mb-0 fs-strong">Mint</p>
                 </div>
                 <hr>
                 <div class="mb-3">
-                    <div class="text-secondary mb-1" style="font-size: 0.95rem;">Graduadora:</div>
-                    <strong style="font-size: 1.1rem;">GBA (Grupo Brasileiro de Autenticação)</strong>
+                    <div class="text-secondary mb-1 fs-label">Graduadora:</div>
+                    <strong class="fs-strong">GBA (Grupo Brasileiro de Autenticação)</strong>
                 </div>
                 <div class="mb-3">
-                    <div class="text-secondary mb-1" style="font-size: 0.95rem;">Certificado:</div>
-                    <strong class="font-monospace" style="font-size: 1.1rem;">P0000259</strong>
+                    <div class="text-secondary mb-1 fs-label">Certificado:</div>
+                    <strong class="font-monospace fs-strong">P0000259</strong>
                 </div>
                 <div class="mb-3">
-                    <div class="text-secondary mb-1" style="font-size: 0.95rem;">Data da Avaliação:</div>
-                    <strong style="font-size: 1.1rem;">20/10/2025</strong>
+                    <div class="text-secondary mb-1 fs-label">Data da Avaliação:</div>
+                    <strong class="fs-strong">20/10/2025</strong>
                 </div>
                 <hr>
-                <a href="https://gbagrading.com.br/card-details/68f7946b365948acca203ac7" target="_blank" class="btn btn-secondary btn-sm w-100 mb-2">
+                <a href="https://gbagrading.com.br/card-details/68f7946b365948acca203ac7" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm w-100 mb-2">
                     Ver Certificado Oficial GBA
                 </a>
             </div>
@@ -165,7 +166,7 @@
                 <h5 class="mb-0">Price Charting</h5>
             </div>
             <div class="card-body bg-white p-0">
-                <div class="ratio ratio-16x9" style="min-height: 600px;">
+                <div class="ratio ratio-16x9 pricechart-frame">
                     <iframe src="https://www.pricecharting.com/game/pokemon-paldean-fates/armarouge-115"
                         title="Price Charting History" allowfullscreen></iframe>
                 </div>
@@ -194,3 +195,60 @@
                         <li>GBA (Grupo Brasileiro de Autenticação) é uma graduadora brasileira especializada em TCG</li>
                         <li>Sistema de graduação de 1-10 com registro de autenticidade AAA</li>
                         <li>A nota 9 (Mint) indica estado excepcional com imperfeições mínimas</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="text-center mt-4">
+            <a href="../index.html" class="btn btn-dark btn-lg">Voltar ao Portfólio</a>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-4 mt-5 border-top border-secondary">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <p class="mb-0 text-secondary">&copy; 2025 Cartas Pokémon TCG Graduadas</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <p class="mb-0 text-secondary">Laudo gerado para: P0000259</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Modal Frente -->
+    <div class="modal fade" id="modalFrente" tabindex="-1" aria-labelledby="modalFrenteLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content bg-dark">
+                <div class="modal-header border-secondary">
+                    <h5 class="modal-title text-white" id="modalFrenteLabel">Armarouge - Frente</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Fechar"></button>
+                </div>
+                <div class="modal-body text-center p-0">
+                    <img src="https://res.cloudinary.com/dyhjjms8y/image/upload/v1766189772/armarouge_115_q3wysl.jpg" alt="Armarouge - Frente" class="img-fluid">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Verso -->
+    <div class="modal fade" id="modalVerso" tabindex="-1" aria-labelledby="modalVersoLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content bg-dark">
+                <div class="modal-header border-secondary">
+                    <h5 class="modal-title text-white" id="modalVersoLabel">Armarouge - Verso</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Fechar"></button>
+                </div>
+                <div class="modal-body text-center p-0">
+                    <img src="https://res.cloudinary.com/dyhjjms8y/image/upload/v1766189773/armarouge_115_v_qalfj1.jpg" alt="Armarouge - Verso" class="img-fluid">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+</body>
+</html>

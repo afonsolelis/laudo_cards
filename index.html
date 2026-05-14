@@ -6,11 +6,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <title>Cartas Pokémon TCG Graduadas - Coleção Certificada</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
   <link href="css/styles.css" rel="stylesheet">
 </head>
 
 <body class="bg-light">
+  <a class="visually-hidden-focusable position-absolute top-0 start-0 m-2 p-2 bg-white text-dark rounded" href="#main">Pular para o conteúdo</a>
   <!-- Header -->
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container">
@@ -21,7 +22,7 @@
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ms-auto">
           <li class="nav-item">
-            <a class="nav-link" href="https://github.com/afonsolelis/laudo_cards" target="_blank">
+            <a class="nav-link" href="https://github.com/afonsolelis/laudo_cards" target="_blank" rel="noopener noreferrer">
               <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
                 class="bi bi-github me-1" viewBox="0 0 16 16" style="vertical-align: text-bottom;">
                 <path
@@ -36,7 +37,7 @@
   </nav>
 
   <!-- Hero Section -->
-  <section class="bg-dark text-white py-5 border-bottom border-secondary">
+  <section id="main" class="bg-dark text-white py-5 border-bottom border-secondary">
     <div class="container">
       <h1 class="display-5 fw-bold mb-3">Cartas Pokémon TCG Graduadas</h1>
       <p class="lead text-secondary">Coleção de Afonso Brandão</p>
@@ -69,6 +70,7 @@
               <option value="RPA">RPA</option>
               <option value="ARS">ARS</option>
               <option value="TAG">TAG</option>
+              <option value="Gradd">Gradd</option>
             </select>
           </div>
           <div class="col-md-3">
@@ -96,12 +98,116 @@
             </select>
           </div>
           <div class="col-md-6">
-            <small id="resultCount" class="text-secondary d-block mt-2"></small>
+            <small id="resultCount" class="text-secondary d-block mt-2" aria-live="polite" aria-atomic="true"></small>
           </div>
         </div>
       </div>
 
       <div class="list-group" id="cardList">
+        <!-- Card: Hisuian Growlithe Twilight Masquerade -->
+        <div class="list-group-item list-group-item-action border-secondary" role="button" tabindex="0"
+          onclick="window.location.href='pages/hisuian-growlithe-twilight-masquerade-181-gradd-8.html';"
+          onkeypress="if (event.key === 'Enter' || event.key === ' ') { window.location.href='pages/hisuian-growlithe-twilight-masquerade-181-gradd-8.html'; }">
+          <div class="row align-items-center">
+            <div class="col-md-2 text-center">
+              <img src="https://images.gradd.com.br/gradding/16/sLAB-1.png"
+                alt="Hisuian Growlithe (181/167) - Slab Frente" class="img-fluid rounded border" loading="lazy">
+            </div>
+            <div class="col-md-5">
+              <h6 class="mb-1 fw-bold">Hisuian Growlithe (181/167)</h6>
+              <div>
+                <span class="badge bg-dark small">Mascarada Crepuscular (SV06)</span>
+                <span class="badge bg-warning text-dark small">Ilustração Rara (AR)</span>
+              </div>
+            </div>
+            <div class="col-md-2">
+              <span class="badge bg-warning text-dark">Gradd 8 NM+</span>
+            </div>
+            <div class="col-md-3 small text-secondary">
+              Cert: <a href="https://gradd.com.br/CARD/B12602004" target="_blank" rel="noopener noreferrer"
+                class="text-decoration-none">B12602004</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card: Perrin Twilight Masquerade -->
+        <div class="list-group-item list-group-item-action border-secondary" role="button" tabindex="0"
+          onclick="window.location.href='pages/perrin-twilight-masquerade-220-gradd-7.html';"
+          onkeypress="if (event.key === 'Enter' || event.key === ' ') { window.location.href='pages/perrin-twilight-masquerade-220-gradd-7.html'; }">
+          <div class="row align-items-center">
+            <div class="col-md-2 text-center">
+              <img src="https://images.gradd.com.br/gradding/15/slab-1.png"
+                alt="Perrin (220/167) - Slab Frente" class="img-fluid rounded border" loading="lazy">
+            </div>
+            <div class="col-md-5">
+              <h6 class="mb-1 fw-bold">Perrin (220/167)</h6>
+              <div>
+                <span class="badge bg-dark small">Mascarada Crepuscular (SV06)</span>
+                <span class="badge bg-danger small">Ilustração Especial Rara (SAR)</span>
+              </div>
+            </div>
+            <div class="col-md-2">
+              <span class="badge bg-secondary">Gradd 7 NM</span>
+            </div>
+            <div class="col-md-3 small text-secondary">
+              Cert: <a href="https://gradd.com.br/CARD/B12602003" target="_blank" rel="noopener noreferrer"
+                class="text-decoration-none">B12602003</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card: Charizard V-ASTRO SWSH262 -->
+        <div class="list-group-item list-group-item-action border-secondary" role="button" tabindex="0"
+          onclick="window.location.href='pages/charizard-vastro-swsh262-gradd-8.html';"
+          onkeypress="if (event.key === 'Enter' || event.key === ' ') { window.location.href='pages/charizard-vastro-swsh262-gradd-8.html'; }">
+          <div class="row align-items-center">
+            <div class="col-md-2 text-center">
+              <img src="https://images.gradd.com.br/gradding/14/Slab-1-1.png"
+                alt="Charizard V-ASTRO (SWSH262) - Slab Frente" class="img-fluid rounded border" loading="lazy">
+            </div>
+            <div class="col-md-5">
+              <h6 class="mb-1 fw-bold">Charizard V-ASTRO (SWSH262)</h6>
+              <div>
+                <span class="badge bg-dark small">Espada e Escudo Promos</span>
+                <span class="badge bg-warning text-dark small">Promo</span>
+              </div>
+            </div>
+            <div class="col-md-2">
+              <span class="badge bg-warning text-dark">Gradd 8 NM+</span>
+            </div>
+            <div class="col-md-3 small text-secondary">
+              Cert: <a href="https://gradd.com.br/CARD/B12602002" target="_blank" rel="noopener noreferrer"
+                class="text-decoration-none">B12602002</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card: Pikachu Forças Temporais Pokémon Day -->
+        <div class="list-group-item list-group-item-action border-secondary" role="button" tabindex="0"
+          onclick="window.location.href='pages/pikachu-forcas-temporais-gradd-9.html';"
+          onkeypress="if (event.key === 'Enter' || event.key === ' ') { window.location.href='pages/pikachu-forcas-temporais-gradd-9.html'; }">
+          <div class="row align-items-center">
+            <div class="col-md-2 text-center">
+              <img src="https://images.gradd.com.br/gradding/13/slab-1.png"
+                alt="Pikachu (051/162) - Slab Frente" class="img-fluid rounded border" loading="lazy">
+            </div>
+            <div class="col-md-5">
+              <h6 class="mb-1 fw-bold">Pikachu (051/162)</h6>
+              <div>
+                <span class="badge bg-dark small">Forças Temporais — Pokémon Day (TEF)</span>
+                <span class="badge bg-secondary small">Comum (C)</span>
+              </div>
+            </div>
+            <div class="col-md-2">
+              <span class="badge bg-success">Gradd 9 Mint</span>
+            </div>
+            <div class="col-md-3 small text-secondary">
+              Cert: <a href="https://gradd.com.br/CARD/B12602001" target="_blank" rel="noopener noreferrer"
+                class="text-decoration-none">B12602001</a>
+            </div>
+          </div>
+        </div>
+
         <!-- Card: Sylveon ex -->
         <div class="list-group-item list-group-item-action border-secondary" role="button" tabindex="0"
           onclick="window.location.href='pages/sylveon-ex-terastal-festival-ars-10.html';"
@@ -122,7 +228,7 @@
               <span class="badge bg-success">ARS 10 Gem Mint</span>
             </div>
             <div class="col-md-3 small text-secondary">
-              Cert: <a href="https://ars-grading.com/grading/searchNumber?id=831258132544" target="_blank"
+              Cert: <a href="https://ars-grading.com/grading/searchNumber?id=831258132544" target="_blank" rel="noopener noreferrer"
                 class="text-decoration-none">831258132544</a>
             </div>
           </div>
@@ -149,7 +255,7 @@
               <span class="badge bg-warning text-dark">Manafix 8 Near Mint</span>
             </div>
             <div class="col-md-3 small text-secondary">
-              Cert: <a href="https://www.mgs.cards/pr/P00003815" target="_blank"
+              Cert: <a href="https://www.mgs.cards/pr/P00003815" target="_blank" rel="noopener noreferrer"
                 class="text-decoration-none">P00003815</a>
             </div>
           </div>
@@ -176,7 +282,7 @@
               <span class="badge bg-success">Manafix 10 Gem Mint</span>
             </div>
             <div class="col-md-3 small text-secondary">
-              Cert: <a href="https://www.mgs.cards/pr/M770535" target="_blank" class="text-decoration-none">M770535</a>
+              Cert: <a href="https://www.mgs.cards/pr/M770535" target="_blank" rel="noopener noreferrer" class="text-decoration-none">M770535</a>
             </div>
           </div>
         </div>
@@ -201,7 +307,7 @@
               <span class="badge bg-success">GBA 9 Mint</span>
             </div>
             <div class="col-md-3 small text-secondary">
-              Cert: <a href="#" target="_blank" class="text-decoration-none">P0000256</a>
+              Cert: <a href="#" target="_blank" rel="noopener noreferrer" class="text-decoration-none">P0000256</a>
             </div>
           </div>
         </div>
@@ -226,7 +332,7 @@
               <span class="badge bg-success">GBA 9 Mint</span>
             </div>
             <div class="col-md-3 small text-secondary">
-              Cert: <a href="https://gbagrading.com.br/card-details/68f7ae97365948acca2055a7" target="_blank"
+              Cert: <a href="https://gbagrading.com.br/card-details/68f7ae97365948acca2055a7" target="_blank" rel="noopener noreferrer"
                 class="text-decoration-none">P0000263</a>
             </div>
           </div>
@@ -252,7 +358,7 @@
               <span class="badge bg-success">GBA 9 Mint</span>
             </div>
             <div class="col-md-3 small text-secondary">
-              Cert: <a href="https://gbagrading.com.br/card-details/68f7ad4c365948acca2051eb" target="_blank"
+              Cert: <a href="https://gbagrading.com.br/card-details/68f7ad4c365948acca2051eb" target="_blank" rel="noopener noreferrer"
                 class="text-decoration-none">P0000261</a>
             </div>
           </div>
@@ -279,7 +385,7 @@
               <span class="badge bg-success">GBA 9 Mint</span>
             </div>
             <div class="col-md-3 small text-secondary">
-              Cert: <a href="https://gbagrading.com.br/card-details/68f6e466e2969d8096499265" target="_blank"
+              Cert: <a href="https://gbagrading.com.br/card-details/68f6e466e2969d8096499265" target="_blank" rel="noopener noreferrer"
                 class="text-decoration-none">P0000254</a>
             </div>
           </div>
@@ -305,7 +411,7 @@
               <span class="badge bg-success">GBA 9 Mint</span>
             </div>
             <div class="col-md-3 small text-secondary">
-              Cert: <a href="https://gbagrading.com.br/card-details/68f7afa2365948acca205873" target="_blank"
+              Cert: <a href="https://gbagrading.com.br/card-details/68f7afa2365948acca205873" target="_blank" rel="noopener noreferrer"
                 class="text-decoration-none">P0000264</a>
             </div>
           </div>
@@ -331,7 +437,7 @@
               <span class="badge bg-success">GBA 9 Mint</span>
             </div>
             <div class="col-md-3 small text-secondary">
-              Cert: <a href="https://gbagrading.com.br/card-details/68f7946b365948acca203ac7" target="_blank"
+              Cert: <a href="https://gbagrading.com.br/card-details/68f7946b365948acca203ac7" target="_blank" rel="noopener noreferrer"
                 class="text-decoration-none">P0000259</a>
             </div>
           </div>
@@ -357,7 +463,7 @@
               <span class="badge bg-dark">Manafix 3 HP</span>
             </div>
             <div class="col-md-3 small text-secondary">
-              Cert: <a href="https://www.mgs.cards/pr/P00003813" target="_blank"
+              Cert: <a href="https://www.mgs.cards/pr/P00003813" target="_blank" rel="noopener noreferrer"
                 class="text-decoration-none">P00003813</a>
             </div>
           </div>
@@ -384,7 +490,7 @@
               <span class="badge bg-warning text-dark">GBA 8 NM</span>
             </div>
             <div class="col-md-3 small text-secondary">
-              Cert: <a href="https://gbagrading.com.br/card-details/68f795f5365948acca203d89" target="_blank"
+              Cert: <a href="https://gbagrading.com.br/card-details/68f795f5365948acca203d89" target="_blank" rel="noopener noreferrer"
                 class="text-decoration-none">P0000260</a>
             </div>
           </div>
@@ -410,7 +516,7 @@
               <span class="badge bg-success">CAPY 10 Gem Mint</span>
             </div>
             <div class="col-md-3 small text-secondary">
-              Cert: <a href="https://grading.capygames.com.br/C001091" target="_blank"
+              Cert: <a href="https://grading.capygames.com.br/C001091" target="_blank" rel="noopener noreferrer"
                 class="text-decoration-none">C001091</a>
             </div>
           </div>
@@ -436,7 +542,7 @@
               <span class="badge bg-warning text-dark">CAPY 8.5 NM-M+</span>
             </div>
             <div class="col-md-3 small text-secondary">
-              Cert: <a href="https://grading.capygames.com.br/C001090" target="_blank"
+              Cert: <a href="https://grading.capygames.com.br/C001090" target="_blank" rel="noopener noreferrer"
                 class="text-decoration-none">C001090</a>
             </div>
           </div>
@@ -462,7 +568,7 @@
               <span class="badge bg-success">CAPY 9 Mint</span>
             </div>
             <div class="col-md-3 small text-secondary">
-              Cert: <a href="https://grading.capygames.com.br/C001087" target="_blank"
+              Cert: <a href="https://grading.capygames.com.br/C001087" target="_blank" rel="noopener noreferrer"
                 class="text-decoration-none">C001087</a>
             </div>
           </div>
@@ -488,7 +594,7 @@
               <span class="badge bg-secondary">GBA 8 NM/Mint</span>
             </div>
             <div class="col-md-3 small text-secondary">
-              Cert: <a href="https://gbagrading.com.br/card-details/6944206c0ae2ec0261a20cdc" target="_blank"
+              Cert: <a href="https://gbagrading.com.br/card-details/6944206c0ae2ec0261a20cdc" target="_blank" rel="noopener noreferrer"
                 class="text-decoration-none">P0000598</a>
             </div>
           </div>
@@ -514,7 +620,7 @@
               <span class="badge bg-success">GBA 9 Mint</span>
             </div>
             <div class="col-md-3 small text-secondary">
-              Cert: <a href="https://gbagrading.com.br/card-details/694420600ae2ec0261a20cab" target="_blank"
+              Cert: <a href="https://gbagrading.com.br/card-details/694420600ae2ec0261a20cab" target="_blank" rel="noopener noreferrer"
                 class="text-decoration-none">P0000597</a>
             </div>
           </div>
@@ -540,7 +646,7 @@
               <span class="badge bg-success">GBA 9 Mint</span>
             </div>
             <div class="col-md-3 small text-secondary">
-              Cert: <a href="https://gbagrading.com.br/card-details/69441fe50ae2ec0261a208e6" target="_blank"
+              Cert: <a href="https://gbagrading.com.br/card-details/69441fe50ae2ec0261a208e6" target="_blank" rel="noopener noreferrer"
                 class="text-decoration-none">P0000596</a>
             </div>
           </div>
@@ -567,7 +673,7 @@
               <span class="badge bg-success">GBA 9 Mint</span>
             </div>
             <div class="col-md-3 small text-secondary">
-              Cert: <a href="https://gbagrading.com.br/card-details/694420790ae2ec0261a20cf0" target="_blank"
+              Cert: <a href="https://gbagrading.com.br/card-details/694420790ae2ec0261a20cf0" target="_blank" rel="noopener noreferrer"
                 class="text-decoration-none">P0000599</a>
             </div>
           </div>
@@ -595,7 +701,7 @@
               <span class="badge bg-success">GBA 9 Mint</span>
             </div>
             <div class="col-md-3 small text-secondary">
-              Cert: <a href="https://gbagrading.com.br/card-details/694420800ae2ec0261a20d20" target="_blank"
+              Cert: <a href="https://gbagrading.com.br/card-details/694420800ae2ec0261a20d20" target="_blank" rel="noopener noreferrer"
                 class="text-decoration-none">P0000600</a>
             </div>
           </div>
@@ -621,7 +727,7 @@
               <span class="badge bg-success">CAPY 10 Gem Mint</span>
             </div>
             <div class="col-md-3 small text-secondary">
-              Cert: <a href="https://grading.capygames.com.br/C001089" target="_blank"
+              Cert: <a href="https://grading.capygames.com.br/C001089" target="_blank" rel="noopener noreferrer"
                 class="text-decoration-none">C001089</a>
             </div>
           </div>
@@ -647,7 +753,7 @@
               <span class="badge bg-success">CAPY 10 Gem Mint</span>
             </div>
             <div class="col-md-3 small text-secondary">
-              Cert: <a href="https://grading.capygames.com.br/C001088" target="_blank"
+              Cert: <a href="https://grading.capygames.com.br/C001088" target="_blank" rel="noopener noreferrer"
                 class="text-decoration-none">C001088</a>
             </div>
           </div>
@@ -674,7 +780,7 @@
               <span class="badge bg-success">GBA 9 Mint</span>
             </div>
             <div class="col-md-3 small text-secondary">
-              Cert: <a href="https://gbagrading.com.br/card-details/68b48a1f80454ea673ce9b7f" target="_blank"
+              Cert: <a href="https://gbagrading.com.br/card-details/68b48a1f80454ea673ce9b7f" target="_blank" rel="noopener noreferrer"
                 class="text-decoration-none">PO0000106</a>
             </div>
           </div>
@@ -700,7 +806,7 @@
               <span class="badge bg-secondary">CGC 7 NM</span>
             </div>
             <div class="col-md-3 small text-secondary">
-              Cert: <a href="https://www.cgccards.com/certlookup/4229679233/7_0/" target="_blank"
+              Cert: <a href="https://www.cgccards.com/certlookup/4229679233/7_0/" target="_blank" rel="noopener noreferrer"
                 class="text-decoration-none">4229679233</a>
             </div>
           </div>
@@ -726,7 +832,7 @@
               <span class="badge bg-warning text-dark">ACE 8 NM-MT</span>
             </div>
             <div class="col-md-3 small text-secondary">
-              Cert: <a href="https://acegrading.com/cert/145764" target="_blank" class="text-decoration-none">145764</a>
+              Cert: <a href="https://acegrading.com/cert/145764" target="_blank" rel="noopener noreferrer" class="text-decoration-none">145764</a>
             </div>
           </div>
         </div>
@@ -752,7 +858,7 @@
             </div>
             <div class="col-md-3 small text-secondary">
               Cert: <a href="https://www.beckett.com/grading/card-lookup?item_id=0017956282&item_type=BGS"
-                target="_blank" class="text-decoration-none">0017956282</a>
+                target="_blank" rel="noopener noreferrer" class="text-decoration-none">0017956282</a>
             </div>
           </div>
         </div>
@@ -777,7 +883,7 @@
               <span class="badge bg-success">PSA 9 Mint</span>
             </div>
             <div class="col-md-3 small text-secondary">
-              Cert: <a href="https://www.psacard.com/cert/59856688/" target="_blank"
+              Cert: <a href="https://www.psacard.com/cert/59856688/" target="_blank" rel="noopener noreferrer"
                 class="text-decoration-none">59856688</a>
             </div>
           </div>
@@ -802,7 +908,7 @@
               <span class="badge bg-warning text-dark">Manafix 8 Near Mint</span>
             </div>
             <div class="col-md-3 small text-secondary">
-              Cert: <a href="#" target="_blank" class="text-decoration-none">P00005155</a>
+              Cert: <a href="#" target="_blank" rel="noopener noreferrer" class="text-decoration-none">P00005155</a>
             </div>
           </div>
         </div>
@@ -826,7 +932,7 @@
               <span class="badge bg-warning text-dark">CAPY 8 Near Mint to Mint</span>
             </div>
             <div class="col-md-3 small text-secondary">
-              Cert: <a href="#" target="_blank" class="text-decoration-none">C001054</a>
+              Cert: <a href="#" target="_blank" rel="noopener noreferrer" class="text-decoration-none">C001054</a>
             </div>
           </div>
         </div>
@@ -850,7 +956,7 @@
               <span class="badge bg-success">Manafix 9 Mint</span>
             </div>
             <div class="col-md-3 small text-secondary">
-              Cert: <a href="#" target="_blank" class="text-decoration-none">P00003814</a>
+              Cert: <a href="#" target="_blank" rel="noopener noreferrer" class="text-decoration-none">P00003814</a>
             </div>
           </div>
         </div>
@@ -874,7 +980,7 @@
               <span class="badge bg-success">PSA 10 Gem Mint</span>
             </div>
             <div class="col-md-3 small text-secondary">
-              Cert: <a href="#" target="_blank" class="text-decoration-none">105810618</a>
+              Cert: <a href="#" target="_blank" rel="noopener noreferrer" class="text-decoration-none">105810618</a>
             </div>
           </div>
         </div>
@@ -898,7 +1004,7 @@
               <span class="badge bg-secondary">Manafix 2 Damaged</span>
             </div>
             <div class="col-md-3 small text-secondary">
-              Cert: <a href="#" target="_blank" class="text-decoration-none">P00005149</a>
+              Cert: <a href="#" target="_blank" rel="noopener noreferrer" class="text-decoration-none">P00005149</a>
             </div>
           </div>
         </div>
@@ -922,7 +1028,7 @@
               <span class="badge bg-secondary">CAPY 1 Poor</span>
             </div>
             <div class="col-md-3 small text-secondary">
-              Cert: <a href="#" target="_blank" class="text-decoration-none">C001052</a>
+              Cert: <a href="#" target="_blank" rel="noopener noreferrer" class="text-decoration-none">C001052</a>
             </div>
           </div>
         </div>
@@ -946,7 +1052,7 @@
               <span class="badge bg-success">BCTC 9.5 Gem Mint</span>
             </div>
             <div class="col-md-3 small text-secondary">
-              Cert: <a href="#" target="_blank" class="text-decoration-none">a preencher</a>
+              Cert: <a href="#" target="_blank" rel="noopener noreferrer" class="text-decoration-none">a preencher</a>
             </div>
           </div>
         </div>
@@ -970,7 +1076,7 @@
               <span class="badge bg-success">CAPY 10 Gem Mint</span>
             </div>
             <div class="col-md-3 small text-secondary">
-              Cert: <a href="#" target="_blank" class="text-decoration-none">C001083</a>
+              Cert: <a href="#" target="_blank" rel="noopener noreferrer" class="text-decoration-none">C001083</a>
             </div>
           </div>
         </div>
@@ -994,7 +1100,7 @@
               <span class="badge bg-success">GBA 10 Gem Mint</span>
             </div>
             <div class="col-md-3 small text-secondary">
-              Cert: <a href="#" target="_blank" class="text-decoration-none">P0000255</a>
+              Cert: <a href="#" target="_blank" rel="noopener noreferrer" class="text-decoration-none">P0000255</a>
             </div>
           </div>
         </div>
@@ -1018,7 +1124,7 @@
               <span class="badge bg-success">CAPY 10 Gem Mint</span>
             </div>
             <div class="col-md-3 small text-secondary">
-              Cert: <a href="#" target="_blank" class="text-decoration-none">C001084</a>
+              Cert: <a href="#" target="_blank" rel="noopener noreferrer" class="text-decoration-none">C001084</a>
             </div>
           </div>
         </div>
@@ -1042,7 +1148,7 @@
               <span class="badge bg-success">Manafix 10 Pristine</span>
             </div>
             <div class="col-md-3 small text-secondary">
-              Cert: <a href="#" target="_blank" class="text-decoration-none">P00005156</a>
+              Cert: <a href="#" target="_blank" rel="noopener noreferrer" class="text-decoration-none">P00005156</a>
             </div>
           </div>
         </div>
@@ -1066,7 +1172,7 @@
               <span class="badge bg-success">Manafix 9 Mint</span>
             </div>
             <div class="col-md-3 small text-secondary">
-              Cert: <a href="#" target="_blank" class="text-decoration-none">P00005154</a>
+              Cert: <a href="#" target="_blank" rel="noopener noreferrer" class="text-decoration-none">P00005154</a>
             </div>
           </div>
         </div>
@@ -1090,7 +1196,7 @@
               <span class="badge bg-success">CAPY 10 Gem Mint</span>
             </div>
             <div class="col-md-3 small text-secondary">
-              Cert: <a href="#" target="_blank" class="text-decoration-none">C001085</a>
+              Cert: <a href="#" target="_blank" rel="noopener noreferrer" class="text-decoration-none">C001085</a>
             </div>
           </div>
         </div>
@@ -1114,7 +1220,7 @@
               <span class="badge bg-success">GBA 9 Mint</span>
             </div>
             <div class="col-md-3 small text-secondary">
-              Cert: <a href="#" target="_blank" class="text-decoration-none">P0000258</a>
+              Cert: <a href="#" target="_blank" rel="noopener noreferrer" class="text-decoration-none">P0000258</a>
             </div>
           </div>
         </div>
@@ -1138,7 +1244,7 @@
               <span class="badge bg-success">CAPY 10 Gem Mint</span>
             </div>
             <div class="col-md-3 small text-secondary">
-              Cert: <a href="#" target="_blank" class="text-decoration-none">C001057</a>
+              Cert: <a href="#" target="_blank" rel="noopener noreferrer" class="text-decoration-none">C001057</a>
             </div>
           </div>
         </div>
@@ -1162,7 +1268,7 @@
               <span class="badge bg-success">CGC 10 Gem Mint</span>
             </div>
             <div class="col-md-3 small text-secondary">
-              Cert: <a href="#" target="_blank" class="text-decoration-none">1402524078</a>
+              Cert: <a href="#" target="_blank" rel="noopener noreferrer" class="text-decoration-none">1402524078</a>
             </div>
           </div>
         </div>
@@ -1186,7 +1292,7 @@
               <span class="badge bg-secondary">Manafix 2.5 HP (Inked)</span>
             </div>
             <div class="col-md-3 small text-secondary">
-              Cert: <a href="https://www.mgs.cards/population-report/P00005153" target="_blank"
+              Cert: <a href="https://www.mgs.cards/population-report/P00005153" target="_blank" rel="noopener noreferrer"
                 class="text-decoration-none">P00005153</a>
             </div>
           </div>
@@ -1211,7 +1317,7 @@
               <span class="badge bg-success">Manafix 8.5 NM+</span>
             </div>
             <div class="col-md-3 small text-secondary">
-              Cert: <a href="https://www.mgs.cards/population-report/P00005157" target="_blank"
+              Cert: <a href="https://www.mgs.cards/population-report/P00005157" target="_blank" rel="noopener noreferrer"
                 class="text-decoration-none">P00005157</a>
             </div>
           </div>
@@ -1236,7 +1342,7 @@
               <span class="badge bg-success">Manafix 8</span>
             </div>
             <div class="col-md-3 small text-secondary">
-              Cert: <a href="https://www.mgs.cards/population-report/P00001375" target="_blank"
+              Cert: <a href="https://www.mgs.cards/population-report/P00001375" target="_blank" rel="noopener noreferrer"
                 class="text-decoration-none">P00001375</a>
             </div>
           </div>
@@ -1261,7 +1367,7 @@
               <span class="badge bg-success">Manafix 9.5 Mint+</span>
             </div>
             <div class="col-md-3 small text-secondary">
-              Cert: <a href="https://www.mgs.cards/population-report/P00005151" target="_blank"
+              Cert: <a href="https://www.mgs.cards/population-report/P00005151" target="_blank" rel="noopener noreferrer"
                 class="text-decoration-none">P00005151</a>
             </div>
           </div>
@@ -1286,7 +1392,7 @@
               <span class="badge bg-warning text-dark">PSA 3 HP</span>
             </div>
             <div class="col-md-3 small text-secondary">
-              Cert: <a href="https://www.psacard.com/cert/95153550/psa" target="_blank" class="text-decoration-none">95153550</a>
+              Cert: <a href="https://www.psacard.com/cert/95153550/psa" target="_blank" rel="noopener noreferrer" class="text-decoration-none">95153550</a>
             </div>
           </div>
         </div>
@@ -1310,7 +1416,7 @@
               <span class="badge bg-success">Manafix 9.5 Mint+</span>
             </div>
             <div class="col-md-3 small text-secondary">
-              Cert: <a href="https://www.mgs.cards/population-report/P00005152" target="_blank" class="text-decoration-none">P00005152</a>
+              Cert: <a href="https://www.mgs.cards/population-report/P00005152" target="_blank" rel="noopener noreferrer" class="text-decoration-none">P00005152</a>
             </div>
           </div>
         </div>
@@ -1334,7 +1440,7 @@
               <span class="badge bg-success">PSA 9 Mint</span>
             </div>
             <div class="col-md-3 small text-secondary">
-              Cert: <a href="https://www.psacard.com/cert/100776511/psa" target="_blank" class="text-decoration-none">100776511</a>
+              Cert: <a href="https://www.psacard.com/cert/100776511/psa" target="_blank" rel="noopener noreferrer" class="text-decoration-none">100776511</a>
             </div>
           </div>
         </div>
@@ -1358,7 +1464,7 @@
               <span class="badge bg-success">BRG 9 Mint</span>
             </div>
             <div class="col-md-3 small text-secondary">
-              Cert: <a href="https://break.co.kr/certification/0131085" target="_blank" class="text-decoration-none">0131085</a>
+              Cert: <a href="https://break.co.kr/certification/0131085" target="_blank" rel="noopener noreferrer" class="text-decoration-none">0131085</a>
             </div>
           </div>
         </div>
@@ -1382,7 +1488,7 @@
               <span class="badge bg-success">CAPY 9 Mint</span>
             </div>
             <div class="col-md-3 small text-secondary">
-              Cert: <a href="#" target="_blank" class="text-decoration-none">C001055</a>
+              Cert: <a href="#" target="_blank" rel="noopener noreferrer" class="text-decoration-none">C001055</a>
             </div>
           </div>
         </div>
@@ -1406,7 +1512,7 @@
               <span class="badge bg-warning text-dark">Manafix 8.5 Near Mint+</span>
             </div>
             <div class="col-md-3 small text-secondary">
-              Cert: <a href="https://www.mgs.cards/population-report/P00005150" target="_blank"
+              Cert: <a href="https://www.mgs.cards/population-report/P00005150" target="_blank" rel="noopener noreferrer"
                 class="text-decoration-none">P00005150</a>
             </div>
           </div>
@@ -1431,7 +1537,7 @@
               <span class="badge bg-success">a preencher 9.5 Mint</span>
             </div>
             <div class="col-md-3 small text-secondary">
-              Cert: <a href="#" target="_blank" class="text-decoration-none">a preencher</a>
+              Cert: <a href="#" target="_blank" rel="noopener noreferrer" class="text-decoration-none">a preencher</a>
             </div>
           </div>
         </div>
@@ -1457,7 +1563,7 @@
             </div>
             <div class="col-md-3 small text-secondary">
               Cert: <a href="https://h5.rpa.vin/#/pages/card/detail/detail?title=%E7%9A%AE%E5%8D%A1%E4%B8%98&type=show"
-                target="_blank" class="text-decoration-none">8553391930</a>
+                target="_blank" rel="noopener noreferrer" class="text-decoration-none">8553391930</a>
             </div>
           </div>
         </div>
@@ -1483,7 +1589,7 @@
               <span class="badge bg-warning text-dark">TAG 8.5 NM MT+</span>
             </div>
             <div class="col-md-3 small text-secondary">
-              Cert: <a href="https://my.taggrading.com/card/C8393724" target="_blank"
+              Cert: <a href="https://my.taggrading.com/card/C8393724" target="_blank" rel="noopener noreferrer"
                 class="text-decoration-none">C8393724</a>
             </div>
           </div>
@@ -1506,7 +1612,7 @@
     </div>
   </footer>
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
 
   <script>
     // Search, filter and sort functionality
@@ -1578,8 +1684,8 @@
 
       for (let badge of badgeElements) {
         const text = badge.textContent.trim();
-        // Look for patterns like "GBA 9", "CAPY 10", "Manafix 7.5", "CGC 7", "ACE 8", "BGS 9.5", "PSA 9", "BRG 9"
-        const gradeMatch = text.match(/(?:GBA|CAPY|Manafix|CGC|ACE|BGS|PSA|BRG)\s+(\d+\.?\d*)/i);
+        // Look for patterns like "GBA 9", "CAPY 10", "Manafix 7.5", "CGC 7", "ACE 8", "BGS 9.5", "PSA 9", "BRG 9", "Gradd 9", "RPA 9.5", "ARS 10", "TAG 8.5"
+        const gradeMatch = text.match(/(?:GBA|CAPY|Manafix|CGC|ACE|BGS|PSA|BRG|Gradd|RPA|ARS|TAG)\s+(\d+\.?\d*)/i);
         if (gradeMatch) {
           return parseFloat(gradeMatch[1]);
         }
