@@ -27,3 +27,20 @@ build/
 
 # Pasta temporária
 .tmp/
+
+# Environment & Secrets (AIOX)
+.env
+.env.local
+.env.*.local
+*.key
+*.pem
+
+# Dependencies (AIOX)
+node_modules
+
+# Build & Logs (AIOX)
+logs/
+
+# AIOX Local (AIOX)
+.aiox-core/local/
+.aiox/install-log.txt
