@@ -155,10 +155,9 @@
                     <div class="text-secondary mb-1 fs-label">Certificado:</div>
                     <strong class="font-monospace fs-strong">{{CERTIFICADO}}</strong>
                 </div>
-                <!-- CAMPO VARIÁVEL: Data da Certificação / Data da Avaliação / Programa -->
                 <div class="mb-3">
-                    <div class="text-secondary mb-1 fs-label">{{DATA_LABEL}}:</div>
-                    <strong class="fs-strong">{{DATA_VALOR}}</strong>
+                    <div class="text-secondary mb-1 fs-label">Data da Certificação:</div>
+                    <strong class="fs-strong">{{DATA_CERTIFICACAO}}</strong>
                 </div>
                 <hr>
                 <div class="text-secondary mb-2" style="font-size: 1rem;">Ranking de Graduação:</div>
@@ -183,30 +182,15 @@
                     </div>
                 </div>
 
-                <!-- OPÇÃO 1: Links dentro da seção de graduação (padrão Mew e Armarouge) -->
+                <!-- Link único do laudo oficial (sempre presente) -->
                 <a href="{{LINK_LAUDO_OFICIAL}}" target="_blank" rel="noopener noreferrer" class="btn btn-dark btn-sm w-100 mb-2">
                     Ver Laudo Oficial {{GRADUADORA_NOME}}
                 </a>
-                <!-- Links adicionais opcionais -->
-                <!-- EXEMPLO:
-                <a href="{{LINK_MYP}}" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm w-100 mb-2">
-                    Ver na MyP Cards
-                </a>
-                <a href="{{LINK_TCGPLAYER}}" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm w-100 mb-2">
-                    Ver no TCGPlayer
-                </a>
-                <a href="{{LINK_LIGA_POKEMON}}" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm w-100 mb-2">
-                    Ver na Liga Pokémon
-                </a>
-                <a href="{{LINK_PRICE_CHARTING}}" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm w-100">
-                    Ver no Price Charting
-                </a>
-                -->
             </div>
         </div>
 
-        <!-- OPÇÃO 2: Seção separada de Links de Referência (padrão Pikachu) -->
-        <!-- DESCOMENTE SE PREFERIR USAR ESTA ESTRUTURA:
+        <!-- Links de Referência e Consulta de Preços (PADRÃO CANÔNICO) -->
+        <!-- Remova esta seção inteira se a carta NÃO tiver links externos (só o laudo oficial). -->
         <div class="card shadow border-secondary mb-4">
             <div class="card-header bg-secondary text-white">
                 <h5 class="mb-0">Links de Referência e Consulta de Preços</h5>
@@ -214,32 +198,23 @@
             <div class="card-body bg-white">
                 <div class="row g-2">
                     <div class="col-md-6">
-                        <a href="{{LINK_TCGPLAYER}}" target="_blank" rel="noopener noreferrer" class="btn btn-outline-dark w-100">
-                            <i class="bi bi-cart3"></i> TCGPlayer (EUA)
-                        </a>
+                        <a href="{{LINK_TCGPLAYER}}" target="_blank" rel="noopener noreferrer" class="btn btn-outline-dark w-100">TCGPlayer (EUA)</a>
                     </div>
                     <div class="col-md-6">
-                        <a href="{{LINK_PRICE_CHARTING}}" target="_blank" rel="noopener noreferrer" class="btn btn-outline-dark w-100">
-                            <i class="bi bi-graph-up"></i> Price Charting
-                        </a>
+                        <a href="{{LINK_PRICE_CHARTING}}" target="_blank" rel="noopener noreferrer" class="btn btn-outline-dark w-100">Price Charting</a>
                     </div>
                     <div class="col-md-6">
-                        <a href="{{LINK_LIGA_POKEMON}}" target="_blank" rel="noopener noreferrer" class="btn btn-outline-dark w-100">
-                            <i class="bi bi-info-circle"></i> Liga Pokémon Brasil
-                        </a>
+                        <a href="{{LINK_LIGA_POKEMON}}" target="_blank" rel="noopener noreferrer" class="btn btn-outline-dark w-100">Liga Pokémon Brasil</a>
                     </div>
                     <div class="col-md-6">
-                        <a href="{{LINK_MYP}}" target="_blank" rel="noopener noreferrer" class="btn btn-outline-dark w-100">
-                            <i class="bi bi-shop"></i> MYP Cards
-                        </a>
+                        <a href="{{LINK_MYP}}" target="_blank" rel="noopener noreferrer" class="btn btn-outline-dark w-100">MYP Cards</a>
                     </div>
                 </div>
                 <div class="alert alert-light border mt-3 mb-0">
-                    <p class="small mb-0"><strong>Nota:</strong> Os links acima direcionam para fontes externas de consulta de preços e informações sobre a carta. Os valores podem variar conforme o mercado e a condição da carta.</p>
+                    <p class="small mb-0"><strong>Nota:</strong> Os links acima direcionam para fontes externas de consulta de preços. Os valores podem variar conforme o mercado e a condição da carta.</p>
                 </div>
             </div>
         </div>
-        -->
 
         <!-- Perícia Section -->
         <div class="card shadow border-secondary mb-4">
@@ -348,7 +323,7 @@
         <!-- History Section -->
         <div class="card shadow border-secondary">
             <div class="card-header bg-dark text-white">
-                <h5 class="mb-0">{{TITULO_HISTORICO}}</h5>
+                <h5 class="mb-0">Histórico de Proveniência</h5>
             </div>
             <div class="card-body bg-white">
                 <div class="accordion accordion-flush" id="accordionHistory">

@@ -39,13 +39,28 @@ Use sempre o formato misto português/inglês com abreviações padronizadas:
 - HR: "Hyper Rare (HR)"
 - SR: "Shiny Rare (SR)"
 - UR: "Ultra Rare (UR)"
+- C: "Comum (C)"
+
+**Padronização de Tipo (PT puro + qualifier opcional):**
+- Pokémon types em português: `Elétrico`, `Fogo`, `Água`, `Lutador`, `Psíquico`, `Planta`, `Sombrio`, `Metal`, `Incolor`, `Dragão`, `Férea`
+- Se houver qualifier (Terastal, TAG TEAM, VSTAR), use entre parênteses: `Elétrico (Terastal)`, `Psíquico (TAG TEAM GX)`
+- Para cartas Treinador: `Treinador — Apoiador`, `Treinador — Item`, etc.
+
+**Padronização de Idioma (apenas estes 6 valores):**
+`Português`, `Japonês`, `Inglês`, `Chinês Simplificado`, `Chinês Tradicional`, `Coreano`
+
+**Padronização de Fabricante:**
+- `The Pokémon Company / Copag` — Brasil (produto da Copag)
+- `The Pokémon Company` — internacional moderno (2003+)
+- `Wizards of the Coast` — legado 1996-2003 (Base Set, Jungle, etc)
+- `Topsun` — cartas Topsun vintage 1995-1997
 
 **Informações de Graduação:**
-- Graduadora (Manafix ou GBA)
+- Graduadora (GBA, Manafix, CAPY, CGC, ACE, BGS, PSA, BRG, RPA, ARS, TAG, Gradd)
 - Certificado
 - Nota final
 - Descrição da nota (Mint, Heavy Played, etc)
-- Data da certificação/avaliação ou programa
+- **Label fixo:** "Data da Certificação" (não use "Data da Avaliação")
 - Notas por componente:
   - Centering
   - Corners
@@ -59,23 +74,22 @@ Use sempre o formato misto português/inglês com abreviações padronizadas:
 
 ### 2. Decisões de Estrutura
 
-Use **AskUserQuestion** para perguntar:
+**Estrutura de Links (DEFAULT: Opção B — seção separada):**
+- O template já vem com a seção "Links de Referência e Consulta de Preços" como padrão canônico (card dedicado com grid 2x2 de botões `btn-outline-dark`).
+- Se a carta NÃO tiver links externos (apenas o laudo oficial da graduadora), **remova a seção inteira** — o card de Graduação já contém o botão "Ver Laudo Oficial".
+- NÃO use o padrão antigo de botões empilhados dentro do card de Graduação.
 
-**Estrutura de Links:**
-- Opção A: Links dentro da seção de graduação (padrão Mew e Armarouge)
-- Opção B: Seção separada "Links de Referência" (padrão Pikachu)
-
-**Campos Adicionais:**
-- Incluir campo "Edição"? (Mew)
-- Incluir campo "Versão"? (Mew)
-- Incluir campo "Lançamento"? (Armarouge)
-- Incluir campo "Registro AAA"? (GBA)
+**Campos Adicionais opcionais:**
+- Incluir campo "Edição"? (cartas com edição diferenciada como Mew Ancião)
+- Incluir campo "Versão"? (variantes promocionais)
+- Incluir campo "Lançamento"? (data específica de lançamento mês/ano)
+- Incluir campo "Registro AAA"? (apenas GBA)
 
 **Observações:**
-- Incluir nota sobre alteração de dados ao longo do tempo? (Mew e Armarouge)
+- Incluir nota sobre alteração de dados ao longo do tempo? (recomendado para certificações recentes)
 
 **Footer:**
-- Formato: "Laudo gerado em: [DATA]" ou "Laudo gerado para: [CERTIFICADO]"
+- Formato padrão: "Laudo gerado para: [CERTIFICADO]"
 
 ### 3. Conteúdo Dinâmico
 
@@ -130,7 +144,29 @@ Para cada componente (Centering, Corners, Edges, Surface):
 **Porcentagem da Barra:**
 - Calcular: `nota × 10` (ex: nota 9 = 90%)
 
-### 6. Validação Final
+### 6. Design System (use SEMPRE)
+
+**Utility classes (em `css/styles.css`)** — use ao invés de inline styles:
+- `.photo-thumb` — foto clicável 400px com cursor pointer
+- `.fs-strong` — texto destacado (1.1rem)
+- `.fs-label` — texto de label (0.95rem)
+- `.fs-figure` — número em destaque (1.5rem)
+- `.fs-small-label` — label pequeno (0.9rem)
+- `.col-label` — coluna de label em tabela (40%)
+- `.progress-tall` — barra de progresso alta (25px)
+- `.progress-thin` — barra de progresso fina (8px)
+- `.pricechart-frame` — iframe PriceCharting (min-height 600px)
+- `.badge-ancien` / `.alert-ancien` — cores temáticas Ancião
+
+**NÃO use `style="font-size: 1.1rem;"`** ou similares — use as classes acima.
+
+**H1 fixo:** `<h1 class="h3 mb-2">Descritivo Técnico</h1>` (não use "Documentação Técnica" ou variantes)
+
+**Card-header colors (regra):**
+- `bg-dark text-white` — seções principais (Graduação, Histórico de Proveniência)
+- `bg-secondary text-white` — seções auxiliares (Fotos, Identificação, Análise, Links de Referência)
+
+### 7. Validação Final
 
 Antes de salvar, verifique:
 - ✅ Todas as variáveis `{{...}}` foram substituídas
@@ -139,8 +175,17 @@ Antes de salvar, verifique:
 - ✅ Accordion do histórico tem IDs únicos (collapse1, collapse2, etc)
 - ✅ Primeiro item do histórico tem `collapse show` se apropriado
 - ✅ Cores dos badges correspondem às notas
-- ✅ Raridade usa o formato padronizado (SAR, AR, HR, SR, UR)
+- ✅ Raridade usa o formato padronizado (SAR, AR, HR, SR, UR, C)
+- ✅ Tipo usa formato PT puro + qualifier opcional
+- ✅ Idioma é um dos 6 valores canônicos
+- ✅ Fabricante é um dos 4 canônicos
+- ✅ Data label é "Data da Certificação"
+- ✅ H1 é "Descritivo Técnico"
+- ✅ Header histórico é "Histórico de Proveniência"
 - ✅ Nome do arquivo usa formato kebab-case (ex: pikachu-gold.html)
+- ✅ `<a target="_blank">` tem `rel="noopener noreferrer"`
+- ✅ Tags Bootstrap CDN têm SRI integrity hash
+- ✅ Inline styles substituídos por utility classes do design system
 
 ## Referências
 
