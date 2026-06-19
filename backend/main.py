@@ -66,10 +66,8 @@ async def view_laudo(request: Request, card_id: str):
 
 @app.get("/admin", response_class=HTMLResponse)
 async def admin_page(request: Request, edit_id: str = None):
-    # Retrieve dynamic graders list from existing cards
-    pipeline = [{"$group": {"_id": "$grading_company"}}]
-    graders = await cards_collection.aggregate(pipeline).to_list(length=None)
-    graders_list = sorted([g["_id"] for g in graders if g["_id"]])
+    # Retrieve managed graders
+    managed_graders = await graders_collection.find().to_list(100)
     
     card = None
     if edit_id:
@@ -80,7 +78,7 @@ async def admin_page(request: Request, edit_id: str = None):
         except Exception:
             pass
 
-    return templates.TemplateResponse(request=request, name="admin.html", context={"graders": graders_list, "card": card})
+    return templates.TemplateResponse(request=request, name="admin.html", context={"graders": managed_graders, "card": card})
 
 # API Routes
 @app.get("/api/graders", response_model=List[GraderModel])
