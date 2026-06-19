@@ -5,41 +5,61 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Administração - Laudo Cards</title>
     <link rel="icon" href="/static/favicon.svg" type="image/svg+xml">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
     <link href="/static/css/styles.css" rel="stylesheet">
 </head>
-<body class="bg-light">
+<body>
+    <a class="visually-hidden-focusable position-absolute top-0 start-0 m-2 p-2 bg-white text-dark rounded" href="#main">Pular para o conteúdo</a>
     <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4">
+    <nav class="navbar navbar-expand-lg site-nav sticky-top">
         <div class="container">
-            <a class="navbar-brand fw-bold" href="/">Painel Admin</a>
+            <a class="navbar-brand site-brand" href="/">Painel Admin</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Alternar navegação">
+                <span class="navbar-toggler-icon"></span>
+            </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="/">Ver Site</a>
+                        <a class="nav-link d-inline-flex align-items-center gap-1" href="/">
+                            <i class="bi bi-box-arrow-up-right" aria-hidden="true"></i> Ver Site
+                        </a>
                     </li>
                 </ul>
             </div>
         </div>
     </nav>
 
-    <div class="container mb-5">
+    <!-- Page header -->
+    <section id="main" class="laudo-head">
+        <div class="container">
+            <span class="eyebrow">Administração</span>
+            <h1 class="laudo-title">Painel de Gestão</h1>
+            <p class="laudo-sub">Cadastre cartas e gerencie as graduadoras da coleção.</p>
+        </div>
+    </section>
+
+    <div class="container my-5">
         <div class="row">
             <!-- Sidebar: Gerenciamento de Graduadoras -->
             <div class="col-md-4 mb-4">
-                <div class="card shadow-sm border-secondary h-100">
-                    <div class="card-header bg-dark text-white">
-                        <h5 class="mb-0">Gerenciar Graduadoras</h5>
+                <div class="panel h-100">
+                    <div class="panel-head">
+                        <h2 class="panel-title">Gerenciar Graduadoras</h2>
                     </div>
-                    <div class="card-body">
+                    <div class="panel-body">
                         <form id="graderForm" class="mb-4">
                             <div class="input-group">
                                 <input type="text" id="newGraderName" class="form-control" placeholder="Nova Graduadora" required>
-                                <button class="btn btn-primary" type="submit">Adicionar</button>
+                                <button class="btn btn-ink" type="submit">Adicionar</button>
                             </div>
                         </form>
-                        
-                        <ul class="list-group list-group-flush border" id="gradersList">
+
+                        <ul class="list-group list-group-flush grader-list" id="gradersList">
                             {% for grader in graders %}
                             <li class="list-group-item d-flex justify-content-between align-items-center">
                                 {{ grader.name }}
@@ -55,16 +75,16 @@
 
             <!-- Form: Cadastro de Carta -->
             <div class="col-md-8">
-                <div class="card shadow border-secondary">
-                    <div class="card-header bg-primary text-white">
-                        <h5 class="mb-0">Cadastrar Nova Carta</h5>
+                <div class="panel">
+                    <div class="panel-head">
+                        <h2 class="panel-title">Cadastrar Nova Carta</h2>
                     </div>
-                    <div class="card-body">
-                        
+                    <div class="panel-body">
+
                         <div id="alertPlaceholder"></div>
 
                         <form id="cardForm">
-                            <h6 class="text-secondary border-bottom pb-2">Imagens (Obrigatório)</h6>
+                            <h3 class="form-section-title">Imagens (Obrigatório)</h3>
                             <div class="row mb-3">
                                 <div class="col-md-6">
                                     <label class="form-label">Foto Frente</label>
@@ -76,7 +96,7 @@
                                 </div>
                             </div>
 
-                            <h6 class="text-secondary border-bottom pb-2 mt-4">Identificação Básica</h6>
+                            <h3 class="form-section-title">Identificação Básica</h3>
                             <div class="row mb-3">
                                 <div class="col-md-6">
                                     <label class="form-label">Nome da Carta</label>
@@ -220,7 +240,7 @@
                                 </div>
                             </div>
 
-                            <h6 class="text-secondary border-bottom pb-2 mt-4">Graduação e População</h6>
+                            <h3 class="form-section-title">Graduação e População</h3>
                             <div class="row mb-3">
                                 <div class="col-md-4">
                                     <label class="form-label">Graduadora</label>
@@ -283,7 +303,7 @@
                                 </div>
                             </div>
 
-                            <h6 class="text-secondary border-bottom pb-2 mt-4">Notas (Grades)</h6>
+                            <h3 class="form-section-title">Notas (Grades)</h3>
                             <div class="row mb-3">
                                 <div class="col-md-2">
                                     <label class="form-label">Final</label>
@@ -312,7 +332,7 @@
                                 </div>
                             </div>
 
-                            <h6 class="text-secondary border-bottom pb-2 mt-4">Links (Opcionais)</h6>
+                            <h3 class="form-section-title">Links (Opcionais)</h3>
                             <div class="row mb-3">
                                 <div class="col-md-3">
                                     <label class="form-label text-truncate" style="max-width: 100%;">TCG Player</label>
@@ -343,7 +363,7 @@
                                 <div class="form-text">Conteúdo opcional sobre a proveniência ou história desta carta específica.</div>
                             </div>
 
-                            <button type="submit" class="btn btn-success btn-lg w-100" id="btnSubmit">
+                            <button type="submit" class="btn btn-ink btn-lg w-100" id="btnSubmit">
                                 Salvar Nova Carta
                             </button>
                         </form>

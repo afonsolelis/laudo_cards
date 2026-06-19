@@ -538,6 +538,30 @@ a { text-decoration: none; }
 
 .pricechart-frame { min-height: 600px; }
 
+/* ----------------------- Admin / forms ----------------------- */
+.form-section-title {
+  font-size: .74rem;
+  font-weight: 700;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--accent-ink);
+  padding-bottom: .55rem;
+  margin: 1.85rem 0 1.1rem;
+  border-bottom: 1px solid var(--line);
+}
+.form-section-title:first-of-type { margin-top: .25rem; }
+
+.grader-list {
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+}
+.grader-list .list-group-item {
+  border-color: var(--line);
+  color: var(--ink-body);
+  padding: .7rem .95rem;
+}
+
 /* Type/era accent (Pokémon antigos) — preservado da auditoria */
 .badge-ancien { background-color: #d2b48c !important; color: #000; }
 .alert-ancien { background-color: #f5deb3; border-color: #d2b48c; color: #5d4037; }
