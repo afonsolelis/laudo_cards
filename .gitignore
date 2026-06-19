@@ -44,3 +44,22 @@ logs/
 # AIOX Local (AIOX)
 .aiox-core/local/
 .aiox/install-log.txt
+
+# Python bytecode & caches
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Python virtual environments (NUNCA versionar — use requirements.txt)
+venv/
+.venv/
+env/
+ENV/
+backend/venv/
+venv_playwright/
+
+# Scratch de verificação local / screenshots
+_render_*.html
+_shot_*.png
+_verify_*.py
+screenshot*.png
