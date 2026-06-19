@@ -65,11 +65,22 @@ async def view_laudo(request: Request, card_id: str):
     )
 
 @app.get("/admin", response_class=HTMLResponse)
-async def admin_page(request: Request):
-    managed_graders = await graders_collection.find().to_list(100)
-    return templates.TemplateResponse(
-        request=request, name="admin.html", context={"graders": managed_graders}
-    )
+async def admin_page(request: Request, edit_id: str = None):
+    # Retrieve dynamic graders list from existing cards
+    pipeline = [{"$group": {"_id": "$grading_company"}}]
+    graders = await cards_collection.aggregate(pipeline).to_list(length=None)
+    graders_list = sorted([g["_id"] for g in graders if g["_id"]])
+    
+    card = None
+    if edit_id:
+        try:
+            card = await cards_collection.find_one({"_id": ObjectId(edit_id)})
+            if card:
+                card["_id"] = str(card["_id"])
+        except Exception:
+            pass
+
+    return templates.TemplateResponse(request=request, name="admin.html", context={"graders": graders_list, "card": card})
 
 # API Routes
 @app.get("/api/graders", response_model=List[GraderModel])
@@ -91,11 +102,28 @@ async def delete_grader(grader_id: str):
     if result.deleted_count == 0:
         raise HTTPException(status_code=404, detail="Grader not found")
     return {"message": "Deleted successfully"}
+
 @app.post("/api/cards", response_model=CardModel)
 async def create_card(card: CardModel):
     new_card = await cards_collection.insert_one(card.model_dump(by_alias=True, exclude=["id"]))
     created_card = await cards_collection.find_one({"_id": new_card.inserted_id})
     return created_card
+
+@app.put("/api/cards/{card_id}")
+async def update_card(card_id: str, card: CardModel):
+    try:
+        existing_card = await cards_collection.find_one({"_id": ObjectId(card_id)})
+        if not existing_card:
+            raise HTTPException(status_code=404, detail="Card not found")
+            
+        update_data = card.model_dump(by_alias=True, exclude=["id"])
+        
+        await cards_collection.update_one({"_id": ObjectId(card_id)}, {"$set": update_data})
+        return {"message": "Card updated successfully", "card_id": card_id}
+    except Exception as e:
+        import traceback
+        traceback.print_exc()
+        raise HTTPException(status_code=500, detail=str(e))
 
 @app.post("/api/upload")
 async def upload_image(file: UploadFile = File(...)):

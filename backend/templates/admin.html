@@ -382,6 +382,53 @@
             return data.url;
         }
 
+        {% if card %}
+        const editId = "{{ card._id }}";
+        const existingFrontUrl = "{{ card.image_front_url }}";
+        const existingBackUrl = "{{ card.image_back_url }}";
+        const cardData = {{ card | tojson | safe }};
+        
+        // Populate inputs
+        document.getElementById('name').value = cardData.name || '';
+        document.getElementById('number').value = cardData.number || '';
+        document.getElementById('full_name').value = cardData.full_name || '';
+        document.getElementById('set_name').value = cardData.set_name || '';
+        document.getElementById('year').value = cardData.year || '';
+        document.getElementById('rarity').value = cardData.rarity || '';
+        document.getElementById('pokemon_type').value = cardData.pokemon_type || '';
+        document.getElementById('language').value = cardData.language || '';
+        document.getElementById('illustrator_name').value = cardData.illustrator_name || '';
+        document.getElementById('grading_company').value = cardData.grading_company || '';
+        document.getElementById('certificate_number').value = cardData.certificate_number || '';
+        document.getElementById('grading_year').value = cardData.grading_year || '';
+        document.getElementById('cert_link').value = cardData.cert_link || '';
+
+        if(cardData.grade) {
+            document.getElementById('grade_centering').value = cardData.grade.centering || '';
+            document.getElementById('grade_corners').value = cardData.grade.corners || '';
+            document.getElementById('grade_edges').value = cardData.grade.edges || '';
+            document.getElementById('grade_surface').value = cardData.grade.surface || '';
+            document.getElementById('grade_final').value = cardData.grade.final || '';
+            document.getElementById('grade_description').value = cardData.grade.description || '';
+        }
+        
+        if(cardData.links) {
+            document.getElementById('link_tcg').value = cardData.links.tcg_player || '';
+            document.getElementById('link_price').value = cardData.links.price_charting || '';
+            document.getElementById('link_liga').value = cardData.links.liga_pokemon || '';
+            document.getElementById('link_myp').value = cardData.links.myp_cards || '';
+        }
+        
+        document.getElementById('grader_notes_markdown').value = cardData.grader_notes_markdown || '';
+        document.getElementById('btnSubmit').innerText = "Atualizar Carta";
+        document.getElementById('imageFront').required = false;
+        document.getElementById('imageBack').required = false;
+        {% else %}
+        const editId = null;
+        const existingFrontUrl = null;
+        const existingBackUrl = null;
+        {% endif %}
+
         // Submissão da Carta
         document.getElementById('cardForm').addEventListener('submit', async (e) => {
             e.preventDefault();
@@ -396,8 +443,11 @@
                 const frontFile = document.getElementById('imageFront').files[0];
                 const backFile = document.getElementById('imageBack').files[0];
                 
-                const frontUrl = await uploadImage(frontFile);
-                const backUrl = await uploadImage(backFile);
+                let frontUrl = existingFrontUrl;
+                if (frontFile) frontUrl = await uploadImage(frontFile);
+                
+                let backUrl = existingBackUrl;
+                if (backFile) backUrl = await uploadImage(backFile);
 
                 btnSubmit.innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Salvando dados...';
 
@@ -435,23 +485,31 @@
                     grader_notes_markdown: document.getElementById('grader_notes_markdown').value || null
                 };
 
-                const saveRes = await fetch('/api/cards', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(payload)
-                });
-
-                if(!saveRes.ok) throw new Error("Erro ao salvar carta no banco");
-
-                alertPlaceholder.innerHTML = `<div class="alert alert-success">Carta cadastrada com sucesso!</div>`;
-                document.getElementById('cardForm').reset();
+                if (editId) {
+                    const saveRes = await fetch(`/api/cards/${editId}`, {
+                        method: 'PUT',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(payload)
+                    });
+                    if(!saveRes.ok) throw new Error("Erro ao atualizar carta no banco");
+                    alertPlaceholder.innerHTML = `<div class="alert alert-success">Carta atualizada com sucesso! <a href="/laudo/${editId}" class="alert-link">Ver Laudo</a></div>`;
+                } else {
+                    const saveRes = await fetch('/api/cards', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(payload)
+                    });
+                    if(!saveRes.ok) throw new Error("Erro ao salvar carta no banco");
+                    alertPlaceholder.innerHTML = `<div class="alert alert-success">Carta cadastrada com sucesso!</div>`;
+                    document.getElementById('cardForm').reset();
+                }
 
             } catch (error) {
                 console.error(error);
                 alertPlaceholder.innerHTML = `<div class="alert alert-danger">${error.message}</div>`;
             } finally {
                 btnSubmit.disabled = false;
-                btnSubmit.textContent = 'Salvar Nova Carta';
+                btnSubmit.textContent = editId ? 'Atualizar Carta' : 'Salvar Nova Carta';
                 window.scrollTo(0,0);
             }
         });
