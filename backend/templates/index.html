@@ -8,6 +8,60 @@
   <title>Cartas Pokémon TCG Graduadas - Coleção Certificada</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="/static/css/styles.css" rel="stylesheet">
+  <style>
+    body {
+      background-color: #121212 !important; /* Dark mode by default for premium feel */
+    }
+    .premium-card {
+      border-radius: 16px;
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      background: linear-gradient(145deg, #1e1e1e, #2a2a2a);
+      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+      cursor: pointer;
+      overflow: hidden;
+      border: 1px solid #333;
+    }
+    .premium-card:hover {
+      transform: translateY(-10px) scale(1.02);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.6), 0 0 20px rgba(255, 215, 0, 0.15);
+      border-color: #555;
+      z-index: 10;
+    }
+    .premium-card:hover .drop-shadow-glow {
+      transform: scale(1.06) rotate(1deg);
+      filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.3));
+    }
+    .drop-shadow-glow {
+      filter: drop-shadow(0 10px 15px rgba(0,0,0,0.6));
+      transition: all 0.4s ease;
+    }
+    .card-img-wrapper {
+      background: radial-gradient(circle at top, rgba(255,255,255,0.08) 0%, rgba(0,0,0,0) 70%);
+      padding: 2rem 1rem 1rem;
+      position: relative;
+    }
+    .holo-overlay {
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: linear-gradient(125deg, rgba(255,255,255,0) 30%, rgba(255,255,255,0.05) 40%, rgba(255,255,255,0.3) 50%, rgba(255,255,255,0.05) 60%, rgba(255,255,255,0) 70%);
+      background-size: 200% 200%;
+      background-position: 150% 150%;
+      opacity: 0;
+      transition: all 0.7s ease;
+      pointer-events: none;
+      z-index: 5;
+    }
+    .premium-card:hover .holo-overlay {
+      opacity: 1;
+      background-position: -50% -50%;
+    }
+    .section-title {
+      background: -webkit-linear-gradient(45deg, #f3ec78, #af4261);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      font-weight: 800;
+    }
+  </style>
 </head>
 
 <body class="bg-light">
@@ -48,9 +102,9 @@
   </section>
 
   <!-- Collection Section -->
-  <section id="colecao" class="py-5">
+  <section id="colecao" class="py-5 bg-dark">
     <div class="container">
-      <h2 class="text-dark mb-4">Cartas Graduadas</h2>
+      <h2 class="mb-4 text-white section-title" style="background: -webkit-linear-gradient(45deg, #ffc107, #ff6b6b); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Sua Coleção</h2>
 
       <!-- Search Bar and Filters -->
       <div class="mb-4">
@@ -81,34 +135,47 @@
         </div>
       </div>
 
-      <div class="list-group" id="cardList">
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4" id="cardList">
         {% if not cards %}
-        <div class="text-center p-4 text-muted">Nenhuma carta encontrada no banco de dados.</div>
+        <div class="col-12 text-center p-5 text-secondary">
+          <i class="bi bi-inbox fs-1 d-block mb-3"></i>
+          Nenhuma carta encontrada no banco de dados.
+        </div>
         {% endif %}
 
         {% for card in cards %}
-        <div class="list-group-item list-group-item-action border-secondary card-item" data-name="{{ card.name | lower }} {{ card.set_name | lower }} {{ card.certificate_number | lower }}" data-grade="{{ card.grade.final }}" data-grader="{{ card.grading_company | lower }}" role="button" tabindex="0"
-          onclick="window.location.href='/laudo/{{ card['_id'] }}';"
-          onkeypress="if (event.key === 'Enter' || event.key === ' ') { window.location.href='/laudo/{{ card['_id'] }}'; }">
-          <div class="row align-items-center">
-            <div class="col-md-2 text-center">
-              <img src="{{ card.image_front_url if card.image_front_url else 'https://via.placeholder.com/150' }}"
-                alt="{{ card.name }} - Slab Frente" class="img-fluid rounded border" loading="lazy" style="max-height: 150px">
+        <div class="col card-item" data-name="{{ card.name | lower }} {{ card.set_name | lower }} {{ card.certificate_number | lower }}" data-grade="{{ card.grade.final }}" data-grader="{{ card.grading_company | lower }}">
+          <div class="card h-100 premium-card text-white" role="button" tabindex="0"
+            onclick="window.location.href='/laudo/{{ card['_id'] }}';"
+            onkeypress="if (event.key === 'Enter' || event.key === ' ') { window.location.href='/laudo/{{ card['_id'] }}'; }">
+            
+            <div class="card-img-wrapper text-center">
+              <img src="{{ card.image_front_url if card.image_front_url else 'https://via.placeholder.com/250x350' }}"
+                alt="{{ card.name }} - Slab" class="img-fluid drop-shadow-glow" loading="lazy" style="max-height: 280px; border-radius: 12px; object-fit: contain;">
             </div>
-            <div class="col-md-5">
-              <h6 class="mb-1 fw-bold">{{ card.name }} ({{ card.number }})</h6>
-              <div>
-                <span class="badge bg-dark small">{{ card.set_name }}</span>
-                <span class="badge bg-secondary small">{{ card.rarity }}</span>
+            
+            <div class="card-body d-flex flex-column pb-3">
+              <div class="d-flex justify-content-between align-items-start mb-2">
+                <h5 class="card-title fw-bold mb-0 text-truncate pe-2">{{ card.name }}</h5>
+                <span class="badge {{ get_grade_badge_color(card.grade.final) }} fs-6 shadow-sm border border-light border-opacity-25">{{ card.grade.final }}</span>
+              </div>
+              
+              <div class="mb-3 text-secondary small d-flex justify-content-between">
+                <span>{{ card.set_name }} <span class="text-white-50">#{{ card.number }}</span></span>
+              </div>
+              
+              <div class="mt-auto pt-3 border-top border-secondary border-opacity-50 d-flex justify-content-between align-items-end">
+                <div>
+                  <span class="badge bg-dark border border-secondary text-light">{{ card.rarity }}</span>
+                </div>
+                <div class="text-end">
+                  <small class="text-white-50 d-block mb-1" style="font-size: 0.65rem; text-transform: uppercase; letter-spacing: 1px;">Graduadora</small>
+                  <span class="fw-bold text-warning" style="letter-spacing: 0.5px;">{{ card.grading_company }}</span>
+                </div>
               </div>
             </div>
-            <div class="col-md-2">
-              <span class="badge {{ get_grade_badge_color(card.grade.final) }}">{{ card.grading_company }} {{ card.grade.final }} {{ card.grade.description }}</span>
-            </div>
-            <div class="col-md-3 small text-secondary">
-              Cert: <a href="{{ card.cert_link }}" target="_blank" rel="noopener noreferrer"
-                class="text-decoration-none">{{ card.certificate_number }}</a>
-            </div>
+            <!-- Efeito holográfico overlay -->
+            <div class="holo-overlay"></div>
           </div>
         </div>
         {% endfor %}
