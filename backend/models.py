@@ -63,8 +63,6 @@ class CardModel(BaseModel):
     grading_company: str
     certificate_number: str
     grading_year: int
-    population: str
-    population_rank: str
     cert_link: str
     
     # Imagens

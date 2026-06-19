@@ -97,15 +97,78 @@
                                     <input type="text" class="form-control" id="set_name" required placeholder="Ex: Base Set">
                                 </div>
                                 <div class="col-md-4">
-                                    <label class="form-label">Ano</label>
-                                    <input type="number" class="form-control" id="year" required placeholder="Ex: 1999">
+                                    <label class="form-label">Ano de Lançamento</label>
+                                    <select class="form-select" id="year" required>
+                                        <option value="" disabled selected>Selecione o ano...</option>
+                                        <option value="2026">2026</option>
+                                        <option value="2025">2025</option>
+                                        <option value="2024">2024</option>
+                                        <option value="2023">2023</option>
+                                        <option value="2022">2022</option>
+                                        <option value="2021">2021</option>
+                                        <option value="2020">2020</option>
+                                        <option value="2019">2019</option>
+                                        <option value="2018">2018</option>
+                                        <option value="2017">2017</option>
+                                        <option value="2016">2016</option>
+                                        <option value="2015">2015</option>
+                                        <option value="2014">2014</option>
+                                        <option value="2013">2013</option>
+                                        <option value="2012">2012</option>
+                                        <option value="2011">2011</option>
+                                        <option value="2010">2010</option>
+                                        <option value="2009">2009</option>
+                                        <option value="2008">2008</option>
+                                        <option value="2007">2007</option>
+                                        <option value="2006">2006</option>
+                                        <option value="2005">2005</option>
+                                        <option value="2004">2004</option>
+                                        <option value="2003">2003</option>
+                                        <option value="2002">2002</option>
+                                        <option value="2001">2001</option>
+                                        <option value="2000">2000</option>
+                                        <option value="1999">1999</option>
+                                        <option value="1998">1998</option>
+                                        <option value="1997">1997</option>
+                                        <option value="1996">1996</option>
+                                        <option value="1995">1995</option>
+                                        <option value="1994">1994</option>
+                                        <option value="1993">1993</option>
+                                        <option value="1992">1992</option>
+                                        <option value="1991">1991</option>
+                                        <option value="1990">1990</option>
+                                    </select>
                                 </div>
                             </div>
                             
                             <div class="row mb-3">
                                 <div class="col-md-6">
                                     <label class="form-label">Raridade</label>
-                                    <input type="text" class="form-control" id="rarity" required placeholder="Ex: Rare Holo">
+                                    <select class="form-select" id="rarity" required>
+                                        <option value="" disabled selected>Selecione a raridade...</option>
+                                        <optgroup label="Era Moderna (Scarlet & Violet / Paldea Evolved)">
+                                            <option value="Comum (●)">Comum (●)</option>
+                                            <option value="Incomum (◆)">Incomum (◆)</option>
+                                            <option value="Rara (★)">Rara (★)</option>
+                                            <option value="Rara Dupla (★★)">Rara Dupla (★★)</option>
+                                            <option value="Rara Ultra (★★ holográfica)">Rara Ultra (★★ holográfica)</option>
+                                            <option value="Ilustração Rara (Rare Illustration)">Ilustração Rara (Rare Illustration)</option>
+                                            <option value="Rara Hiper / Secreta (★★★ dourada)">Rara Hiper / Secreta (★★★ dourada)</option>
+                                        </optgroup>
+                                        <optgroup label="Era Clássica (WOTC e EX/Sun & Moon)">
+                                            <option value="Rara Holofoil">Rara Holofoil</option>
+                                            <option value="Rara Reversa (Reverse Holo)">Rara Reversa (Reverse Holo)</option>
+                                            <option value="Ultra Rara (Estrela Branca)">Ultra Rara (Estrela Branca)</option>
+                                            <option value="Secret Rare">Secret Rare</option>
+                                            <option value="Radiant">Radiant</option>
+                                        </optgroup>
+                                        <optgroup label="Promocionais e Especiais">
+                                            <option value="Promo (★ PROMOG / P)">Promo (★ PROMOG / P)</option>
+                                            <option value="Cartas de Subconjunto (Subset)">Cartas de Subconjunto (Subset)</option>
+                                            <option value="Ace Spec">Ace Spec</option>
+                                            <option value="Prism Star">Prism Star</option>
+                                        </optgroup>
+                                    </select>
                                 </div>
                                 <div class="col-md-6">
                                     <label class="form-label">Tipo Pokémon</label>
@@ -116,7 +179,24 @@
                             <div class="row mb-3">
                                 <div class="col-md-6">
                                     <label class="form-label">Idioma</label>
-                                    <input type="text" class="form-control" id="language" required placeholder="Ex: English">
+                                    <select class="form-select" id="language" required>
+                                        <option value="" disabled selected>Selecione o idioma...</option>
+                                        <option value="Inglês (English)">Inglês (English)</option>
+                                        <option value="Português (Portuguese)">Português (Portuguese)</option>
+                                        <option value="Japonês (Japanese)">Japonês (Japanese)</option>
+                                        <option value="Espanhol (Spanish)">Espanhol (Spanish)</option>
+                                        <option value="Francês (French)">Francês (French)</option>
+                                        <option value="Alemão (German)">Alemão (German)</option>
+                                        <option value="Italiano (Italian)">Italiano (Italian)</option>
+                                        <option value="Coreano (Korean)">Coreano (Korean)</option>
+                                        <option value="Chinês Tradicional (Traditional Chinese)">Chinês Tradicional (Traditional Chinese)</option>
+                                        <option value="Chinês Simplificado (Simplified Chinese)">Chinês Simplificado (Simplified Chinese)</option>
+                                        <option value="Tailandês (Thai)">Tailandês (Thai)</option>
+                                        <option value="Indonésio (Indonesian)">Indonésio (Indonesian)</option>
+                                        <option value="Holandês (Dutch)">Holandês (Dutch)</option>
+                                        <option value="Polonês (Polish)">Polonês (Polish)</option>
+                                        <option value="Russo (Russian)">Russo (Russian)</option>
+                                    </select>
                                 </div>
                                 <div class="col-md-6">
                                     <label class="form-label">Nome do Artista / Ilustrador</label>
@@ -140,20 +220,48 @@
                                 </div>
                                 <div class="col-md-4">
                                     <label class="form-label">Ano de Graduação</label>
-                                    <input type="number" class="form-control" id="grading_year" required placeholder="Ex: 2023">
+                                    <select class="form-select" id="grading_year" required>
+                                        <option value="" disabled selected>Selecione o ano...</option>
+                                        <option value="2026">2026</option>
+                                        <option value="2025">2025</option>
+                                        <option value="2024">2024</option>
+                                        <option value="2023">2023</option>
+                                        <option value="2022">2022</option>
+                                        <option value="2021">2021</option>
+                                        <option value="2020">2020</option>
+                                        <option value="2019">2019</option>
+                                        <option value="2018">2018</option>
+                                        <option value="2017">2017</option>
+                                        <option value="2016">2016</option>
+                                        <option value="2015">2015</option>
+                                        <option value="2014">2014</option>
+                                        <option value="2013">2013</option>
+                                        <option value="2012">2012</option>
+                                        <option value="2011">2011</option>
+                                        <option value="2010">2010</option>
+                                        <option value="2009">2009</option>
+                                        <option value="2008">2008</option>
+                                        <option value="2007">2007</option>
+                                        <option value="2006">2006</option>
+                                        <option value="2005">2005</option>
+                                        <option value="2004">2004</option>
+                                        <option value="2003">2003</option>
+                                        <option value="2002">2002</option>
+                                        <option value="2001">2001</option>
+                                        <option value="2000">2000</option>
+                                        <option value="1999">1999</option>
+                                        <option value="1998">1998</option>
+                                        <option value="1997">1997</option>
+                                        <option value="1996">1996</option>
+                                        <option value="1995">1995</option>
+                                        <option value="1994">1994</option>
+                                        <option value="1993">1993</option>
+                                        <option value="1992">1992</option>
+                                        <option value="1991">1991</option>
+                                        <option value="1990">1990</option>
+                                    </select>
                                 </div>
-                            </div>
-                            
-                            <div class="row mb-3">
-                                <div class="col-md-4">
-                                    <label class="form-label">População (Total)</label>
-                                    <input type="text" class="form-control" id="population" required placeholder="Ex: 5.432">
-                                </div>
-                                <div class="col-md-4">
-                                    <label class="form-label">Ranking Populacional</label>
-                                    <input type="text" class="form-control" id="population_rank" required placeholder="Ex: Top 10%">
-                                </div>
-                                <div class="col-md-4">
+                                <div class="col-md-6">
                                     <label class="form-label">Link do Certificado Oficial</label>
                                     <input type="url" class="form-control" id="cert_link" required placeholder="https://...">
                                 </div>
@@ -291,8 +399,6 @@
                     grading_company: document.getElementById('grading_company').value,
                     certificate_number: document.getElementById('certificate_number').value,
                     grading_year: parseInt(document.getElementById('grading_year').value),
-                    population: document.getElementById('population').value,
-                    population_rank: document.getElementById('population_rank').value,
                     cert_link: document.getElementById('cert_link').value,
                     image_front_url: frontUrl,
                     image_back_url: backUrl,
