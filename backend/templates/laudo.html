@@ -1,343 +1,287 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ card.name }} ({{ card.number }}) - Descritivo</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="/static/css/styles.css" rel="stylesheet">
-</head>
-<body class="bg-light">
-    <a class="visually-hidden-focusable position-absolute top-0 start-0 m-2 p-2 bg-white text-dark rounded" href="#main">Pular para o conteúdo</a>
-    <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <div class="container">
-            <a class="navbar-brand fw-bold" href="/">Cartas Graduadas</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="/">Voltar ao Portfólio</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
 
-    <!-- Header Section -->
-    <section id="main" class="bg-dark text-white py-4 border-bottom border-secondary">
-        <div class="container">
-            <div class="row align-items-center">
-                <div class="col-md-8">
-                    <h1 class="h3 mb-2">Descritivo Técnico</h1>
-                    <p class="mb-0 text-secondary">{{ card.full_name }}</p>
-                </div>
-                <div class="col-md-4 text-md-end">
-                    <span class="badge bg-secondary fs-6">Cert: {{ card.certificate_number }}</span>
-                </div>
-            </div>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="/static/favicon.svg" type="image/svg+xml">
+  <title>{{ card.name }} ({{ card.number }}) - Descritivo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <link href="/static/css/styles.css" rel="stylesheet">
+</head>
+
+<body>
+  <a class="visually-hidden-focusable position-absolute top-0 start-0 m-2 p-2 bg-white text-dark rounded" href="#main">Pular para o conteúdo</a>
+
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg site-nav sticky-top">
+    <div class="container">
+      <a class="navbar-brand site-brand" href="/">Cartas Graduadas</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Alternar navegação">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a class="nav-link d-inline-flex align-items-center gap-1" href="/">
+              <i class="bi bi-arrow-left" aria-hidden="true"></i> Voltar ao Portfólio
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Header Section -->
+  <section id="main" class="laudo-head">
+    <div class="container">
+      <div class="row align-items-center g-3">
+        <div class="col-md-8">
+          <span class="eyebrow">Descritivo técnico</span>
+          <h1 class="laudo-title">{{ card.full_name if card.full_name else card.name }}</h1>
+          <p class="laudo-sub">{{ card.set_name }} · #{{ card.number }} · {{ card.year }}</p>
         </div>
+        <div class="col-md-4 text-md-end">
+          <span class="cert-chip"><span class="cert-key">Cert</span> {{ card.certificate_number }}</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Card Details -->
+  <div id="cardContent" class="container my-5">
+    <!-- Fotos e Identificação -->
+    <div class="row g-4 mb-4">
+      <div class="col-lg-6">
+        <section class="panel">
+          <div class="panel-head"><h2 class="panel-title">Fotos da Carta</h2></div>
+          <div class="panel-body is-flush">
+            <div class="row g-0">
+              <div class="col-6 photo-cell">
+                <img src="{{ card.image_front_url if card.image_front_url else 'https://via.placeholder.com/300x400?text=Sem+Foto' }}"
+                  alt="Frente" class="img-fluid photo-thumb" data-bs-toggle="modal" data-bs-target="#modalFrente">
+              </div>
+              <div class="col-6 photo-cell">
+                <img src="{{ card.image_back_url if card.image_back_url else 'https://via.placeholder.com/300x400?text=Sem+Foto' }}"
+                  alt="Verso" class="img-fluid photo-thumb" data-bs-toggle="modal" data-bs-target="#modalVerso">
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <div class="col-lg-6">
+        <section class="panel">
+          <div class="panel-head"><h2 class="panel-title">Identificação</h2></div>
+          <div class="panel-body">
+            <table class="table id-table">
+              <tbody>
+                <tr><td class="id-key">Nome</td><td class="id-val">{{ card.name }}</td></tr>
+                <tr><td class="id-key">Número</td><td class="id-val">{{ card.number }}</td></tr>
+                <tr><td class="id-key">Coleção</td><td class="id-val">{{ card.set_name }}</td></tr>
+                <tr><td class="id-key">Ano</td><td class="id-val">{{ card.year }}</td></tr>
+                <tr><td class="id-key">Raridade</td><td class="id-val"><span class="chip">{{ card.rarity }}</span></td></tr>
+                <tr><td class="id-key">Tipo</td><td class="id-val">{{ card.pokemon_type }}</td></tr>
+                <tr><td class="id-key">Idioma</td><td class="id-val">{{ card.language }}</td></tr>
+                <tr><td class="id-key">Artista/Ilustrador</td><td class="id-val">{{ card.illustrator_name }}</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+      </div>
+    </div>
+
+    <!-- Graduação -->
+    <section class="panel mb-4">
+      <div class="panel-head"><h2 class="panel-title">Graduação {{ card.grading_company }}</h2></div>
+      <div class="panel-body">
+        <div class="grade-hero">
+          <div class="grade-number">{{ card.grade.final }}</div>
+          <div>
+            <p class="grade-desc">{{ card.grade.description }}</p>
+            <p class="grade-company">Avaliada por <strong>{{ card.grading_company }}</strong></p>
+          </div>
+        </div>
+
+        <hr class="my-3" style="border-color: var(--line);">
+
+        <div class="meta-list">
+          <div>
+            <div class="meta-key">Graduadora</div>
+            <div class="meta-val">{{ card.grading_company }}</div>
+          </div>
+          <div>
+            <div class="meta-key">Certificado</div>
+            <div class="meta-val font-monospace">{{ card.certificate_number }}</div>
+          </div>
+          <div>
+            <div class="meta-key">Ano da Certificação</div>
+            <div class="meta-val">{{ card.grading_year }}</div>
+          </div>
+        </div>
+
+        <div class="d-grid gap-2 mt-4">
+          <a href="{{ card.cert_link }}" target="_blank" rel="noopener noreferrer" class="btn btn-ink">
+            Ver Laudo Oficial {{ card.grading_company }}
+          </a>
+          <a href="/admin?edit_id={{ card._id }}" class="btn btn-line">
+            <i class="bi bi-pencil me-1" aria-hidden="true"></i> Editar Carta
+          </a>
+        </div>
+      </div>
     </section>
 
-    <!-- Card Details -->
-    <div id="cardContent" class="container my-5">
-        <!-- Fotos e Identificação -->
-        <div class="row mb-4">
-            <div class="col-lg-6 mb-3 mb-lg-0">
-                <!-- Fotos da Carta -->
-                <div class="card shadow border-secondary h-100">
-                    <div class="card-header bg-secondary text-white">
-                        <h5 class="mb-0">Fotos da Carta</h5>
-                    </div>
-                    <div class="card-body bg-white p-0">
-                        <div class="row g-0">
-                            <div class="col-6">
-                                <div class="p-3 border-end text-center">
-                                    <img src="{{ card.image_front_url if card.image_front_url else 'https://via.placeholder.com/300x400?text=Sem+Foto' }}" alt="Frente" class="img-fluid rounded border photo-thumb" data-bs-toggle="modal" data-bs-target="#modalFrente" style="cursor: pointer; max-height: 400px;">
-                                </div>
-                            </div>
-                            <div class="col-6">
-                                <div class="p-3 text-center">
-                                    <img src="{{ card.image_back_url if card.image_back_url else 'https://via.placeholder.com/300x400?text=Sem+Foto' }}" alt="Verso" class="img-fluid rounded border photo-thumb" data-bs-toggle="modal" data-bs-target="#modalVerso" style="cursor: pointer; max-height: 400px;">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+    <!-- Links de Referência -->
+    <section class="panel mb-4">
+      <div class="panel-head"><h2 class="panel-title">Links de Referência e Consulta de Preços</h2></div>
+      <div class="panel-body">
+        <div class="row g-2">
+          {% if card.links.tcg_player %}
+          <div class="col-md-6">
+            <a href="{{ card.links.tcg_player }}" target="_blank" rel="noopener noreferrer" class="btn btn-line w-100">TCGPlayer (EUA)</a>
+          </div>
+          {% endif %}
+          {% if card.links.price_charting %}
+          <div class="col-md-6">
+            <a href="{{ card.links.price_charting }}" target="_blank" rel="noopener noreferrer" class="btn btn-line w-100">Price Charting</a>
+          </div>
+          {% endif %}
+          {% if card.links.liga_pokemon %}
+          <div class="col-md-6">
+            <a href="{{ card.links.liga_pokemon }}" target="_blank" rel="noopener noreferrer" class="btn btn-line w-100">Liga Pokémon Brasil</a>
+          </div>
+          {% endif %}
+          {% if card.links.myp_cards %}
+          <div class="col-md-6">
+            <a href="{{ card.links.myp_cards }}" target="_blank" rel="noopener noreferrer" class="btn btn-line w-100">MYP Cards</a>
+          </div>
+          {% endif %}
+        </div>
+      </div>
+    </section>
 
-            <div class="col-lg-6">
-                <div class="card shadow border-secondary h-100">
-                    <div class="card-header bg-secondary text-white">
-                        <h5 class="mb-0">Identificação</h5>
-                    </div>
-                    <div class="card-body bg-white">
-                        <table class="table table-sm table-borderless mb-0">
-                            <tbody>
-                                <tr>
-                                    <td class="fw-bold text-dark col-label">Nome:</td>
-                                    <td>{{ card.name }}</td>
-                                </tr>
-                                <tr>
-                                    <td class="fw-bold text-dark">Número:</td>
-                                    <td>{{ card.number }}</td>
-                                </tr>
-                                <tr>
-                                    <td class="fw-bold text-dark">Coleção:</td>
-                                    <td>{{ card.set_name }}</td>
-                                </tr>
-                                <tr>
-                                    <td class="fw-bold text-dark">Ano:</td>
-                                    <td>{{ card.year }}</td>
-                                </tr>
-                                <tr>
-                                    <td class="fw-bold text-dark">Raridade:</td>
-                                    <td><span class="badge bg-secondary">{{ card.rarity }}</span></td>
-                                </tr>
-                                <tr>
-                                    <td class="fw-bold text-dark">Tipo:</td>
-                                    <td>{{ card.pokemon_type }}</td>
-                                </tr>
-                                <tr>
-                                    <td class="fw-bold text-dark">Idioma:</td>
-                                    <td>{{ card.language }}</td>
-                                </tr>
-                                <tr>
-                                    <td class="fw-bold text-dark">Artista/Ilustrador:</td>
-                                    <td>{{ card.illustrator_name }}</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
+    <!-- Perícia Section -->
+    <section class="panel mb-4">
+      <div class="panel-head"><h2 class="panel-title">Análise de Condição — {{ card.grading_company }}</h2></div>
+      <div class="panel-body">
+        <div class="mb-4">
+          <div class="d-flex justify-content-between align-items-center mb-2">
+            <span class="fw-bold">Classificação Geral</span>
+            <span class="badge {{ get_grade_badge_color(card.grade.final) }} grade-badge">{{ card.grade.final }} — {{ card.grade.description }}</span>
+          </div>
+          <div class="progress progress-tall">
+            <div class="progress-bar {{ get_grade_badge_color(card.grade.final) }}" role="progressbar"
+              style="width: {{ (card.grade.final / 10) * 100 }}%;"
+              aria-valuenow="{{ (card.grade.final / 10) * 100 }}" aria-valuemin="0" aria-valuemax="100">
+              <span class="fw-bold">{{ card.grade.final }}/10</span>
             </div>
+          </div>
         </div>
 
-        <!-- Graduação -->
-        <div class="card shadow border-secondary mb-4">
-            <div class="card-header bg-dark text-white">
-                <h5 class="mb-0">Graduação {{ card.grading_company }}</h5>
-            </div>
-            <div class="card-body bg-white">
-                <div class="text-center mb-3">
-                    <h2 class="display-4 text-dark mb-0">{{ card.grade.final }}</h2>
-                    <p class="text-secondary mb-0 fs-strong">{{ card.grade.description }}</p>
-                </div>
-                <hr>
-                <div class="mb-3">
-                    <div class="text-secondary mb-1 fs-label">Graduadora:</div>
-                    <strong class="fs-strong">{{ card.grading_company }}</strong>
-                </div>
-                <div class="mb-3">
-                    <div class="text-secondary mb-1 fs-label">Certificado:</div>
-                    <strong class="font-monospace fs-strong">{{ card.certificate_number }}</strong>
-                </div>
-                <div class="mb-3">
-                    <div class="text-secondary mb-1 fs-label">Ano da Certificação:</div>
-                    <strong class="fs-strong">{{ card.grading_year }}</strong>
-                </div>
-                <hr>
-                <a href="{{ card.cert_link }}" target="_blank" rel="noopener noreferrer" class="btn btn-dark btn-sm w-100 mb-2">
-                    Ver Laudo Oficial {{ card.grading_company }}
-                </a>
-                
-                <a href="/admin?edit_id={{ card._id }}" class="btn btn-outline-secondary btn-sm w-100 mt-2">
-                    <i class="bi bi-pencil me-1"></i> Editar Carta
-                </a>
-            </div>
+        <h3 class="h6 mb-3">Análise Detalhada por Componente</h3>
+
+        {% if card.grade.centering is not none %}
+        <div class="spec-row">
+          <span class="spec-label">Centering (Centralização)</span>
+          <span class="badge {{ get_grade_badge_color(card.grade.centering) }}">{{ card.grade.centering }}</span>
+        </div>
+        {% endif %}
+
+        {% if card.grade.corners is not none %}
+        <div class="spec-row">
+          <span class="spec-label">Corners (Cantos)</span>
+          <span class="badge {{ get_grade_badge_color(card.grade.corners) }}">{{ card.grade.corners }}</span>
+        </div>
+        {% endif %}
+
+        {% if card.grade.edges is not none %}
+        <div class="spec-row">
+          <span class="spec-label">Edges (Bordas)</span>
+          <span class="badge {{ get_grade_badge_color(card.grade.edges) }}">{{ card.grade.edges }}</span>
+        </div>
+        {% endif %}
+
+        {% if card.grade.surface is not none %}
+        <div class="spec-row">
+          <span class="spec-label">Surface (Superfície)</span>
+          <span class="badge {{ get_grade_badge_color(card.grade.surface) }}">{{ card.grade.surface }}</span>
+        </div>
+        {% endif %}
+
+        <div class="spec-row is-total">
+          <span class="spec-label">Nota Final (Overall)</span>
+          <span class="badge {{ get_grade_badge_color(card.grade.final) }}">{{ card.grade.final }}</span>
         </div>
 
-        <!-- Links de Referência -->
-        <div class="card shadow border-secondary mb-4">
-            <div class="card-header bg-secondary text-white">
-                <h5 class="mb-0">Links de Referência e Consulta de Preços</h5>
+        {% if card.grader_notes_markdown %}
+        <div class="mt-4">
+          <h3 class="h6 mb-3">Observações Técnicas</h3>
+          <div class="note-box">
+            <div class="d-flex">
+              <span class="text-success me-2" aria-hidden="true"><i class="bi bi-check-circle-fill"></i></span>
+              <div class="small">{{ card.grader_notes_markdown | replace('\n', '<br>') | safe }}</div>
             </div>
-            <div class="card-body bg-white">
-                <div class="row g-2">
-                    {% if card.links.tcg_player %}
-                    <div class="col-md-6">
-                        <a href="{{ card.links.tcg_player }}" target="_blank" rel="noopener noreferrer" class="btn btn-outline-dark w-100">TCGPlayer (EUA)</a>
-                    </div>
-                    {% endif %}
-                    {% if card.links.price_charting %}
-                    <div class="col-md-6">
-                        <a href="{{ card.links.price_charting }}" target="_blank" rel="noopener noreferrer" class="btn btn-outline-dark w-100">Price Charting</a>
-                    </div>
-                    {% endif %}
-                    {% if card.links.liga_pokemon %}
-                    <div class="col-md-6">
-                        <a href="{{ card.links.liga_pokemon }}" target="_blank" rel="noopener noreferrer" class="btn btn-outline-dark w-100">Liga Pokémon Brasil</a>
-                    </div>
-                    {% endif %}
-                    {% if card.links.myp_cards %}
-                    <div class="col-md-6">
-                        <a href="{{ card.links.myp_cards }}" target="_blank" rel="noopener noreferrer" class="btn btn-outline-dark w-100">MYP Cards</a>
-                    </div>
-                    {% endif %}
-                </div>
-            </div>
+          </div>
         </div>
+        {% endif %}
 
-        <!-- Perícia Section -->
-        <div class="card shadow border-secondary mb-4">
-            <div class="card-header bg-secondary text-white">
-                <h5 class="mb-0">Análise de Condição - {{ card.grading_company }}</h5>
+        {% if card.card_history %}
+        <div class="mt-4">
+          <h3 class="h6 mb-3">Histórico da Carta</h3>
+          <div class="note-box">
+            <div class="d-flex">
+              <span class="text-muted me-2" aria-hidden="true"><i class="bi bi-clock-history"></i></span>
+              <div class="small">{{ card.card_history | replace('\n', '<br>') | safe }}</div>
             </div>
-            <div class="card-body bg-white">
-                <div class="mb-4">
-                    <div class="d-flex justify-content-between align-items-center mb-2">
-                        <span class="fw-bold text-dark">Classificação Geral:</span>
-                        <span class="badge {{ get_grade_badge_color(card.grade.final) }} fs-6">{{ card.grade.final }} - {{ card.grade.description }}</span>
-                    </div>
-                    <div class="progress progress-tall">
-                        <div class="progress-bar {{ get_grade_badge_color(card.grade.final) }}" role="progressbar" style="width: {{ (card.grade.final / 10) * 100 }}%;" aria-valuenow="{{ (card.grade.final / 10) * 100 }}" aria-valuemin="0" aria-valuemax="100">
-                            <span class="fw-bold">{{ card.grade.final }}/10</span>
-                        </div>
-                    </div>
-                </div>
-
-                <h6 class="text-dark mb-3">Análise Detalhada por Componente</h6>
-
-                {% if card.grade.centering is not none %}
-                <div class="card mb-2 border">
-                    <div class="card-body py-2 px-3">
-                        <div class="row align-items-center">
-                            <div class="col-8">
-                                <span class="small">Centering (Centralização)</span>
-                            </div>
-                            <div class="col-4 text-end">
-                                <span class="badge {{ get_grade_badge_color(card.grade.centering) }}">{{ card.grade.centering }}</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                {% endif %}
-
-                {% if card.grade.corners is not none %}
-                <div class="card mb-2 border">
-                    <div class="card-body py-2 px-3">
-                        <div class="row align-items-center">
-                            <div class="col-8">
-                                <span class="small">Corners (Cantos)</span>
-                            </div>
-                            <div class="col-4 text-end">
-                                <span class="badge {{ get_grade_badge_color(card.grade.corners) }}">{{ card.grade.corners }}</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                {% endif %}
-
-                {% if card.grade.edges is not none %}
-                <div class="card mb-2 border">
-                    <div class="card-body py-2 px-3">
-                        <div class="row align-items-center">
-                            <div class="col-8">
-                                <span class="small">Edges (Bordas)</span>
-                            </div>
-                            <div class="col-4 text-end">
-                                <span class="badge {{ get_grade_badge_color(card.grade.edges) }}">{{ card.grade.edges }}</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                {% endif %}
-
-                {% if card.grade.surface is not none %}
-                <div class="card mb-3 border">
-                    <div class="card-body py-2 px-3">
-                        <div class="row align-items-center">
-                            <div class="col-8">
-                                <span class="small">Surface (Superfície)</span>
-                            </div>
-                            <div class="col-4 text-end">
-                                <span class="badge {{ get_grade_badge_color(card.grade.surface) }}">{{ card.grade.surface }}</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                {% endif %}
-
-                <div class="card mb-3 border bg-light border-dark">
-                    <div class="card-body py-2 px-3">
-                        <div class="row align-items-center">
-                            <div class="col-8">
-                                <span class="small fw-bold">Nota Final (Overall)</span>
-                            </div>
-                            <div class="col-4 text-end">
-                                <span class="badge {{ get_grade_badge_color(card.grade.final) }}">{{ card.grade.final }}</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                {% if card.grader_notes_markdown %}
-                <div class="mt-4">
-                    <h6 class="text-dark mb-3">Observações Técnicas</h6>
-                    <div class="alert alert-light border mb-0">
-                        <div class="d-flex">
-                            <span class="text-success me-2">✓</span>
-                            <div>
-                                <span class="small text-secondary">{{ card.grader_notes_markdown | replace('\n', '<br>') | safe }}</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                {% endif %}
-
-                {% if card.card_history %}
-                <div class="mt-4">
-                    <h6 class="text-dark mb-3">Histórico da Carta</h6>
-                    <div class="alert alert-light border mb-0">
-                        <div class="d-flex">
-                            <span class="text-secondary me-2"><i class="bi bi-clock-history"></i></span>
-                            <div>
-                                <span class="small text-secondary">{{ card.card_history | replace('\n', '<br>') | safe }}</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                {% endif %}
-            </div>
+          </div>
         </div>
+        {% endif %}
+      </div>
+    </section>
 
-        <div class="text-center mt-4 mb-5">
-            <a href="/" class="btn btn-dark btn-lg">Voltar ao Portfólio</a>
-        </div>
+    <div class="text-center mt-4 mb-5">
+      <a href="/" class="btn btn-ink btn-lg">
+        <i class="bi bi-arrow-left me-1" aria-hidden="true"></i> Voltar ao Portfólio
+      </a>
     </div>
+  </div>
 
-    <!-- Modal Frente -->
-    <div class="modal fade" id="modalFrente" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-lg">
-            <div class="modal-content bg-dark">
-                <div class="modal-header border-secondary">
-                    <h5 class="modal-title text-white">Frente</h5>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Fechar"></button>
-                </div>
-                <div class="modal-body text-center p-0">
-                    <img src="{{ card.image_front_url if card.image_front_url else 'https://via.placeholder.com/300x400?text=Sem+Foto' }}" alt="Frente" class="img-fluid">
-                </div>
-            </div>
+  <!-- Modal Frente -->
+  <div class="modal fade" id="modalFrente" tabindex="-1" aria-hidden="true" aria-labelledby="modalFrenteTitle">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2 class="modal-title h5" id="modalFrenteTitle">Frente</h2>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
         </div>
-    </div>
-
-    <!-- Modal Verso -->
-    <div class="modal fade" id="modalVerso" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-lg">
-            <div class="modal-content bg-dark">
-                <div class="modal-header border-secondary">
-                    <h5 class="modal-title text-white">Verso</h5>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Fechar"></button>
-                </div>
-                <div class="modal-body text-center p-0">
-                    <img src="{{ card.image_back_url if card.image_back_url else 'https://via.placeholder.com/300x400?text=Sem+Foto' }}" alt="Verso" class="img-fluid">
-                </div>
-            </div>
+        <div class="modal-body text-center p-0">
+          <img src="{{ card.image_front_url if card.image_front_url else 'https://via.placeholder.com/300x400?text=Sem+Foto' }}" alt="Frente" class="img-fluid">
         </div>
+      </div>
     </div>
+  </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- Modal Verso -->
+  <div class="modal fade" id="modalVerso" tabindex="-1" aria-hidden="true" aria-labelledby="modalVersoTitle">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2 class="modal-title h5" id="modalVersoTitle">Verso</h2>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+        </div>
+        <div class="modal-body text-center p-0">
+          <img src="{{ card.image_back_url if card.image_back_url else 'https://via.placeholder.com/300x400?text=Sem+Foto' }}" alt="Verso" class="img-fluid">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
+
 </html>

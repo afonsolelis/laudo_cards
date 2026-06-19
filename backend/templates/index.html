@@ -6,82 +6,34 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" href="/static/favicon.svg" type="image/svg+xml">
   <title>Cartas Pokémon TCG Graduadas - Coleção Certificada</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
   <link href="/static/css/styles.css" rel="stylesheet">
-  <style>
-    body {
-      background-color: #121212 !important; /* Dark mode by default for premium feel */
-    }
-    .premium-card {
-      border-radius: 16px;
-      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-      background: linear-gradient(145deg, #1e1e1e, #2a2a2a);
-      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-      cursor: pointer;
-      overflow: hidden;
-      border: 1px solid #333;
-    }
-    .premium-card:hover {
-      transform: translateY(-10px) scale(1.02);
-      box-shadow: 0 20px 40px rgba(0,0,0,0.6), 0 0 20px rgba(255, 215, 0, 0.15);
-      border-color: #555;
-      z-index: 10;
-    }
-    .premium-card:hover .drop-shadow-glow {
-      transform: scale(1.06) rotate(1deg);
-      filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.3));
-    }
-    .drop-shadow-glow {
-      filter: drop-shadow(0 10px 15px rgba(0,0,0,0.6));
-      transition: all 0.4s ease;
-    }
-    .card-img-wrapper {
-      background: radial-gradient(circle at top, rgba(255,255,255,0.08) 0%, rgba(0,0,0,0) 70%);
-      padding: 2rem 1rem 1rem;
-      position: relative;
-    }
-    .holo-overlay {
-      position: absolute;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background: linear-gradient(125deg, rgba(255,255,255,0) 30%, rgba(255,255,255,0.05) 40%, rgba(255,255,255,0.3) 50%, rgba(255,255,255,0.05) 60%, rgba(255,255,255,0) 70%);
-      background-size: 200% 200%;
-      background-position: 150% 150%;
-      opacity: 0;
-      transition: all 0.7s ease;
-      pointer-events: none;
-      z-index: 5;
-    }
-    .premium-card:hover .holo-overlay {
-      opacity: 1;
-      background-position: -50% -50%;
-    }
-    .section-title {
-      background: -webkit-linear-gradient(45deg, #f3ec78, #af4261);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      font-weight: 800;
-    }
-  </style>
 </head>
 
-<body class="bg-light">
+<body>
   <a class="visually-hidden-focusable position-absolute top-0 start-0 m-2 p-2 bg-white text-dark rounded" href="#main">Pular para o conteúdo</a>
+
   <!-- Header -->
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <nav class="navbar navbar-expand-lg site-nav sticky-top">
     <div class="container">
-      <a class="navbar-brand fw-bold" href="/">Cartas Graduadas</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+      <a class="navbar-brand site-brand" href="/">Cartas Graduadas</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Alternar navegação">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav ms-auto">
+        <ul class="navbar-nav ms-auto align-items-lg-center">
           <li class="nav-item">
             <a class="nav-link" href="/admin">Painel Admin</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="https://github.com/afonsolelis/laudo_cards" target="_blank" rel="noopener noreferrer">
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
-                class="bi bi-github me-1" viewBox="0 0 16 16" style="vertical-align: text-bottom;">
+            <a class="nav-link d-inline-flex align-items-center gap-1" href="https://github.com/afonsolelis/laudo_cards" target="_blank" rel="noopener noreferrer">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor"
+                class="bi bi-github" viewBox="0 0 16 16" aria-hidden="true">
                 <path
                   d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8" />
               </svg>
@@ -94,20 +46,34 @@
   </nav>
 
   <!-- Hero Section -->
-  <section id="main" class="bg-dark text-white py-5 border-bottom border-secondary">
+  <section id="main" class="hero">
     <div class="container">
-      <h1 class="display-5 fw-bold mb-3">Cartas Pokémon TCG Graduadas</h1>
-      <p class="lead text-secondary">Coleção de Afonso Brandão</p>
+      <span class="eyebrow">Coleção certificada</span>
+      <h1 class="hero-title">Cartas Pokémon TCG Graduadas</h1>
+      <p class="hero-sub">Coleção de Afonso Brandão</p>
+      <div class="hero-stats">
+        <div>
+          <span class="stat-num">{{ cards | length }}</span>
+          <span class="stat-label">{% if cards | length == 1 %}Carta{% else %}Cartas{% endif %}</span>
+        </div>
+        <div>
+          <span class="stat-num">{{ graders | length }}</span>
+          <span class="stat-label">{% if graders | length == 1 %}Certificadora{% else %}Certificadoras{% endif %}</span>
+        </div>
+      </div>
     </div>
   </section>
 
   <!-- Collection Section -->
-  <section id="colecao" class="py-5 bg-dark">
+  <section id="colecao" class="py-5">
     <div class="container">
-      <h2 class="mb-4 text-white section-title" style="background: -webkit-linear-gradient(45deg, #ffc107, #ff6b6b); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Sua Coleção</h2>
+      <div class="section-head">
+        <span class="eyebrow">Acervo</span>
+        <h2 class="section-title">Sua Coleção</h2>
+      </div>
 
       <!-- Search Bar and Filters -->
-      <div class="mb-4">
+      <div class="toolbar">
         <div class="row g-3">
           <div class="col-md-6">
             <input type="text" id="searchInput" class="form-control"
@@ -137,46 +103,43 @@
 
       <div class="row row-cols-1 row-cols-md-2 row-cols-xl-3 g-4" id="cardList">
         {% if not cards %}
-        <div class="col-12 text-center p-5 text-secondary">
-          <i class="bi bi-inbox fs-1 d-block mb-3"></i>
-          Nenhuma carta encontrada no banco de dados.
+        <div class="col-12">
+          <div class="empty-state text-center p-5">
+            <i class="bi bi-inbox fs-1 d-block mb-3"></i>
+            Nenhuma carta encontrada no banco de dados.
+          </div>
         </div>
         {% endif %}
 
         {% for card in cards %}
         <div class="col card-item" data-name="{{ card.name | lower }} {{ card.set_name | lower }} {{ card.certificate_number | lower }}" data-grade="{{ card.grade.final }}" data-grader="{{ card.grading_company | lower }}">
-          <div class="card h-100 premium-card text-white" role="button" tabindex="0"
+          <article class="collection-card" role="button" tabindex="0"
+            aria-label="Ver descritivo de {{ card.name }}"
             onclick="window.location.href='/laudo/{{ card['_id'] }}';"
             onkeypress="if (event.key === 'Enter' || event.key === ' ') { window.location.href='/laudo/{{ card['_id'] }}'; }">
-            
-            <div class="card-img-wrapper text-center">
+
+            <div class="card-stage">
               <img src="{{ card.image_front_url if card.image_front_url else 'https://via.placeholder.com/250x350' }}"
-                alt="{{ card.name }} - Slab" class="img-fluid drop-shadow-glow" loading="lazy" style="height: 320px; width: 100%; object-fit: contain; border-radius: 12px;">
+                alt="{{ card.name }} - Slab" class="stage-img" loading="lazy">
             </div>
-            
-            <div class="card-body d-flex flex-column p-4">
-              <div class="d-flex justify-content-between align-items-start mb-3">
-                <h4 class="card-title fw-bold mb-0 text-truncate pe-2">{{ card.name }}</h4>
-                <span class="badge {{ get_grade_badge_color(card.grade.final) }} fs-5 shadow-sm border border-light border-opacity-25 px-3 py-2">{{ card.grade.final }}</span>
+
+            <div class="cc-body">
+              <div class="cc-row">
+                <h3 class="cc-name">{{ card.name }}</h3>
+                <span class="badge grade-badge {{ get_grade_badge_color(card.grade.final) }}">{{ card.grade.final }}</span>
               </div>
-              
-              <div class="mb-4 text-secondary d-flex justify-content-between fs-6">
-                <span>{{ card.set_name }} <span class="text-white-50">#{{ card.number }}</span></span>
-              </div>
-              
-              <div class="mt-auto pt-3 border-top border-secondary border-opacity-50 d-flex justify-content-between align-items-end">
-                <div>
-                  <span class="badge bg-dark border border-secondary text-light">{{ card.rarity }}</span>
-                </div>
-                <div class="text-end">
-                  <small class="text-white-50 d-block mb-1" style="font-size: 0.65rem; text-transform: uppercase; letter-spacing: 1px;">Graduadora</small>
-                  <span class="fw-bold text-warning" style="letter-spacing: 0.5px;">{{ card.grading_company }}</span>
+
+              <div class="cc-meta">{{ card.set_name }} <span class="cc-num">#{{ card.number }}</span></div>
+
+              <div class="cc-foot">
+                <span class="chip">{{ card.rarity }}</span>
+                <div class="cc-grader">
+                  <span class="cc-grader-label">Graduadora</span>
+                  <span class="cc-grader-name">{{ card.grading_company }}</span>
                 </div>
               </div>
             </div>
-            <!-- Efeito holográfico overlay -->
-            <div class="holo-overlay"></div>
-          </div>
+          </article>
         </div>
         {% endfor %}
       </div>
@@ -184,10 +147,10 @@
   </section>
 
   <!-- Footer -->
-  <footer class="bg-dark text-white py-4 mt-5">
+  <footer class="site-footer">
     <div class="container text-center">
-      <p class="mb-0">Desenvolvido por <a href="https://github.com/afonsolelis" class="text-white fw-bold text-decoration-none">Afonso Brandão</a></p>
-      <small class="text-secondary">© 2024 Laudo Cards. Todos os direitos reservados.</small>
+      <p class="mb-1">Desenvolvido por <a href="https://github.com/afonsolelis">Afonso Brandão</a></p>
+      <small>© 2024 Laudo Cards. Todos os direitos reservados.</small>
     </div>
   </footer>
 
@@ -206,7 +169,7 @@
       document.querySelectorAll('.card-item').forEach(card => {
         const matchesSearch = card.getAttribute('data-name').includes(searchTerm);
         const matchesGrader = graderValue === '' || card.getAttribute('data-grader') === graderValue;
-        
+
         let matchesGrade = true;
         if (gradeValue) {
           matchesGrade = Math.abs(parseFloat(card.getAttribute('data-grade')) - parseFloat(gradeValue)) < 0.01;
@@ -225,4 +188,5 @@
     gradeFilter.addEventListener('change', applyFilters);
   </script>
 </body>
+
 </html>
