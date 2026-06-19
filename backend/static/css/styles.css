@@ -1,86 +1,14 @@
-/* Grid card list styling */
-#cardList {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 1rem;
-}
-
-#cardList .list-group-item {
-    padding: 0.9rem 0.9rem 1rem;
-    margin-bottom: 0;
-    transition: all 0.2s ease;
-    border-left: 3px solid transparent;
-}
-
-#cardList .list-group-item:hover {
-    transform: translateX(3px);
-    border-left-color: #0d6efd;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-}
-
-#cardList img {
-    height: 260px;
-    width: 100%;
-    object-fit: contain;
-    transition: transform 0.2s;
-}
-
-#cardList .list-group-item:hover img {
-    transform: scale(1.05);
-}
-
-#cardList h6 {
-    font-size: 0.95rem;
-    margin-bottom: 0.3rem;
-    font-weight: 600;
-}
-
-#cardList .badge {
-    font-size: 0.7rem;
-    padding: 0.25rem 0.45rem;
-    margin-right: 0.25rem;
-    margin-bottom: 0.15rem;
-}
-
-#cardList .card-grid-item {
-    display: flex;
-    flex-direction: column;
-    gap: 0.55rem;
-}
-
-#cardList .card-tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.35rem;
-}
-
-#cardList .card-grade {
-    align-self: flex-start;
-}
-
-#cardList small {
-    font-size: 0.75rem;
-}
-
-#cardList a {
-    font-weight: 500;
-}
-
-@media (max-width: 767.98px) {
-#cardList {
-        grid-template-columns: repeat(1, minmax(0, 1fr));
-    }
-
-    #cardList img {
-        height: 220px;
-    }
-}
-
-@media (min-width: 768px) and (max-width: 991.98px) {
-    #cardList {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-}
+/* ============================================================
+   Card grid (home)
+   ------------------------------------------------------------
+   NÃO declarar `#cardList { display: grid }` aqui. O grid da
+   coleção é responsabilidade do Bootstrap, via as classes
+   `row row-cols-1 row-cols-md-2 row-cols-xl-3` em index.html.
+   Forçar `display:grid` neste container faz o `row-cols-*`
+   (que aplica `width:33.33%` em cada `.col`) calcular 33% de
+   33% e espremer cada carta para ~11% de largura (bug do card
+   "quebrado"). Deixe o layout das colunas com o Bootstrap.
+   ============================================================ */
 
 /* ============================================================
    Atomic utility classes — consolidam estilos inline repetidos
