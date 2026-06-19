@@ -337,6 +337,12 @@
                                 <textarea class="form-control" id="grader_notes_markdown" rows="3" placeholder="Slight edge wear on top left."></textarea>
                             </div>
 
+                            <div class="mb-4">
+                                <label class="form-label">Histórico da Carta (Opcional)</label>
+                                <textarea class="form-control" id="card_history" rows="3" placeholder="Ex: Comprada de um colecionador local em 2024. Puxada de um booster original..."></textarea>
+                                <div class="form-text">Conteúdo opcional sobre a proveniência ou história desta carta específica.</div>
+                            </div>
+
                             <button type="submit" class="btn btn-success btn-lg w-100" id="btnSubmit">
                                 Salvar Nova Carta
                             </button>
@@ -420,6 +426,7 @@
         }
         
         document.getElementById('grader_notes_markdown').value = cardData.grader_notes_markdown || '';
+        document.getElementById('card_history').value = cardData.card_history || '';
         document.getElementById('btnSubmit').innerText = "Atualizar Carta";
         document.getElementById('imageFront').required = false;
         document.getElementById('imageBack').required = false;
@@ -482,7 +489,8 @@
                         liga_pokemon: document.getElementById('link_liga').value || null,
                         myp_cards: document.getElementById('link_myp').value || null,
                     },
-                    grader_notes_markdown: document.getElementById('grader_notes_markdown').value || null
+                    grader_notes_markdown: document.getElementById('grader_notes_markdown').value || null,
+                    card_history: document.getElementById('card_history').value || null
                 };
 
                 if (editId) {

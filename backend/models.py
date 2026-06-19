@@ -80,6 +80,7 @@ class CardModel(BaseModel):
     
     # Notas da Graduadora (opcional)
     grader_notes_markdown: Optional[str] = None
+    card_history: Optional[str] = None
 
     model_config = ConfigDict(
         populate_by_name=True,
