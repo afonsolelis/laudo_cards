@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Administração - Laudo Cards</title>
+    <link rel="icon" href="/static/favicon.svg" type="image/svg+xml">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/static/css/styles.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="/">Painel Admin</a>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/">Ver Site</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mb-5">
+        <div class="row">
+            <!-- Sidebar: Gerenciamento de Graduadoras -->
+            <div class="col-md-4 mb-4">
+                <div class="card shadow-sm border-secondary h-100">
+                    <div class="card-header bg-dark text-white">
+                        <h5 class="mb-0">Gerenciar Graduadoras</h5>
+                    </div>
+                    <div class="card-body">
+                        <form id="graderForm" class="mb-4">
+                            <div class="input-group">
+                                <input type="text" id="newGraderName" class="form-control" placeholder="Nova Graduadora" required>
+                                <button class="btn btn-primary" type="submit">Adicionar</button>
+                            </div>
+                        </form>
+                        
+                        <ul class="list-group list-group-flush border" id="gradersList">
+                            {% for grader in graders %}
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                {{ grader.name }}
+                                <button class="btn btn-sm btn-outline-danger" onclick="deleteGrader('{{ grader['_id'] }}')">Excluir</button>
+                            </li>
+                            {% else %}
+                            <li class="list-group-item text-muted">Nenhuma cadastrada.</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Form: Cadastro de Carta -->
+            <div class="col-md-8">
+                <div class="card shadow border-secondary">
+                    <div class="card-header bg-primary text-white">
+                        <h5 class="mb-0">Cadastrar Nova Carta</h5>
+                    </div>
+                    <div class="card-body">
+                        
+                        <div id="alertPlaceholder"></div>
+
+                        <form id="cardForm">
+                            <h6 class="text-secondary border-bottom pb-2">Imagens (Obrigatório)</h6>
+                            <div class="row mb-3">
+                                <div class="col-md-6">
+                                    <label class="form-label">Foto Frente</label>
+                                    <input class="form-control" type="file" id="imageFront" accept="image/*" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label">Foto Verso</label>
+                                    <input class="form-control" type="file" id="imageBack" accept="image/*" required>
+                                </div>
+                            </div>
+
+                            <h6 class="text-secondary border-bottom pb-2 mt-4">Identificação Básica</h6>
+                            <div class="row mb-3">
+                                <div class="col-md-6">
+                                    <label class="form-label">Nome da Carta</label>
+                                    <input type="text" class="form-control" id="name" required placeholder="Ex: Charizard">
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label">Nome Completo (Título)</label>
+                                    <input type="text" class="form-control" id="full_name" required placeholder="Ex: Charizard Holo - Base Set">
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col-md-4">
+                                    <label class="form-label">Número</label>
+                                    <input type="text" class="form-control" id="number" required placeholder="Ex: 4/102">
+                                </div>
+                                <div class="col-md-4">
+                                    <label class="form-label">Coleção</label>
+                                    <input type="text" class="form-control" id="set_name" required placeholder="Ex: Base Set">
+                                </div>
+                                <div class="col-md-4">
+                                    <label class="form-label">Ano</label>
+                                    <input type="number" class="form-control" id="year" required placeholder="Ex: 1999">
+                                </div>
+                            </div>
+                            
+                            <div class="row mb-3">
+                                <div class="col-md-6">
+                                    <label class="form-label">Raridade</label>
+                                    <input type="text" class="form-control" id="rarity" required placeholder="Ex: Rare Holo">
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label">Tipo Pokémon</label>
+                                    <input type="text" class="form-control" id="pokemon_type" required placeholder="Ex: Fire">
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <div class="col-md-6">
+                                    <label class="form-label">Idioma</label>
+                                    <input type="text" class="form-control" id="language" required placeholder="Ex: English">
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label">Nome do Artista / Ilustrador</label>
+                                    <input type="text" class="form-control" id="illustrator_name" required placeholder="Ex: Mitsuhiro Arita">
+                                </div>
+                            </div>
+
+                            <h6 class="text-secondary border-bottom pb-2 mt-4">Graduação e População</h6>
+                            <div class="row mb-3">
+                                <div class="col-md-4">
+                                    <label class="form-label">Graduadora</label>
+                                    <select class="form-select" id="grading_company" required>
+                                        {% for grader in graders %}
+                                        <option value="{{ grader.name }}">{{ grader.name }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                                <div class="col-md-4">
+                                    <label class="form-label">Certificado</label>
+                                    <input type="text" class="form-control" id="certificate_number" required>
+                                </div>
+                                <div class="col-md-4">
+                                    <label class="form-label">Ano de Graduação</label>
+                                    <input type="number" class="form-control" id="grading_year" required placeholder="Ex: 2023">
+                                </div>
+                            </div>
+                            
+                            <div class="row mb-3">
+                                <div class="col-md-4">
+                                    <label class="form-label">População (Total)</label>
+                                    <input type="text" class="form-control" id="population" required placeholder="Ex: 5.432">
+                                </div>
+                                <div class="col-md-4">
+                                    <label class="form-label">Ranking Populacional</label>
+                                    <input type="text" class="form-control" id="population_rank" required placeholder="Ex: Top 10%">
+                                </div>
+                                <div class="col-md-4">
+                                    <label class="form-label">Link do Certificado Oficial</label>
+                                    <input type="url" class="form-control" id="cert_link" required placeholder="https://...">
+                                </div>
+                            </div>
+
+                            <h6 class="text-secondary border-bottom pb-2 mt-4">Notas (Grades)</h6>
+                            <div class="row mb-3">
+                                <div class="col-md-2">
+                                    <label class="form-label">Final</label>
+                                    <input type="number" step="0.5" min="1" max="10" placeholder="10.0" class="form-control" id="grade_final" required>
+                                </div>
+                                <div class="col-md-2">
+                                    <label class="form-label">Centering</label>
+                                    <input type="number" step="0.5" min="1" max="10" placeholder="10.0" class="form-control" id="grade_centering">
+                                </div>
+                                <div class="col-md-2">
+                                    <label class="form-label">Corners</label>
+                                    <input type="number" step="0.5" min="1" max="10" placeholder="10.0" class="form-control" id="grade_corners">
+                                </div>
+                                <div class="col-md-2">
+                                    <label class="form-label">Edges</label>
+                                    <input type="number" step="0.5" min="1" max="10" placeholder="10.0" class="form-control" id="grade_edges">
+                                </div>
+                                <div class="col-md-2">
+                                    <label class="form-label">Surface</label>
+                                    <input type="number" step="0.5" min="1" max="10" placeholder="10.0" class="form-control" id="grade_surface">
+                                </div>
+                                <div class="col-md-2">
+                                    <label class="form-label">Desc. Final</label>
+                                    <input type="text" class="form-control" id="grade_description" required placeholder="Ex: Gem Mint">
+                                    <small class="text-muted d-block" style="font-size: 0.7em;">Depende de cada graduadora</small>
+                                </div>
+                            </div>
+
+                            <h6 class="text-secondary border-bottom pb-2 mt-4">Links (Opcionais)</h6>
+                            <div class="row mb-3">
+                                <div class="col-md-3">
+                                    <label class="form-label text-truncate" style="max-width: 100%;">TCG Player</label>
+                                    <input type="url" class="form-control" id="link_tcg">
+                                </div>
+                                <div class="col-md-3">
+                                    <label class="form-label text-truncate" style="max-width: 100%;">Price Charting</label>
+                                    <input type="url" class="form-control" id="link_price">
+                                </div>
+                                <div class="col-md-3">
+                                    <label class="form-label text-truncate" style="max-width: 100%;">Liga Pokémon</label>
+                                    <input type="url" class="form-control" id="link_liga">
+                                </div>
+                                <div class="col-md-3">
+                                    <label class="form-label text-truncate" style="max-width: 100%;">MYP Cards</label>
+                                    <input type="url" class="form-control" id="link_myp">
+                                </div>
+                            </div>
+
+                            <div class="mb-4">
+                                <label class="form-label">Observações da Graduadora (Markdown opcional)</label>
+                                <textarea class="form-control" id="grader_notes_markdown" rows="3" placeholder="Slight edge wear on top left."></textarea>
+                            </div>
+
+                            <button type="submit" class="btn btn-success btn-lg w-100" id="btnSubmit">
+                                Salvar Nova Carta
+                            </button>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Funcionalidade de Graduadoras
+        document.getElementById('graderForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const name = document.getElementById('newGraderName').value;
+            const res = await fetch('/api/graders', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ name })
+            });
+            if(res.ok) window.location.reload();
+        });
+
+        async function deleteGrader(id) {
+            if(confirm("Tem certeza que deseja excluir?")) {
+                await fetch(`/api/graders/${id}`, { method: 'DELETE' });
+                window.location.reload();
+            }
+        }
+
+        // Upload de imagem no MinIO
+        async function uploadImage(file) {
+            const formData = new FormData();
+            formData.append('file', file);
+            const response = await fetch('/api/upload', {
+                method: 'POST',
+                body: formData
+            });
+            if (!response.ok) throw new Error("Erro no upload da imagem");
+            const data = await response.json();
+            return data.url;
+        }
+
+        // Submissão da Carta
+        document.getElementById('cardForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const btnSubmit = document.getElementById('btnSubmit');
+            const alertPlaceholder = document.getElementById('alertPlaceholder');
+            
+            try {
+                btnSubmit.disabled = true;
+                btnSubmit.innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Fazendo upload das imagens...';
+                
+                // Upload das Imagens primeiro
+                const frontFile = document.getElementById('imageFront').files[0];
+                const backFile = document.getElementById('imageBack').files[0];
+                
+                const frontUrl = await uploadImage(frontFile);
+                const backUrl = await uploadImage(backFile);
+
+                btnSubmit.innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Salvando dados...';
+
+                // Montar JSON
+                const payload = {
+                    name: document.getElementById('name').value,
+                    number: document.getElementById('number').value,
+                    full_name: document.getElementById('full_name').value,
+                    set_name: document.getElementById('set_name').value,
+                    year: parseInt(document.getElementById('year').value),
+                    rarity: document.getElementById('rarity').value,
+                    pokemon_type: document.getElementById('pokemon_type').value,
+                    language: document.getElementById('language').value,
+                    illustrator_name: document.getElementById('illustrator_name').value,
+                    grading_company: document.getElementById('grading_company').value,
+                    certificate_number: document.getElementById('certificate_number').value,
+                    grading_year: parseInt(document.getElementById('grading_year').value),
+                    population: document.getElementById('population').value,
+                    population_rank: document.getElementById('population_rank').value,
+                    cert_link: document.getElementById('cert_link').value,
+                    image_front_url: frontUrl,
+                    image_back_url: backUrl,
+                    grade: {
+                        centering: document.getElementById('grade_centering').value ? parseFloat(document.getElementById('grade_centering').value) : null,
+                        corners: document.getElementById('grade_corners').value ? parseFloat(document.getElementById('grade_corners').value) : null,
+                        edges: document.getElementById('grade_edges').value ? parseFloat(document.getElementById('grade_edges').value) : null,
+                        surface: document.getElementById('grade_surface').value ? parseFloat(document.getElementById('grade_surface').value) : null,
+                        final: parseFloat(document.getElementById('grade_final').value),
+                        description: document.getElementById('grade_description').value,
+                    },
+                    links: {
+                        tcg_player: document.getElementById('link_tcg').value || null,
+                        price_charting: document.getElementById('link_price').value || null,
+                        liga_pokemon: document.getElementById('link_liga').value || null,
+                        myp_cards: document.getElementById('link_myp').value || null,
+                    },
+                    grader_notes_markdown: document.getElementById('grader_notes_markdown').value || null
+                };
+
+                const saveRes = await fetch('/api/cards', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+
+                if(!saveRes.ok) throw new Error("Erro ao salvar carta no banco");
+
+                alertPlaceholder.innerHTML = `<div class="alert alert-success">Carta cadastrada com sucesso!</div>`;
+                document.getElementById('cardForm').reset();
+
+            } catch (error) {
+                console.error(error);
+                alertPlaceholder.innerHTML = `<div class="alert alert-danger">${error.message}</div>`;
+            } finally {
+                btnSubmit.disabled = false;
+                btnSubmit.textContent = 'Salvar Nova Carta';
+                window.scrollTo(0,0);
+            }
+        });
+    </script>
+</body>
+</html>
