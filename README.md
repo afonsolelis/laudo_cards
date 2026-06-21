@@ -1,105 +1,118 @@
-# 🎴 Cartas Pokémon TCG Graduadas (Laudo Cards)
+# Laudo Cards 🎴
 
-<div align="center">
+Um portfólio digital seguro e premium para colecionadores de Cartas Pokémon TCG Graduadas. Esta plataforma permite que colecionadores exibam seu acervo de *slabs* com o máximo de clareza, documentação rigorosa de condição (subgrades) e links de referência de mercado.
 
-![Pokémon TCG](https://img.shields.io/badge/Pokémon-TCG-ffcc00?style=for-the-badge&logo=pokemon&logoColor=white)
-![FastAPI](https://img.shields.io/badge/FastAPI-005571?style=for-the-badge&logo=fastapi)
-![MongoDB](https://img.shields.io/badge/MongoDB-%234ea94b.svg?style=for-the-badge&logo=mongodb&logoColor=white)
-![MinIO](https://img.shields.io/badge/MinIO-C72C48?style=for-the-badge&logo=minio&logoColor=white)
-![Bootstrap](https://img.shields.io/badge/Bootstrap-5.3.0-7952b3?style=for-the-badge&logo=bootstrap&logoColor=white)
+## 🌟 Destaques e Features
 
-**Portfólio profissional de cartas Pokémon TCG certificadas com laudos técnicos detalhados**
+- **Catálogo Premium:** Interface *Dark Mode Premium* com tipografia elegante e *Glassmorphism* para dar o maior destaque visual à arte e às notas técnicas das cartas.
+- **Micro-interações e HUD de Colecionador:** Animações fluidas em 3D no hover e barras de progresso modernas detalhando a graduação (Centering, Corners, Edges, Surface).
+- **Hospedagem de Imagens na Nuvem:** Integração nativa com Cloudinary, aliviando o servidor e acelerando a entrega via CDN global.
+- **Painel Administrativo Seguro:** CRUD completo (Create, Read, Update, Delete) acessível somente após autenticação via cookies baseados em sessões criptografadas (Bcrypt).
+- **Busca e Filtros no Client-Side:** Pesquisa ultra-rápida sem a necessidade de reloading da página.
+- **Pronto para Escalar:** Arquitetura Server-Side Rendered (Jinja2) combinada com um backend extremamente rápido e assíncrono (FastAPI) em banco NoSQL (MongoDB).
 
-</div>
+## 🛠️ Stack Tecnológico
 
----
+A plataforma foi construída com tecnologias modernas de alto desempenho:
 
-## 📋 Sobre o Projeto
+**Backend:**
+- **[FastAPI](https://fastapi.tiangolo.com/):** Framework web assíncrono hiper veloz para Python.
+- **[Motor](https://motor.readthedocs.io/):** Driver assíncrono oficial para MongoDB.
+- **[Jinja2](https://jinja.palletsprojects.com/):** Engine de templates segura e extensível para renderização SSR.
+- **[Bcrypt](https://pypi.org/project/bcrypt/):** Algoritmo de hash de senhas confiável.
+- **[Cloudinary](https://cloudinary.com/):** SDK oficial para upload assíncrono direto do servidor.
 
-Este projeto documenta uma coleção pessoal de cartas Pokémon TCG graduadas por empresas certificadoras reconhecidas (GBA, Manafix, CAPY Games, etc.). Ele possui um sistema backend em FastAPI que gerencia e serve laudos técnicos detalhados sobre as condições, o histórico e as cotações de cada carta.
+**Frontend:**
+- **HTML5 & CSS3 Vanilla:** Focado em *Design Tokens*, varíaveis HSL e animações CSS (`@keyframes`, `transition`).
+- **Bootstrap 5.3:** Para sistema de grid responsivo, modais de imagem ampliada e estrutura base de componentes.
+- **Tipografia do Google Fonts:** Combinação harmônica das fontes `Outfit` (Headings e Números) e `Inter` (Parágrafos).
 
-### ✨ Características Principais
+**Infraestrutura & DevOps:**
+- **[Railway](https://railway.app/):** Plataforma PaaS de nuvem para deploy sem fricção.
+- **[Nixpacks](https://nixpacks.com/):** Build engine open-source usada pelo Railway para compilar a aplicação sem a necessidade de escrever `Dockerfiles` pesados manualmente.
+- **[GitHub Actions](https://github.com/features/actions):** CI/CD pipeline (*Quality Gate*) rodando validações rigorosas (Pytest, Black, Flake8, Isort e Bandit).
 
-- 🎯 **Laudos Técnicos Profissionais** - Análise completa gerada dinamicamente
-- 📊 **Sistema de Notas Detalhado** - Visualização clara com badges e barras de progresso
-- 🖼️ **Armazenamento Seguro de Imagens** - Integração com MinIO via S3-compatible API
-- 💾 **Persistência de Dados** - Catálogo mantido em banco MongoDB
-- 📱 **Design Responsivo** - Interface web clean baseada em Bootstrap e templates Jinja2
+## 🚀 Como Executar Localmente
 
----
+### Pré-requisitos
+- Python 3.10+
+- MongoDB instalado ou cluster remoto do MongoDB Atlas.
+- Conta gratuita no Cloudinary (com as credenciais de API prontas).
 
-## 🛠️ Tecnologias Utilizadas
-
-| Tecnologia | Função |
-|------------|--------|
-| **FastAPI** (Python) | Framework Backend e roteamento de páginas |
-| **MongoDB** | Banco de Dados NoSQL para salvar as cartas |
-| **MinIO** | Object Storage para upload e hospedagem das imagens |
-| **Jinja2** | Motor de templates para renderização do HTML |
-| **Bootstrap 5.3** | Framework CSS responsivo para o frontend |
-
----
-
-## 📁 Estrutura do Projeto
-
+### 1. Clonar o repositório
+```bash
+git clone https://github.com/afonsolelis/laudo_cards.git
+cd laudo_cards
 ```
+
+### 2. Configurar o Ambiente Virtual
+```bash
+python -m venv venv
+
+# Windows
+venv\Scripts\activate
+# Linux/Mac
+source venv/bin/activate
+```
+
+### 3. Instalar Dependências
+Instale os pacotes diretamente do `requirements.txt` da pasta backend (ou raiz):
+```bash
+pip install -r backend/requirements.txt
+```
+
+### 4. Variáveis de Ambiente (.env)
+Crie um arquivo `.env` na raiz do projeto contendo as seguintes credenciais obrigatórica:
+```env
+# Banco de Dados
+MONGO_URL=mongodb+srv://<usuario>:<senha>@cluster0.exemplo.mongodb.net/?retryWrites=true&w=majority
+MONGO_DB=laudo_cards
+
+# Credenciais do Administrador Padrão
+ADMIN_USERNAME=admin
+ADMIN_PASSWORD_HASH=$2b$12$exemploHashGeradoAqui...  # Hash Bcrypt da sua senha
+SECRET_KEY=uma_chave_aleatoria_longa_e_segura
+
+# Cloudinary
+CLOUDINARY_CLOUD_NAME=seu_nome_de_nuvem
+CLOUDINARY_API_KEY=sua_api_key
+CLOUDINARY_API_SECRET=seu_api_secret
+```
+*Obs: Você pode usar `import bcrypt; print(bcrypt.hashpw(b"suasenha", bcrypt.gensalt()).decode('utf-8'))` em um console Python para gerar um hash Bcrypt válido.*
+
+### 5. Iniciar o Servidor de Desenvolvimento
+Rode o servidor web Uvicorn:
+```bash
+cd backend
+uvicorn main:app --reload
+```
+
+Acesse no navegador:
+- Galeria Pública: `http://localhost:8000`
+- Painel Administrativo: `http://localhost:8000/login`
+
+## 📁 Estrutura de Diretórios e Código
+
+O código-fonte principal concentra-se dentro da pasta `/backend/`. A separação lógica é intencionalmente MVC-like:
+
+```text
 laudo_cards/
-│
 ├── backend/
-│   ├── main.py               # Arquivo principal do FastAPI (Rotas)
-│   ├── database.py           # Conexão com o MongoDB
-│   ├── models.py             # Modelos de dados Pydantic
-│   ├── storage.py            # Uploads e integração com MinIO
-│   ├── requirements.txt      # Dependências Python
-│   ├── static/               # Arquivos estáticos (CSS, JS, Imagens locais)
-│   └── templates/            # Templates Jinja2 (HTML dinâmico)
-│       ├── index.html        # Página principal do portfólio
-│       └── laudo.html        # Template base do laudo da carta
-│
-├── README.md                 # Este arquivo
-└── CLAUDE.md                 # Guia de desenvolvimento
+│   ├── main.py            # Inicialização do FastAPI e Rotas HTTP
+│   ├── database.py        # Configuração assíncrona do MongoDB
+│   ├── models.py          # Tipagens Pydantic e Validações
+│   ├── storage.py         # Lógica de interface e upload com Cloudinary
+│   ├── pdf_generator.py   # Motor gerador de PDFs (ReportLab)
+│   ├── requirements.txt   # Dependências do pacote pip
+│   ├── static/            # CSS, Favicon, JS customizados
+│   └── templates/         # Arquivos HTML Jinja2 (Views)
+├── documentations/        # UML e Requisitos de Qualidade (ISO 25010)
+├── .github/               # Workflows de CI/CD (Actions) e Agentes
+└── requirements.txt       # Arquivo "proxy" para Nixpacks / Railway
 ```
 
----
-
-## 🚀 Como Executar o Projeto
-
-1. **Pré-requisitos**:
-   - Python 3.9+
-   - MongoDB rodando localmente ou remoto
-   - Instância do MinIO configurada
-
-2. **Configuração de Ambiente**:
-   Crie um arquivo `.env` na raiz do backend com as suas credenciais (veja `.env.example`).
-
-3. **Rodando a Aplicação**:
-   ```bash
-   cd backend
-   pip install -r requirements.txt
-   uvicorn main:app --reload --host 0.0.0.0 --port 8000
-   ```
-   Acesse no navegador: `http://localhost:8000/`
+## 📜 Licença
+Este projeto é provido "as-is", criado inicialmente como uma coleção pessoal particular. Dependências open source estão sujeitas às suas próprias licenças.
 
 ---
-
-## 🎨 Design e Acessibilidade
-
-O layout é gerado dinamicamente com base em variáveis no Jinja2 (`{{ card.name }}`, etc). As notas (grades) definem automaticamente as cores de badges usando um helper incluído no FastAPI:
-- Gem/Mint (>= 9): Verde
-- Near Mint (8 - 8.9): Amarelo
-- Menos de 8: Cinza
-
----
-
-## 📝 Roadmap (Em Breve)
-
-- [ ] Painel Administrativo para cadastro manual de cartas via UI
-- [ ] Integração total de rotas na API de Uploads
-- [ ] Melhorias no sistema de tags e categorias
-- [ ] Exportação de laudos em PDF
-
----
-
-## 📄 Licença
-
-Este projeto está sob a licença MIT. Veja o arquivo `LICENSE` para mais detalhes.
+Desenvolvido e padronizado sob rigorosos eixos de qualidade de software.
