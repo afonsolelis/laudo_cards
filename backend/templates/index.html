@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-BR" data-bs-theme="dark">
 
 <head>
   <meta charset="UTF-8">
@@ -8,7 +8,7 @@
   <title>Cartas Pokémon TCG Graduadas - Coleção Certificada</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@500;700;800;900&display=swap" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
   <link href="/static/css/styles.css?v=2" rel="stylesheet">
@@ -47,11 +47,11 @@
 
   <!-- Hero Section -->
   <section id="main" class="hero">
-    <div class="container">
-      <span class="eyebrow">Coleção certificada</span>
-      <h1 class="hero-title">Cartas Pokémon TCG Graduadas</h1>
-      <p class="hero-sub">Coleção de Afonso Brandão</p>
-      <div class="hero-stats">
+    <div class="container fade-up">
+      <span class="eyebrow fade-up delay-1">Coleção certificada</span>
+      <h1 class="hero-title fade-up delay-1">Cartas Pokémon TCG Graduadas</h1>
+      <p class="hero-sub fade-up delay-2">Acervo digital seguro, documentado e precificado de Afonso Brandão.</p>
+      <div class="hero-stats fade-up delay-3">
         <div>
           <span class="stat-num">{{ cards | length }}</span>
           <span class="stat-label">{% if cards | length == 1 %}Carta{% else %}Cartas{% endif %}</span>
