@@ -78,14 +78,10 @@
             </select>
           </div>
           <div class="col-md-3">
-            <select id="gradeFilter" class="form-select" aria-label="Filtrar por nota">
-              <option value="">Todas as notas</option>
-              <option value="10">10 (Gem Mint)</option>
-              <option value="9.5">9.5 (Gem Mint)</option>
-              <option value="9">9 (Mint)</option>
-              <option value="8.5">8.5 (NM-M+)</option>
-              <option value="8">8 (NM)</option>
-              <option value="7">7 (NM)</option>
+            <select id="gradeFilter" class="form-select" aria-label="Ordenar por nota">
+              <option value="">Ordenar (Padrão)</option>
+              <option value="desc">Maior Nota para Menor</option>
+              <option value="asc">Menor Nota para Maior</option>
             </select>
           </div>
         </div>
@@ -102,7 +98,7 @@
         {% endif %}
 
         {% for card in cards %}
-        <div class="col card-item" data-name="{{ card.name | lower }} {{ card.set_name | lower }} {{ card.certificate_number | lower }}" data-grade="{{ card.grade.final }}" data-grader="{{ card.grading_company | lower }}">
+        <div class="col card-item" data-index="{{ loop.index }}" data-name="{{ card.name | lower }} {{ card.set_name | lower }} {{ card.certificate_number | lower }}" data-grade="{{ card.grade.final }}" data-grader="{{ card.grading_company | lower }}">
           <article class="collection-card" role="button" tabindex="0"
             aria-label="Ver descritivo de {{ card.name }}"
             onclick="window.location.href='/laudo/{{ card['_id'] }}';"
@@ -150,27 +146,40 @@
     const searchInput = document.getElementById('searchInput');
     const graderFilter = document.getElementById('graderFilter');
     const gradeFilter = document.getElementById('gradeFilter');
+    const cardList = document.getElementById('cardList');
 
     function applyFilters() {
       const searchTerm = searchInput.value.toLowerCase();
       const graderValue = graderFilter.value.toLowerCase();
-      const gradeValue = gradeFilter.value;
+      const sortOrder = gradeFilter.value;
 
-      document.querySelectorAll('.card-item').forEach(card => {
+      let cards = Array.from(document.querySelectorAll('.card-item'));
+
+      cards.forEach(card => {
         const matchesSearch = card.getAttribute('data-name').includes(searchTerm);
         const matchesGrader = graderValue === '' || card.getAttribute('data-grader') === graderValue;
 
-        let matchesGrade = true;
-        if (gradeValue) {
-          matchesGrade = Math.abs(parseFloat(card.getAttribute('data-grade')) - parseFloat(gradeValue)) < 0.01;
-        }
-
-        if (matchesSearch && matchesGrader && matchesGrade) {
+        if (matchesSearch && matchesGrader) {
           card.style.display = '';
         } else {
           card.style.display = 'none';
         }
       });
+
+      // Ordenar os elementos do DOM
+      cards.sort((a, b) => {
+        if (sortOrder === 'desc') {
+          return parseFloat(b.getAttribute('data-grade')) - parseFloat(a.getAttribute('data-grade'));
+        } else if (sortOrder === 'asc') {
+          return parseFloat(a.getAttribute('data-grade')) - parseFloat(b.getAttribute('data-grade'));
+        } else {
+          // Reverte para o índice original (Padrão)
+          return parseInt(a.getAttribute('data-index')) - parseInt(b.getAttribute('data-index'));
+        }
+      });
+      
+      // Reanexa os cards na ordem calculada
+      cards.forEach(card => cardList.appendChild(card));
     }
 
     searchInput.addEventListener('input', applyFilters);
