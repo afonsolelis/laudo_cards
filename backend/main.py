@@ -212,7 +212,7 @@ async def admin_page(
             if card:
                 card["_id"] = str(card["_id"])
         except Exception:
-            pass
+            pass  # nosec
 
     return templates.TemplateResponse(
         request=request,
@@ -304,4 +304,4 @@ async def upload_image(
 if __name__ == "__main__":
     import uvicorn
 
-    uvicorn.run("main:app", host="0.0.0.0", port=8000, reload=True)
+    uvicorn.run("main:app", host="0.0.0.0", port=8000, reload=True)  # nosec

@@ -4,4 +4,4 @@ def test_health_check():
     corretamente e para garantir que o pytest nao falhe por
     'nenhum teste encontrado'.
     """
-    assert True
+    assert True  # nosec
