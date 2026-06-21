@@ -48,6 +48,14 @@
         </div>
         <div class="col-md-4 text-md-end">
           <span class="cert-chip"><span class="cert-key">Cert</span> {{ card.certificate_number }}</span>
+          {% if card.added_date %}
+          {% set d = card.added_date.split('-') %}
+          <div class="mt-2">
+            <span class="cert-chip"><span class="cert-key">Na coleção desde</span>
+              {% if d|length == 3 %}{{ d[2] }}/{{ d[1] }}/{{ d[0] }}{% else %}{{ card.added_date }}{% endif %}
+            </span>
+          </div>
+          {% endif %}
         </div>
       </div>
     </div>
@@ -89,6 +97,9 @@
                 <tr><td class="id-key">Tipo</td><td class="id-val">{{ card.pokemon_type }}</td></tr>
                 <tr><td class="id-key">Idioma</td><td class="id-val">{{ card.language }}</td></tr>
                 <tr><td class="id-key">Artista/Ilustrador</td><td class="id-val">{{ card.illustrator_name }}</td></tr>
+                {% if card.acquisition_price is not none %}
+                <tr><td class="id-key">Preço de Aquisição</td><td class="id-val"><span class="chip">R$ {{ "%.2f"|format(card.acquisition_price)|replace('.', ',') }}</span></td></tr>
+                {% endif %}
               </tbody>
             </table>
           </div>

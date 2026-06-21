@@ -171,13 +171,14 @@
                                     <label class="form-label">Raridade</label>
                                     <select class="form-select" id="rarity" required>
                                         <option value="" disabled selected>Selecione a raridade...</option>
-                                        <optgroup label="Era Moderna (Scarlet & Violet / Paldea Evolved)">
+                                        <optgroup label="Era Moderna (Scarlet & Violet até Mega Evolução)">
                                             <option value="Comum (●)">Comum (●)</option>
                                             <option value="Incomum (◆)">Incomum (◆)</option>
                                             <option value="Rara (★)">Rara (★)</option>
                                             <option value="Rara Dupla (★★)">Rara Dupla (★★)</option>
                                             <option value="Rara Ultra (★★ holográfica)">Rara Ultra (★★ holográfica)</option>
                                             <option value="Ilustração Rara (Rare Illustration)">Ilustração Rara (Rare Illustration)</option>
+                                            <option value="Ilustração Rara Especial (Special Illustration Rare - SIR/SAR)">Ilustração Rara Especial (Special Illustration Rare - SIR/SAR)</option>
                                             <option value="Rara Hiper / Secreta (★★★ dourada)">Rara Hiper / Secreta (★★★ dourada)</option>
                                         </optgroup>
                                         <optgroup label="Era Clássica (WOTC e EX/Sun & Moon)">
@@ -242,6 +243,20 @@
                                 <div class="col-md-6">
                                     <label class="form-label">Nome do Artista / Ilustrador</label>
                                     <input type="text" class="form-control" id="illustrator_name" required placeholder="Ex: Mitsuhiro Arita">
+                                </div>
+                            </div>
+
+                            <h3 class="form-section-title">Dados da Coleção</h3>
+                            <div class="row mb-3">
+                                <div class="col-md-6">
+                                    <label class="form-label">Preço de Aquisição (R$)</label>
+                                    <input type="number" step="0.01" min="0" class="form-control" id="acquisition_price" placeholder="Ex: 150.00">
+                                    <div class="form-text">Valor pago quando a carta entrou na sua coleção.</div>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label">Data de Inclusão na Coleção</label>
+                                    <input type="text" class="form-control" id="added_date_display" value="Definida automaticamente ao salvar" readonly disabled>
+                                    <div class="form-text">Capturada automaticamente no momento do cadastro.</div>
                                 </div>
                             </div>
 
@@ -506,6 +521,10 @@
         document.getElementById('pokemon_type').value = cardData.pokemon_type || '';
         document.getElementById('language').value = cardData.language || '';
         document.getElementById('illustrator_name').value = cardData.illustrator_name || '';
+        document.getElementById('acquisition_price').value = (cardData.acquisition_price !== null && cardData.acquisition_price !== undefined) ? cardData.acquisition_price : '';
+        if (cardData.added_date) {
+            document.getElementById('added_date_display').value = cardData.added_date;
+        }
         document.getElementById('grading_company').value = cardData.grading_company || '';
         document.getElementById('certificate_number').value = cardData.certificate_number || '';
         document.getElementById('grading_year').value = cardData.grading_year || '';
@@ -571,6 +590,7 @@
                     pokemon_type: document.getElementById('pokemon_type').value,
                     language: document.getElementById('language').value,
                     illustrator_name: document.getElementById('illustrator_name').value,
+                    acquisition_price: document.getElementById('acquisition_price').value ? parseFloat(document.getElementById('acquisition_price').value) : null,
                     grading_company: document.getElementById('grading_company').value,
                     certificate_number: document.getElementById('certificate_number').value,
                     grading_year: parseInt(document.getElementById('grading_year').value),

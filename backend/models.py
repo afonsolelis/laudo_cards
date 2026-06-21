@@ -68,6 +68,10 @@ class CardModel(BaseModel):
     language: str
     illustrator_name: str
 
+    # Coleção / Aquisição
+    acquisition_price: Optional[float] = None  # preço pago ao entrar na coleção
+    added_date: Optional[str] = None  # data de inclusão na coleção (YYYY-MM-DD)
+
     # Graduação
     grading_company: str
     certificate_number: str

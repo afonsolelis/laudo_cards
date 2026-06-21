@@ -1,6 +1,7 @@
 import json
 import os
 import uuid
+from datetime import datetime
 from typing import List, Optional
 
 import bcrypt
@@ -255,9 +256,11 @@ async def delete_grader(grader_id: str, user: dict = Depends(get_current_user_ap
 
 @app.post("/api/cards", response_model=CardModel)
 async def create_card(card: CardModel, user: dict = Depends(get_current_user_api)):
-    new_card = await cards_collection.insert_one(
-        card.model_dump(by_alias=True, exclude=["id"])
-    )
+    card_data = card.model_dump(by_alias=True, exclude=["id"])
+    # Data de inclusão na coleção: capturada no momento do cadastro do formulário
+    if not card_data.get("added_date"):
+        card_data["added_date"] = datetime.now().strftime("%Y-%m-%d")
+    new_card = await cards_collection.insert_one(card_data)
     created_card = await cards_collection.find_one({"_id": new_card.inserted_id})
     return created_card
 
@@ -272,6 +275,10 @@ async def update_card(
             raise HTTPException(status_code=404, detail="Card not found")
 
         update_data = card.model_dump(by_alias=True, exclude=["id"])
+        # Preserva a data de inclusão original na coleção (não é editável pelo formulário)
+        update_data["added_date"] = existing_card.get("added_date") or update_data.get(
+            "added_date"
+        )
 
         await cards_collection.update_one(
             {"_id": ObjectId(card_id)}, {"$set": update_data}
