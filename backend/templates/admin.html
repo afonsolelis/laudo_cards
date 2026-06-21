@@ -29,6 +29,11 @@
                             <i class="bi bi-box-arrow-up-right" aria-hidden="true"></i> Ver Site
                         </a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link d-inline-flex align-items-center gap-1 text-danger" href="/logout">
+                            <i class="bi bi-box-arrow-left" aria-hidden="true"></i> Sair
+                        </a>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -374,6 +379,67 @@
         </div>
     </div>
 
+    <!-- Cartas Cadastradas -->
+    <div class="row mt-5">
+        <div class="col-12">
+            <div class="panel">
+                <div class="panel-head">
+                    <h2 class="panel-title">Cartas Cadastradas</h2>
+                </div>
+                <div class="panel-body">
+                    <div class="table-responsive">
+                        <table class="table align-middle">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Imagem</th>
+                                    <th scope="col">Nome</th>
+                                    <th scope="col">Coleção / Número</th>
+                                    <th scope="col">Graduadora / Nota</th>
+                                    <th scope="col" class="text-end">Ações</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for c in cards %}
+                                <tr>
+                                    <td>
+                                        <img src="{{ c.image_front_url if c.image_front_url else 'https://via.placeholder.com/50x70' }}" alt="{{ c.name }}" style="height: 50px; object-fit: contain; border-radius: var(--radius-sm); border: 1px solid var(--line);">
+                                    </td>
+                                    <td>
+                                        <strong>{{ c.name }}</strong>
+                                        <div class="text-muted small">{{ c.full_name }}</div>
+                                    </td>
+                                    <td>
+                                        {{ c.set_name }}
+                                        <span class="text-muted">#{{ c.number }}</span>
+                                    </td>
+                                    <td>
+                                        <span class="badge bg-light text-dark border">{{ c.grading_company }}</span>
+                                        <span class="badge {{ get_grade_badge_color(c.grade.final) }}">{{ c.grade.final }}</span>
+                                    </td>
+                                    <td class="text-end">
+                                        <a href="/admin?edit_id={{ c._id }}" class="btn btn-sm btn-line me-1">
+                                            <i class="bi bi-pencil"></i> Editar
+                                        </a>
+                                        <button class="btn btn-sm btn-outline-danger" onclick="deleteCard('{{ c._id }}')">
+                                            <i class="bi bi-trash"></i> Excluir
+                                        </button>
+                                    </td>
+                                </tr>
+                                {% else %}
+                                <tr>
+                                    <td colspan="5" class="text-center text-muted py-4">Nenhuma carta cadastrada.</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
         // Funcionalidade de Graduadoras
@@ -392,6 +458,22 @@
             if(confirm("Tem certeza que deseja excluir?")) {
                 await fetch(`/api/graders/${id}`, { method: 'DELETE' });
                 window.location.reload();
+            }
+        }
+
+        async function deleteCard(id) {
+            if(confirm("Tem certeza que deseja excluir esta carta definitivamente?")) {
+                try {
+                    const res = await fetch(`/api/cards/${id}`, { method: 'DELETE' });
+                    if(res.ok) {
+                        window.location.href = '/admin';
+                    } else {
+                        const data = await res.json();
+                        alert("Erro ao excluir: " + (data.detail || "Erro desconhecido"));
+                    }
+                } catch(error) {
+                    alert("Erro de rede: " + error.message);
+                }
             }
         }
 

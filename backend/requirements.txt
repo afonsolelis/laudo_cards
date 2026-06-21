@@ -6,3 +6,4 @@ cloudinary
 python-dotenv
 python-multipart
 jinja2
+bcrypt

@@ -224,7 +224,7 @@
           <div class="note-box">
             <div class="d-flex">
               <span class="text-success me-2" aria-hidden="true"><i class="bi bi-check-circle-fill"></i></span>
-              <div class="small">{{ card.grader_notes_markdown | replace('\n', '<br>') | safe }}</div>
+              <div class="small" style="white-space: pre-wrap;">{{ card.grader_notes_markdown }}</div>
             </div>
           </div>
         </div>
@@ -236,7 +236,7 @@
           <div class="note-box">
             <div class="d-flex">
               <span class="text-muted me-2" aria-hidden="true"><i class="bi bi-clock-history"></i></span>
-              <div class="small">{{ card.card_history | replace('\n', '<br>') | safe }}</div>
+              <div class="small" style="white-space: pre-wrap;">{{ card.card_history }}</div>
             </div>
           </div>
         </div>
