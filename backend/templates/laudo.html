@@ -140,9 +140,11 @@
           <a href="{{ card.cert_link }}" target="_blank" rel="noopener noreferrer" class="btn btn-ink">
             Ver Laudo Oficial {{ card.grading_company }}
           </a>
+          {% if user %}
           <a href="/admin?edit_id={{ card._id }}" class="btn btn-line">
             <i class="bi bi-pencil me-1" aria-hidden="true"></i> Editar Carta
           </a>
+          {% endif %}
         </div>
       </div>
     </section>

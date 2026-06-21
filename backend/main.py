@@ -184,7 +184,11 @@ async def home(request: Request):
 
 
 @app.get("/laudo/{card_id}", response_class=HTMLResponse)
-async def view_laudo(request: Request, card_id: str):
+async def view_laudo(
+    request: Request,
+    card_id: str,
+    user: Optional[dict] = Depends(get_current_user_optional),
+):
     if not ObjectId.is_valid(card_id):
         raise HTTPException(status_code=400, detail="Invalid ID")
 
@@ -193,7 +197,7 @@ async def view_laudo(request: Request, card_id: str):
         raise HTTPException(status_code=404, detail="Card not found")
 
     return templates.TemplateResponse(
-        request=request, name="laudo.html", context={"card": card}
+        request=request, name="laudo.html", context={"card": card, "user": user}
     )
 
 
