@@ -8,8 +8,8 @@ Um portfólio digital seguro e premium para colecionadores de Cartas Pokémon TC
 - **Micro-interações e HUD de Colecionador:** Animações fluidas em 3D no hover e barras de progresso modernas detalhando a graduação (Centering, Corners, Edges, Surface).
 - **Hospedagem de Imagens na Nuvem:** Integração nativa com Cloudinary, aliviando o servidor e acelerando a entrega via CDN global.
 - **Painel Administrativo Seguro:** CRUD completo (Create, Read, Update, Delete) acessível somente após autenticação via cookies baseados em sessões criptografadas (Bcrypt).
-- **Busca e Filtros no Client-Side:** Pesquisa ultra-rápida sem a necessidade de reloading da página.
-- **Pronto para Escalar:** Arquitetura Server-Side Rendered (Jinja2) combinada com um backend extremamente rápido e assíncrono (FastAPI) em banco NoSQL (MongoDB).
+- **Busca, Filtros e Ordenação no Client-Side:** Pesquisa ultra-rápida, filtragem por empresa certificadora e ordenação por nota máxima e mínima sem a necessidade de reloading da página.
+- **Preparado para Escalar (QA Validado):** Arquitetura Server-Side Rendered (Jinja2) combinada com um backend extremamente rápido e assíncrono (FastAPI) em banco NoSQL (MongoDB), acompanhado de script de teste de carga assíncrono hiper veloz.
 
 ## 🛠️ Stack Tecnológico
 

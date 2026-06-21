@@ -5,7 +5,7 @@ Com base nas entregas realizadas, o backlog funcional do sistema Laudo Cards est
 | ID | Título | Descrição | Criticidade | Status |
 |---|---|---|---|---|
 | **RF01** | **Catálogo Público de Cartas** | O sistema deve permitir que usuários não autenticados visualizem a lista completa de cartas graduadas em formato de grade (grid), exibindo imagens, nomes e notas finais. | Alta | Concluído |
-| **RF02** | **Filtros e Busca de Acervo** | O sistema deve permitir a busca textual por nome de carta e filtragem múltipla (por certificadora e nota) no lado do cliente. | Média | Concluído |
+| **RF02** | **Filtros e Ordenação de Acervo** | O sistema deve permitir a busca textual por nome de carta, filtragem dinâmica por certificadora cadastrada, e ordenação de notas (Maior para Menor e vice-versa) no lado do cliente. | Média | Concluído |
 | **RF03** | **Visualização de Laudo Detalhado** | O sistema deve possuir uma página dedicada por carta (HUD de Colecionador), exibindo quebra técnica das notas (Centering, Edges, Surface, Corners) e metadados completos. | Alta | Concluído |
 | **RF04** | **Autenticação Segura** | O sistema deve possuir uma área restrita (`/admin`) acessível apenas mediante login com usuário e senha armazenados com hash seguro (Bcrypt) no banco de dados, utilizando persistência de sessão via Cookies. | Alta | Concluído |
 | **RF05** | **CRUD Completo de Cartas** | O administrador autenticado deve ser capaz de criar (adicionar), ler (listar), atualizar (editar) e deletar (excluir) cartas diretamente no banco de dados através de um painel de controle interativo. | Alta | Concluído |
