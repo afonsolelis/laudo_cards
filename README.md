@@ -102,7 +102,6 @@ laudo_cards/
 │   ├── database.py        # Configuração assíncrona do MongoDB
 │   ├── models.py          # Tipagens Pydantic e Validações
 │   ├── storage.py         # Lógica de interface e upload com Cloudinary
-│   ├── pdf_generator.py   # Motor gerador de PDFs (ReportLab)
 │   ├── requirements.txt   # Dependências do pacote pip
 │   ├── static/            # CSS, Favicon, JS customizados
 │   └── templates/         # Arquivos HTML Jinja2 (Views)
