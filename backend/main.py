@@ -19,10 +19,14 @@ from storage import upload_file_to_cloudinary
 app = FastAPI(title="Laudo Cards")
 
 # Mount static files
-app.mount("/static", StaticFiles(directory="static"), name="static")
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
+app.mount(
+    "/static", StaticFiles(directory=os.path.join(BASE_DIR, "static")), name="static"
+)
 
 # Templates
-templates = Jinja2Templates(directory="templates")
+templates = Jinja2Templates(directory=os.path.join(BASE_DIR, "templates"))
 
 # CORS (more relevant for API, but good to keep)
 app.add_middleware(
