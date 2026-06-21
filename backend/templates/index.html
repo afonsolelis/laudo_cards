@@ -73,7 +73,7 @@
             <select id="graderFilter" class="form-select" aria-label="Filtrar por certificadora">
               <option value="">Todas as certificadoras</option>
               {% for grader in graders %}
-              <option value="{{ grader }}">{{ grader }}</option>
+              <option value="{{ grader.name }}">{{ grader.name }}</option>
               {% endfor %}
             </select>
           </div>

@@ -173,7 +173,7 @@ async def home(request: Request):
     cards_cursor = cards_collection.find()
     cards_list = await cards_cursor.to_list(1000)
 
-    graders = await cards_collection.distinct("grading_company")
+    graders = await graders_collection.find().to_list(100)
 
     return templates.TemplateResponse(
         request=request,
