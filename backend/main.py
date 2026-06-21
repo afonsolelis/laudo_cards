@@ -5,13 +5,12 @@ from fastapi.templating import Jinja2Templates
 from fastapi.responses import HTMLResponse
 from typing import List
 from bson import ObjectId
-import uuid
 import json
 import os
 
 from models import CardModel, GraderModel
 from database import cards_collection, graders_collection
-from storage import upload_file_to_minio
+from storage import upload_file_to_cloudinary
 
 app = FastAPI(title="Laudo Cards")
 
@@ -125,13 +124,10 @@ async def update_card(card_id: str, card: CardModel):
 
 @app.post("/api/upload")
 async def upload_image(file: UploadFile = File(...)):
-    file_extension = file.filename.split(".")[-1]
-    filename = f"{uuid.uuid4()}.{file_extension}"
-    
-    url = await upload_file_to_minio(file, filename)
+    url = await upload_file_to_cloudinary(file)
     if not url:
         raise HTTPException(status_code=500, detail="Failed to upload image")
-    
+
     return {"url": url}
 
 if __name__ == "__main__":
