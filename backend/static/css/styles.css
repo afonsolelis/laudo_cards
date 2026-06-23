@@ -281,6 +281,31 @@ a:hover { color: var(--accent-hover); }
   transform: translateY(-8px) scale(1.05) rotate(1deg);
 }
 
+.trade-badge {
+  position: absolute;
+  top: 0.75rem;
+  left: 0.75rem;
+  z-index: 3;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35);
+}
+
+.trade-toggle {
+  margin-top: auto;
+  padding-top: 0.85rem;
+  border-top: 1px solid var(--glass-border);
+  cursor: default;
+}
+.trade-toggle .form-check-label {
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+.trade-toggle .form-check-input {
+  cursor: pointer;
+}
+
 .cc-body {
   display: flex;
   flex-direction: column;

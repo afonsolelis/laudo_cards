@@ -40,6 +40,10 @@ class GraderModel(BaseModel):
     name: str
 
 
+class TradeToggle(BaseModel):
+    available_for_trade: bool
+
+
 class CardGrade(BaseModel):
     centering: Optional[float] = None
     corners: Optional[float] = None
@@ -71,6 +75,9 @@ class CardModel(BaseModel):
     # Coleção / Aquisição
     acquisition_price: Optional[float] = None  # preço pago ao entrar na coleção
     added_date: Optional[str] = None  # data de inclusão na coleção (YYYY-MM-DD)
+
+    # Disponibilidade para troca
+    available_for_trade: bool = False  # se a carta está disponível para troca
 
     # Graduação
     grading_company: str

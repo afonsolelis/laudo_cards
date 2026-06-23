@@ -11,7 +11,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@500;700;800;900&display=swap" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
-  <link href="/static/css/styles.css?v=2" rel="stylesheet">
+  <link href="/static/css/styles.css?v=3" rel="stylesheet">
 </head>
 
 <body>
@@ -107,6 +107,15 @@
             <div class="card-stage">
               <img src="{{ card.image_front_url if card.image_front_url else 'https://via.placeholder.com/250x350' }}"
                 alt="{{ card.name }} - Slab" class="stage-img" loading="lazy">
+              {% if card.available_for_trade %}
+              <span class="badge bg-success trade-badge" id="tradeBadge-{{ card['_id'] }}">
+                <i class="bi bi-arrow-left-right me-1" aria-hidden="true"></i> Disponível para troca
+              </span>
+              {% else %}
+              <span class="badge bg-success trade-badge d-none" id="tradeBadge-{{ card['_id'] }}">
+                <i class="bi bi-arrow-left-right me-1" aria-hidden="true"></i> Disponível para troca
+              </span>
+              {% endif %}
             </div>
 
             <div class="cc-body">
@@ -124,6 +133,21 @@
                   <span class="cc-grader-name">{{ card.grading_company }}</span>
                 </div>
               </div>
+
+              {% if user %}
+              <div class="form-check form-switch trade-toggle mt-3"
+                onclick="event.stopPropagation();"
+                onkeypress="event.stopPropagation();">
+                <input class="form-check-input" type="checkbox" role="switch"
+                  id="tradeSwitch-{{ card['_id'] }}"
+                  data-card-id="{{ card['_id'] }}"
+                  {% if card.available_for_trade %}checked{% endif %}
+                  onchange="toggleTrade(this);">
+                <label class="form-check-label" for="tradeSwitch-{{ card['_id'] }}">
+                  Disponível para troca
+                </label>
+              </div>
+              {% endif %}
             </div>
           </article>
         </div>
@@ -185,6 +209,33 @@
     searchInput.addEventListener('input', applyFilters);
     graderFilter.addEventListener('change', applyFilters);
     gradeFilter.addEventListener('change', applyFilters);
+
+    // Toggle de disponibilidade para troca (apenas usuário logado)
+    async function toggleTrade(input) {
+      const cardId = input.getAttribute('data-card-id');
+      const available = input.checked;
+      input.disabled = true;
+      try {
+        const response = await fetch(`/api/cards/${cardId}/trade`, {
+          method: 'PATCH',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ available_for_trade: available }),
+        });
+        if (!response.ok) {
+          throw new Error('Falha ao atualizar disponibilidade');
+        }
+        const badge = document.getElementById(`tradeBadge-${cardId}`);
+        if (badge) {
+          badge.classList.toggle('d-none', !available);
+        }
+      } catch (err) {
+        // Reverte o estado visual em caso de erro
+        input.checked = !available;
+        alert(err.message);
+      } finally {
+        input.disabled = false;
+      }
+    }
   </script>
 </body>
 

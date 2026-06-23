@@ -14,7 +14,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import HTMLResponse, RedirectResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
-from models import CardModel, GraderModel
+from models import CardModel, GraderModel, TradeToggle
 from storage import upload_file_to_cloudinary
 
 app = FastAPI(title="Laudo Cards")
@@ -169,7 +169,10 @@ async def logout(request: Request):
 
 # HTML Routes
 @app.get("/", response_class=HTMLResponse)
-async def home(request: Request):
+async def home(
+    request: Request,
+    user: Optional[dict] = Depends(get_current_user_optional),
+):
     # Buscar todas as cartas para listar na home
     cards_cursor = cards_collection.find()
     cards_list = await cards_cursor.to_list(1000)
@@ -179,7 +182,7 @@ async def home(request: Request):
     return templates.TemplateResponse(
         request=request,
         name="index.html",
-        context={"cards": cards_list, "graders": graders},
+        context={"cards": cards_list, "graders": graders, "user": user},
     )
 
 
@@ -283,6 +286,10 @@ async def update_card(
         update_data["added_date"] = existing_card.get("added_date") or update_data.get(
             "added_date"
         )
+        # Preserva a disponibilidade para troca (controlada pelo toggle, não pelo formulário)
+        update_data["available_for_trade"] = existing_card.get(
+            "available_for_trade", False
+        )
 
         await cards_collection.update_one(
             {"_id": ObjectId(card_id)}, {"$set": update_data}
@@ -293,6 +300,26 @@ async def update_card(
 
         traceback.print_exc()
         raise HTTPException(status_code=500, detail=str(e))
+
+
+@app.patch("/api/cards/{card_id}/trade")
+async def toggle_card_trade(
+    card_id: str,
+    payload: TradeToggle,
+    user: dict = Depends(get_current_user_api),
+):
+    if not ObjectId.is_valid(card_id):
+        raise HTTPException(status_code=400, detail="Invalid ID")
+    result = await cards_collection.update_one(
+        {"_id": ObjectId(card_id)},
+        {"$set": {"available_for_trade": payload.available_for_trade}},
+    )
+    if result.matched_count == 0:
+        raise HTTPException(status_code=404, detail="Card not found")
+    return {
+        "card_id": card_id,
+        "available_for_trade": payload.available_for_trade,
+    }
 
 
 @app.delete("/api/cards/{card_id}")
