@@ -58,6 +58,7 @@ class CardLinks(BaseModel):
     price_charting: Optional[str] = None
     liga_pokemon: Optional[str] = None
     myp_cards: Optional[str] = None
+    ebay: Optional[str] = None
 
 
 class CardModel(BaseModel):

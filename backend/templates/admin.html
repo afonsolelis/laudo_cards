@@ -370,6 +370,10 @@
                                     <label class="form-label text-truncate" style="max-width: 100%;">MYP Cards</label>
                                     <input type="url" class="form-control" id="link_myp">
                                 </div>
+                                <div class="col-md-3">
+                                    <label class="form-label text-truncate" style="max-width: 100%;">eBay</label>
+                                    <input type="url" class="form-control" id="link_ebay">
+                                </div>
                             </div>
 
                             <div class="mb-4">
@@ -544,6 +548,7 @@
             document.getElementById('link_price').value = cardData.links.price_charting || '';
             document.getElementById('link_liga').value = cardData.links.liga_pokemon || '';
             document.getElementById('link_myp').value = cardData.links.myp_cards || '';
+            document.getElementById('link_ebay').value = cardData.links.ebay || '';
         }
         
         document.getElementById('grader_notes_markdown').value = cardData.grader_notes_markdown || '';
@@ -610,6 +615,7 @@
                         price_charting: document.getElementById('link_price').value || null,
                         liga_pokemon: document.getElementById('link_liga').value || null,
                         myp_cards: document.getElementById('link_myp').value || null,
+                        ebay: document.getElementById('link_ebay').value || null,
                     },
                     grader_notes_markdown: document.getElementById('grader_notes_markdown').value || null,
                     card_history: document.getElementById('card_history').value || null
