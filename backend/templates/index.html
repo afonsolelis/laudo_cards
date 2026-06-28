@@ -84,6 +84,14 @@
               <option value="asc">Menor Nota para Maior</option>
             </select>
           </div>
+          <div class="col-12">
+            <div class="form-check form-switch">
+              <input class="form-check-input" type="checkbox" role="switch" id="tradeFilter">
+              <label class="form-check-label" for="tradeFilter">
+                <i class="bi bi-arrow-left-right me-1" aria-hidden="true"></i> Mostrar apenas disponíveis para troca
+              </label>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -98,7 +106,7 @@
         {% endif %}
 
         {% for card in cards %}
-        <div class="col card-item" data-index="{{ loop.index }}" data-name="{{ card.name | lower }} {{ card.set_name | lower }} {{ card.certificate_number | lower }}" data-grade="{{ card.grade.final }}" data-grader="{{ card.grading_company | lower }}">
+        <div class="col card-item" data-index="{{ loop.index }}" data-name="{{ card.name | lower }} {{ card.set_name | lower }} {{ card.certificate_number | lower }}" data-grade="{{ card.grade.final }}" data-grader="{{ card.grading_company | lower }}" data-trade="{{ 'true' if card.available_for_trade else 'false' }}">
           <article class="collection-card" role="button" tabindex="0"
             aria-label="Ver descritivo de {{ card.name }}"
             onclick="window.location.href='/laudo/{{ card['_id'] }}';"
@@ -170,20 +178,23 @@
     const searchInput = document.getElementById('searchInput');
     const graderFilter = document.getElementById('graderFilter');
     const gradeFilter = document.getElementById('gradeFilter');
+    const tradeFilter = document.getElementById('tradeFilter');
     const cardList = document.getElementById('cardList');
 
     function applyFilters() {
       const searchTerm = searchInput.value.toLowerCase();
       const graderValue = graderFilter.value.toLowerCase();
       const sortOrder = gradeFilter.value;
+      const tradeOnly = tradeFilter.checked;
 
       let cards = Array.from(document.querySelectorAll('.card-item'));
 
       cards.forEach(card => {
         const matchesSearch = card.getAttribute('data-name').includes(searchTerm);
         const matchesGrader = graderValue === '' || card.getAttribute('data-grader') === graderValue;
+        const matchesTrade = !tradeOnly || card.getAttribute('data-trade') === 'true';
 
-        if (matchesSearch && matchesGrader) {
+        if (matchesSearch && matchesGrader && matchesTrade) {
           card.style.display = '';
         } else {
           card.style.display = 'none';
@@ -209,6 +220,7 @@
     searchInput.addEventListener('input', applyFilters);
     graderFilter.addEventListener('change', applyFilters);
     gradeFilter.addEventListener('change', applyFilters);
+    tradeFilter.addEventListener('change', applyFilters);
 
     // Toggle de disponibilidade para troca (apenas usuário logado)
     async function toggleTrade(input) {
@@ -227,6 +239,11 @@
         const badge = document.getElementById(`tradeBadge-${cardId}`);
         if (badge) {
           badge.classList.toggle('d-none', !available);
+        }
+        const cardItem = input.closest('.card-item');
+        if (cardItem) {
+          cardItem.setAttribute('data-trade', available ? 'true' : 'false');
+          applyFilters();
         }
       } catch (err) {
         // Reverte o estado visual em caso de erro
