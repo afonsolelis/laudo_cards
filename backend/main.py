@@ -6,10 +6,13 @@ from typing import List, Optional
 
 import bcrypt
 from bson import ObjectId
-from database import (cards_collection, graders_collection,
-                      sessions_collection, users_collection)
-from fastapi import (Depends, FastAPI, File, Form, HTTPException, Request,
-                     UploadFile)
+from database import (
+    cards_collection,
+    graders_collection,
+    sessions_collection,
+    users_collection,
+)
+from fastapi import Depends, FastAPI, File, Form, HTTPException, Request, UploadFile
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import HTMLResponse, RedirectResponse
 from fastapi.staticfiles import StaticFiles
@@ -261,8 +264,30 @@ async def delete_grader(grader_id: str, user: dict = Depends(get_current_user_ap
     return {"message": "Deleted successfully"}
 
 
+async def validate_grading_company(name: str) -> None:
+    """Garante que a graduadora da carta existe na collection `graders`.
+
+    `grading_company` é uma string livre. Sem esta checagem, um valor divergente
+    (ex: "MGS" em vez de "Manafix") é aceito e a carta desaparece do filtro da
+    home, que é alimentado por `graders_collection`.
+    """
+    if await graders_collection.find_one({"name": name}):
+        return
+
+    valid = sorted(g["name"] for g in await graders_collection.find().to_list(100))
+    raise HTTPException(
+        status_code=400,
+        detail=(
+            f"Graduadora '{name}' não cadastrada. Cadastre-a primeiro ou use "
+            f"uma das existentes: {', '.join(valid)}"
+        ),
+    )
+
+
 @app.post("/api/cards", response_model=CardModel)
 async def create_card(card: CardModel, user: dict = Depends(get_current_user_api)):
+    await validate_grading_company(card.grading_company)
+
     card_data = card.model_dump(by_alias=True, exclude=["id"])
     # Data de inclusão na coleção: capturada no momento do cadastro do formulário
     if not card_data.get("added_date"):
@@ -276,6 +301,11 @@ async def create_card(card: CardModel, user: dict = Depends(get_current_user_api
 async def update_card(
     card_id: str, card: CardModel, user: dict = Depends(get_current_user_api)
 ):
+    if not ObjectId.is_valid(card_id):
+        raise HTTPException(status_code=400, detail="Invalid ID")
+
+    await validate_grading_company(card.grading_company)
+
     try:
         existing_card = await cards_collection.find_one({"_id": ObjectId(card_id)})
         if not existing_card:
@@ -295,6 +325,9 @@ async def update_card(
             {"_id": ObjectId(card_id)}, {"$set": update_data}
         )
         return {"message": "Card updated successfully", "card_id": card_id}
+    except HTTPException:
+        # Erros de negócio (404, 400) já têm o status correto — não mascarar como 500.
+        raise
     except Exception as e:
         import traceback
 

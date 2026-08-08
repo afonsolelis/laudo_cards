@@ -1,0 +1,18 @@
+# Configuracao das ferramentas de qualidade.
+#
+# Sem este arquivo, black e isort usam defaults incompativeis entre si: o isort
+# quebra imports longos em grade vertical e o black os reescreve, fazendo
+# `black --check` e `isort --check-only` se contradizerem na pipeline.
+# O profile "black" do isort alinha os dois.
+
+[tool.black]
+line-length = 88
+target-version = ["py311"]
+
+[tool.isort]
+profile = "black"
+line_length = 88
+
+[tool.bandit]
+# Testes usam asserts (B101), o que e esperado.
+exclude_dirs = ["tests", "venv", ".venv"]
