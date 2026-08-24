@@ -137,9 +137,16 @@
         </div>
 
         <div class="d-grid gap-2 mt-4">
+          {% if card.cert_link %}
           <a href="{{ card.cert_link }}" target="_blank" rel="noopener noreferrer" class="btn btn-ink">
             Ver Laudo Oficial {{ card.grading_company }}
           </a>
+          {% else %}
+          <div class="note-box small text-muted" role="status">
+            <i class="bi bi-info-circle me-1" aria-hidden="true"></i>
+            Consulta pública do certificado indisponível. Os dados exibidos foram conferidos no rótulo físico da graduadora.
+          </div>
+          {% endif %}
           {% if user %}
           <a href="/admin?edit_id={{ card._id }}" class="btn btn-line">
             <i class="bi bi-pencil me-1" aria-hidden="true"></i> Editar Carta

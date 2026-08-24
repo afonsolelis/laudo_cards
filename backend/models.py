@@ -84,7 +84,8 @@ class CardModel(BaseModel):
     grading_company: str
     certificate_number: str
     grading_year: int
-    cert_link: str
+    # Algumas graduadoras descontinuaram a consulta pública de certificados.
+    cert_link: Optional[str] = None
 
     # Imagens
     image_front_url: Optional[str] = None

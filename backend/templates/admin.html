@@ -318,8 +318,9 @@
                                     </select>
                                 </div>
                                 <div class="col-md-6">
-                                    <label class="form-label">Link do Certificado Oficial</label>
-                                    <input type="url" class="form-control" id="cert_link" required placeholder="https://...">
+                                    <label class="form-label">Link do Certificado Oficial (opcional)</label>
+                                    <input type="url" class="form-control" id="cert_link" placeholder="https://...">
+                                    <div class="form-text">Deixe em branco quando a graduadora não oferecer mais consulta pública.</div>
                                 </div>
                             </div>
 
@@ -599,7 +600,7 @@
                     grading_company: document.getElementById('grading_company').value,
                     certificate_number: document.getElementById('certificate_number').value,
                     grading_year: parseInt(document.getElementById('grading_year').value),
-                    cert_link: document.getElementById('cert_link').value,
+                    cert_link: document.getElementById('cert_link').value || null,
                     image_front_url: frontUrl,
                     image_back_url: backUrl,
                     grade: {

@@ -29,7 +29,7 @@ classDiagram
         +String certificate_number
         +String grading_company
         +String grading_year
-        +String cert_link
+        +Optional~String~ cert_link
         +String image_front_url
         +String image_back_url
         +String grader_notes_markdown
