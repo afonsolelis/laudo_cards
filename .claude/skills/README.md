@@ -5,7 +5,9 @@ Este diretório contém skills customizadas para o Claude Code que automatizam e
 ## 📚 Skills Disponíveis
 
 ### 1. **pericia-template**
-Automatiza a criação de novas páginas de perícia de cartas graduadas.
+Compatibilidade para o fluxo atual de cadastro de cartas graduadas no MongoDB.
+As instruções canônicas ficam em `.agents/skills/adicionar-carta/`, para uso pelo
+Codex e outros agentes compatíveis com skills de projeto.
 
 **Quando usar:**
 - "Criar perícia para [carta]"
@@ -14,15 +16,16 @@ Automatiza a criação de novas páginas de perícia de cartas graduadas.
 
 **O que faz:**
 - Coleta informações da carta
-- Gera HTML completo usando template
-- Calcula cores automaticamente
-- Valida resultado final
+- Valida os dados contra `backend/models.py`
+- Confere graduadora e duplicidade de certificado
+- Envia imagens ao Cloudinary quando necessário
+- Insere e verifica o documento no MongoDB
 
 **Arquivos:**
-- `SKILL.md` - Instruções principais
-- `reference.md` - Guia completo de variáveis
-- `examples.md` - Exemplos de uso
-- `README.md` - Documentação
+- `.claude/skills/pericia-template/SKILL.md` - Roteador de compatibilidade
+- `.agents/skills/adicionar-carta/SKILL.md` - Instruções principais
+- `.agents/skills/adicionar-carta/references/card-schema.md` - Schema e valores canônicos
+- `.agents/skills/adicionar-carta/scripts/card_admin.py` - Preflight e cadastro seguro
 
 ---
 
@@ -92,18 +95,17 @@ Define padrões de código HTML limpo e consistente.
 ---
 
 ### 5. **estrutura-paginas**
-Define estrutura padrão para páginas de cartas individuais.
+Define a apresentação dinâmica da galeria e do laudo em templates Jinja2.
 
 **Quando usar:**
-- Criar novas páginas de carta
-- Revisar estrutura existente
-- Mencionar "layout de perícia", "estrutura de carta"
+- Alterar ou revisar `backend/templates/index.html` e `backend/templates/laudo.html`
+- Mencionar "layout de laudo" ou "apresentação da carta"
 
 **O que faz:**
-- Define seções obrigatórias
-- Padroniza componentes
-- Garante responsividade
-- Valida completude da página
+- Mantém um único template para todas as cartas
+- Preserva os campos condicionais do `CardModel`
+- Garante responsividade e acessibilidade
+- Impede a volta de páginas HTML individuais
 
 **Estrutura padrão:**
 1. Navbar
@@ -151,8 +153,10 @@ As skills são complementares e frequentemente trabalham em conjunto:
 
 ```
 pericia-template (coordena)
-    ├── estrutura-paginas (define layout)
-    ├── bootstrap-guidelines (aplica estilos)
+    └── adicionar-carta (valida, envia imagens e persiste no MongoDB)
+
+estrutura-paginas (somente mudanças visuais)
+    ├── bootstrap-guidelines (aplica componentes)
     ├── codigo-html (garante código limpo)
     └── acessibilidade (valida acessibilidade)
 ```
@@ -161,25 +165,27 @@ pericia-template (coordena)
 
 1. **Usuário:** "Criar perícia para Mewtwo ex"
 2. **pericia-template** é ativada e coordena:
-   - Usa **estrutura-paginas** para layout
-   - Aplica **bootstrap-guidelines** para estilos
-   - Segue **codigo-html** para formatação
-   - Valida com **acessibilidade**
-3. Resultado: Página completa, bem-estruturada, estilizada e acessível
+   - Usa **adicionar-carta** para montar e validar o payload
+   - Faz preflight da graduadora e do certificado
+   - Envia as imagens e grava no MongoDB
+3. Resultado: Carta disponível na galeria e em `/laudo/{id}` sem gerar HTML novo
 
 ## 📋 Hierarquia de Skills
 
 **Nível 1 - Coordenação:**
-- `pericia-template` - Automatiza criação completa
+- `pericia-template` - Roteia pedidos de inclusão
 
-**Nível 2 - Estrutura:**
+**Nível 2 - Persistência:**
+- `adicionar-carta` - Valida e cadastra a carta no MongoDB
+
+**Nível 3 - Estrutura visual:**
 - `estrutura-paginas` - Define layout
 - `codigo-html` - Define código
 
-**Nível 3 - Estilo:**
+**Nível 4 - Estilo:**
 - `bootstrap-guidelines` - Define aparência
 
-**Nível 4 - Qualidade:**
+**Nível 5 - Qualidade:**
 - `acessibilidade` - Valida inclusividade
 
 ## 🎨 Padrões do Projeto
@@ -221,10 +227,13 @@ pericia-template (coordena)
 ├── estrutura-paginas/
 │   └── SKILL.md
 └── pericia-template/
+    └── SKILL.md (compatibilidade)
+
+.agents/skills/
+└── adicionar-carta/
     ├── SKILL.md
-    ├── reference.md
-    ├── examples.md
-    └── README.md
+    ├── references/card-schema.md
+    └── scripts/card_admin.py
 ```
 
 ## 🚀 Início Rápido
@@ -235,7 +244,8 @@ pericia-template (coordena)
 "Criar perícia para Charizard ex da coleção Obsidian Flames"
 ```
 
-A skill `pericia-template` será ativada automaticamente e guiará você no processo.
+A skill `pericia-template` encaminhará o pedido para `adicionar-carta`, que valida
+e grava a carta na aplicação dinâmica.
 
 ### Verificar Acessibilidade
 

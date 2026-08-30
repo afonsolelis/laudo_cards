@@ -20,6 +20,6 @@ This project is a dynamic web application built with **FastAPI**, **MongoDB**, a
 
 - **Working Directory**: All active code is now under the `backend/` directory. If you are asked to edit the layout or logic, you should look into `backend/templates/`, `backend/static/`, and `backend/main.py`.
 - **Authentication**: Modification routes (POST, PUT, DELETE) and `/admin` require session-cookie authentication. Read routes (`/`, `/laudo/{id}`) are public.
-- **Adding new cards**: The system relies on adding card data to the MongoDB collection (`cards_collection`) and uploading their respective images to Cloudinary. We no longer write hard-coded HTML pages.
+- **Adding new cards**: Read `.claude/skills/pericia-template/SKILL.md`, which routes to the canonical `.agents/skills/adicionar-carta/SKILL.md`. Card data is validated and inserted into MongoDB and local images are uploaded to Cloudinary. Never write a hard-coded HTML page for a card.
 - **Layout Adjustments**: When editing the visual representation of a card, edit `backend/templates/laudo.html` or `backend/templates/index.html`. Remember to use Jinja2 templating syntax `{{ var }}` for dynamic text.
 - **Environment**: You must set environment variables (or rely on a `.env` file) for database connections and Cloudinary if you need to run the application to test features.

@@ -66,7 +66,7 @@ Crie um arquivo `.env` na raiz do projeto contendo as seguintes credenciais obri
 ```env
 # Banco de Dados
 MONGO_URL=mongodb+srv://<usuario>:<senha>@cluster0.exemplo.mongodb.net/?retryWrites=true&w=majority
-MONGO_DB=laudo_cards
+DB_NAME=laudo_cards
 
 # Credenciais do Administrador Padrão
 ADMIN_USERNAME=admin
