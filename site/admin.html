@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-bs-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Administração - Laudo Cards</title>
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@500;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+    <link href="css/styles.css?v=4" rel="stylesheet">
+</head>
+<body>
+    <a class="visually-hidden-focusable position-absolute top-0 start-0 m-2 p-2 bg-white text-dark rounded" href="#main">Pular para o conteúdo</a>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg site-nav sticky-top">
+        <div class="container">
+            <a class="navbar-brand site-brand" href="./">Painel Admin</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Alternar navegação">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link d-inline-flex align-items-center gap-1" href="./">
+                            <i class="bi bi-box-arrow-up-right" aria-hidden="true"></i> Ver Site
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link d-inline-flex align-items-center gap-1 text-danger" href="#" id="logoutLink">
+                            <i class="bi bi-box-arrow-left" aria-hidden="true"></i> Sair
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page header -->
+    <section id="main" class="laudo-head">
+        <div class="container">
+            <span class="eyebrow">Administração</span>
+            <h1 class="laudo-title">Painel de Gestão</h1>
+            <p class="laudo-sub">Cadastre cartas e gerencie as graduadoras da coleção.</p>
+        </div>
+    </section>
+
+    <div class="container my-5">
+        <div class="row">
+            <!-- Sidebar: Gerenciamento de Graduadoras -->
+            <div class="col-md-4 mb-4">
+                <div class="panel h-100">
+                    <div class="panel-head">
+                        <h2 class="panel-title">Gerenciar Graduadoras</h2>
+                    </div>
+                    <div class="panel-body">
+                        <form id="graderForm" class="mb-4">
+                            <div class="input-group">
+                                <input type="text" id="newGraderName" class="form-control" placeholder="Nova Graduadora" required>
+                                <button class="btn btn-ink" type="submit">Adicionar</button>
+                            </div>
+                        </form>
+
+                        <ul class="list-group list-group-flush grader-list" id="gradersList">
+                            <li class="list-group-item text-muted">Carregando...</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Form: Cadastro de Carta -->
+            <div class="col-md-8">
+                <div class="panel">
+                    <div class="panel-head">
+                        <h2 class="panel-title" id="formTitle">Cadastrar Nova Carta</h2>
+                    </div>
+                    <div class="panel-body">
+
+                        <div id="alertPlaceholder"></div>
+
+                        <form id="cardForm">
+                            <h3 class="form-section-title">Imagens (Obrigatório)</h3>
+                            <div class="row mb-3">
+                                <div class="col-md-6">
+                                    <label class="form-label" for="imageFront">Foto Frente</label>
+                                    <input class="form-control" type="file" id="imageFront" accept="image/*" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label" for="imageBack">Foto Verso</label>
+                                    <input class="form-control" type="file" id="imageBack" accept="image/*" required>
+                                </div>
+                            </div>
+
+                            <h3 class="form-section-title">Identificação Básica</h3>
+                            <div class="row mb-3">
+                                <div class="col-md-6">
+                                    <label class="form-label" for="name">Nome da Carta</label>
+                                    <input type="text" class="form-control" id="name" required placeholder="Ex: Charizard">
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label" for="full_name">Nome Completo (Título)</label>
+                                    <input type="text" class="form-control" id="full_name" required placeholder="Ex: Charizard Holo - Base Set">
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col-md-4">
+                                    <label class="form-label" for="number">Número</label>
+                                    <input type="text" class="form-control" id="number" required placeholder="Ex: 4/102">
+                                </div>
+                                <div class="col-md-4">
+                                    <label class="form-label" for="set_name">Coleção</label>
+                                    <input type="text" class="form-control" id="set_name" required placeholder="Ex: Base Set">
+                                </div>
+                                <div class="col-md-4">
+                                    <label class="form-label" for="year">Ano de Lançamento</label>
+                                    <select class="form-select year-select" id="year" required>
+                                        <option value="" disabled selected>Selecione o ano...</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <div class="col-md-6">
+                                    <label class="form-label" for="rarity">Raridade</label>
+                                    <select class="form-select" id="rarity" required>
+                                        <option value="" disabled selected>Selecione a raridade...</option>
+                                        <optgroup label="Era Moderna (Scarlet & Violet até Mega Evolução)">
+                                            <option value="Comum (●)">Comum (●)</option>
+                                            <option value="Incomum (◆)">Incomum (◆)</option>
+                                            <option value="Rara (★)">Rara (★)</option>
+                                            <option value="Rara Dupla (★★)">Rara Dupla (★★)</option>
+                                            <option value="Rara Ultra (★★ holográfica)">Rara Ultra (★★ holográfica)</option>
+                                            <option value="Ilustração Rara (Rare Illustration)">Ilustração Rara (Rare Illustration)</option>
+                                            <option value="Ilustração Rara Especial (Special Illustration Rare - SIR/SAR)">Ilustração Rara Especial (Special Illustration Rare - SIR/SAR)</option>
+                                            <option value="Rara Hiper / Secreta (★★★ dourada)">Rara Hiper / Secreta (★★★ dourada)</option>
+                                        </optgroup>
+                                        <optgroup label="Era Clássica (WOTC e EX/Sun & Moon)">
+                                            <option value="Rara Holofoil">Rara Holofoil</option>
+                                            <option value="Rara Reversa (Reverse Holo)">Rara Reversa (Reverse Holo)</option>
+                                            <option value="Ultra Rara (Estrela Branca)">Ultra Rara (Estrela Branca)</option>
+                                            <option value="Secret Rare">Secret Rare</option>
+                                            <option value="Radiant">Radiant</option>
+                                        </optgroup>
+                                        <optgroup label="Promocionais e Especiais">
+                                            <option value="Promo (★ PROMOG / P)">Promo (★ PROMOG / P)</option>
+                                            <option value="Cartas de Subconjunto (Subset)">Cartas de Subconjunto (Subset)</option>
+                                            <option value="Ace Spec">Ace Spec</option>
+                                            <option value="Prism Star">Prism Star</option>
+                                        </optgroup>
+                                    </select>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label" for="pokemon_type">Tipo da Carta</label>
+                                    <select class="form-select" id="pokemon_type" required>
+                                        <option value="" disabled selected>Selecione o tipo...</option>
+                                        <option value="Grass (Planta)">Grass (Planta)</option>
+                                        <option value="Fire (Fogo)">Fire (Fogo)</option>
+                                        <option value="Water (Água)">Water (Água)</option>
+                                        <option value="Lightning (Elétrico)">Lightning (Elétrico)</option>
+                                        <option value="Psychic (Psíquico)">Psychic (Psíquico)</option>
+                                        <option value="Fighting (Lutador)">Fighting (Lutador)</option>
+                                        <option value="Darkness (Sombrio)">Darkness (Sombrio)</option>
+                                        <option value="Metal (Metálico)">Metal (Metálico)</option>
+                                        <option value="Fairy (Fada)">Fairy (Fada)</option>
+                                        <option value="Dragon (Dragão)">Dragon (Dragão)</option>
+                                        <option value="Colorless (Incolor)">Colorless (Incolor)</option>
+                                        <option value="Stellar (Estelar)">Stellar (Estelar)</option>
+                                        <option value="Trainer (Treinador)">Trainer (Treinador)</option>
+                                        <option value="Energy (Energia)">Energy (Energia)</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <div class="col-md-6">
+                                    <label class="form-label" for="language">Idioma</label>
+                                    <select class="form-select" id="language" required>
+                                        <option value="" disabled selected>Selecione o idioma...</option>
+                                        <option value="Inglês (English)">Inglês (English)</option>
+                                        <option value="Português (Portuguese)">Português (Portuguese)</option>
+                                        <option value="Japonês (Japanese)">Japonês (Japanese)</option>
+                                        <option value="Espanhol (Spanish)">Espanhol (Spanish)</option>
+                                        <option value="Francês (French)">Francês (French)</option>
+                                        <option value="Alemão (German)">Alemão (German)</option>
+                                        <option value="Italiano (Italian)">Italiano (Italian)</option>
+                                        <option value="Coreano (Korean)">Coreano (Korean)</option>
+                                        <option value="Chinês Tradicional (Traditional Chinese)">Chinês Tradicional (Traditional Chinese)</option>
+                                        <option value="Chinês Simplificado (Simplified Chinese)">Chinês Simplificado (Simplified Chinese)</option>
+                                        <option value="Tailandês (Thai)">Tailandês (Thai)</option>
+                                        <option value="Indonésio (Indonesian)">Indonésio (Indonesian)</option>
+                                        <option value="Holandês (Dutch)">Holandês (Dutch)</option>
+                                        <option value="Polonês (Polish)">Polonês (Polish)</option>
+                                        <option value="Russo (Russian)">Russo (Russian)</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label" for="illustrator_name">Nome do Artista / Ilustrador</label>
+                                    <input type="text" class="form-control" id="illustrator_name" required placeholder="Ex: Mitsuhiro Arita">
+                                </div>
+                            </div>
+
+                            <h3 class="form-section-title">Dados da Coleção</h3>
+                            <div class="row mb-3">
+                                <div class="col-md-6">
+                                    <label class="form-label" for="acquisition_price">Preço de Aquisição (R$)</label>
+                                    <input type="number" step="0.01" min="0" class="form-control" id="acquisition_price" placeholder="Ex: 150.00">
+                                    <div class="form-text">Valor pago quando a carta entrou na sua coleção.</div>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label" for="added_date_display">Data de Inclusão na Coleção</label>
+                                    <input type="text" class="form-control" id="added_date_display" value="Definida automaticamente ao salvar" readonly disabled>
+                                    <div class="form-text">Capturada automaticamente no momento do cadastro.</div>
+                                </div>
+                            </div>
+
+                            <h3 class="form-section-title">Graduação e População</h3>
+                            <div class="row mb-3">
+                                <div class="col-md-4">
+                                    <label class="form-label" for="grading_company">Graduadora</label>
+                                    <select class="form-select" id="grading_company" required></select>
+                                </div>
+                                <div class="col-md-4">
+                                    <label class="form-label" for="certificate_number">Certificado</label>
+                                    <input type="text" class="form-control" id="certificate_number" required>
+                                </div>
+                                <div class="col-md-4">
+                                    <label class="form-label" for="grading_year">Ano de Graduação</label>
+                                    <select class="form-select year-select" id="grading_year" required>
+                                        <option value="" disabled selected>Selecione o ano...</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label" for="cert_link">Link do Certificado Oficial (opcional)</label>
+                                    <input type="url" class="form-control" id="cert_link" placeholder="https://...">
+                                    <div class="form-text">Deixe em branco quando a graduadora não oferecer mais consulta pública.</div>
+                                </div>
+                            </div>
+
+                            <h3 class="form-section-title">Notas (Grades)</h3>
+                            <div class="row mb-3">
+                                <div class="col-md-2">
+                                    <label class="form-label" for="grade_final">Final</label>
+                                    <input type="number" step="0.5" min="1" max="10" placeholder="10.0" class="form-control" id="grade_final" required>
+                                </div>
+                                <div class="col-md-2">
+                                    <label class="form-label" for="grade_centering">Centering</label>
+                                    <input type="number" step="0.5" min="1" max="10" placeholder="10.0" class="form-control" id="grade_centering">
+                                </div>
+                                <div class="col-md-2">
+                                    <label class="form-label" for="grade_corners">Corners</label>
+                                    <input type="number" step="0.5" min="1" max="10" placeholder="10.0" class="form-control" id="grade_corners">
+                                </div>
+                                <div class="col-md-2">
+                                    <label class="form-label" for="grade_edges">Edges</label>
+                                    <input type="number" step="0.5" min="1" max="10" placeholder="10.0" class="form-control" id="grade_edges">
+                                </div>
+                                <div class="col-md-2">
+                                    <label class="form-label" for="grade_surface">Surface</label>
+                                    <input type="number" step="0.5" min="1" max="10" placeholder="10.0" class="form-control" id="grade_surface">
+                                </div>
+                                <div class="col-md-2">
+                                    <label class="form-label" for="grade_description">Desc. Final</label>
+                                    <input type="text" class="form-control" id="grade_description" required placeholder="Ex: Gem Mint">
+                                    <small class="text-muted d-block" style="font-size: 0.7em;">Depende de cada graduadora</small>
+                                </div>
+                            </div>
+
+                            <h3 class="form-section-title">Links (Opcionais)</h3>
+                            <div class="row mb-3">
+                                <div class="col-md-3">
+                                    <label class="form-label text-truncate" style="max-width: 100%;" for="link_tcg">TCG Player</label>
+                                    <input type="url" class="form-control" id="link_tcg">
+                                </div>
+                                <div class="col-md-3">
+                                    <label class="form-label text-truncate" style="max-width: 100%;" for="link_price">Price Charting</label>
+                                    <input type="url" class="form-control" id="link_price">
+                                </div>
+                                <div class="col-md-3">
+                                    <label class="form-label text-truncate" style="max-width: 100%;" for="link_liga">Liga Pokémon</label>
+                                    <input type="url" class="form-control" id="link_liga">
+                                </div>
+                                <div class="col-md-3">
+                                    <label class="form-label text-truncate" style="max-width: 100%;" for="link_myp">MYP Cards</label>
+                                    <input type="url" class="form-control" id="link_myp">
+                                </div>
+                                <div class="col-md-3">
+                                    <label class="form-label text-truncate" style="max-width: 100%;" for="link_ebay">eBay</label>
+                                    <input type="url" class="form-control" id="link_ebay">
+                                </div>
+                            </div>
+
+                            <div class="mb-4">
+                                <label class="form-label" for="grader_notes_markdown">Observações da Graduadora (Markdown opcional)</label>
+                                <textarea class="form-control" id="grader_notes_markdown" rows="3" placeholder="Slight edge wear on top left."></textarea>
+                            </div>
+
+                            <div class="mb-4">
+                                <label class="form-label" for="card_history">Histórico da Carta (Opcional)</label>
+                                <textarea class="form-control" id="card_history" rows="3" placeholder="Ex: Comprada de um colecionador local em 2024. Puxada de um booster original..."></textarea>
+                                <div class="form-text">Conteúdo opcional sobre a proveniência ou história desta carta específica.</div>
+                            </div>
+
+                            <button type="submit" class="btn btn-ink btn-lg w-100" id="btnSubmit">
+                                Salvar Nova Carta
+                            </button>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Cartas Cadastradas -->
+    <div class="container mb-5">
+        <div class="panel">
+            <div class="panel-head">
+                <h2 class="panel-title">Cartas Cadastradas</h2>
+            </div>
+            <div class="panel-body">
+                <div class="table-responsive">
+                    <table class="table align-middle">
+                        <thead>
+                            <tr>
+                                <th scope="col">Imagem</th>
+                                <th scope="col">Nome</th>
+                                <th scope="col">Coleção / Número</th>
+                                <th scope="col">Graduadora / Nota</th>
+                                <th scope="col" class="text-end">Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody id="cardsTable">
+                            <tr><td colspan="5" class="text-center text-muted py-4">Carregando...</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script type="module">
+        import { supabase, getSession, IMAGE_BUCKET } from './js/supabase.js';
+        import { escapeHtml as e, safeUrl, gradeBadgeColor, todayLocal, errorMessage, PLACEHOLDER_IMG } from './js/common.js';
+
+        const session = await getSession();
+        if (!session) window.location.replace('login.html');
+
+        const $ = (id) => document.getElementById(id);
+        const alertPlaceholder = $('alertPlaceholder');
+        const editId = new URLSearchParams(location.search).get('edit_id');
+        let existingFrontUrl = null;
+        let existingBackUrl = null;
+
+        function showAlert(kind, html) {
+            alertPlaceholder.innerHTML = `<div class="alert alert-${kind}">${html}</div>`;
+            window.scrollTo(0, 0);
+        }
+
+        // Anos de 1990 até o ano seguinte ao atual
+        const lastYear = new Date().getFullYear() + 1;
+        for (const select of document.querySelectorAll('.year-select')) {
+            for (let y = lastYear; y >= 1990; y--) select.add(new Option(y, y));
+        }
+
+        $('logoutLink').addEventListener('click', async (ev) => {
+            ev.preventDefault();
+            await supabase.auth.signOut();
+            window.location.href = './';
+        });
+
+        // Graduadoras ---------------------------------------------------------
+        async function loadGraders() {
+            const { data, error } = await supabase.from('graders').select('id, name').order('created_at');
+            if (error) throw error;
+            const list = $('gradersList');
+            list.innerHTML = data.length ? data.map(g => `
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    ${e(g.name)}
+                    <button class="btn btn-sm btn-outline-danger" data-delete-grader="${e(g.id)}">Excluir</button>
+                </li>`).join('') : '<li class="list-group-item text-muted">Nenhuma cadastrada.</li>';
+
+            const select = $('grading_company');
+            const current = select.value;
+            select.innerHTML = '';
+            for (const g of data) select.add(new Option(g.name, g.name));
+            if (current) select.value = current;
+        }
+
+        $('graderForm').addEventListener('submit', async (ev) => {
+            ev.preventDefault();
+            const name = $('newGraderName').value.trim();
+            const { error } = await supabase.from('graders').insert({ name });
+            if (error) return showAlert('danger', e(errorMessage(error)));
+            $('newGraderName').value = '';
+            await loadGraders();
+        });
+
+        $('gradersList').addEventListener('click', async (ev) => {
+            const id = ev.target.dataset.deleteGrader;
+            if (!id || !confirm('Tem certeza que deseja excluir?')) return;
+            const { error } = await supabase.from('graders').delete().eq('id', id);
+            if (error) return showAlert('danger', e(errorMessage(error)));
+            await loadGraders();
+        });
+
+        // Cartas --------------------------------------------------------------
+        async function loadCards() {
+            const { data, error } = await supabase.from('cards')
+                .select('id, name, full_name, set_name, number, grading_company, grade, image_front_url')
+                .order('created_at');
+            if (error) throw error;
+            $('cardsTable').innerHTML = data.length ? data.map(c => `
+                <tr>
+                    <td>
+                        <img src="${e(safeUrl(c.image_front_url, PLACEHOLDER_IMG))}" alt="${e(c.name)}" style="height: 50px; object-fit: contain; border-radius: var(--radius-sm); border: 1px solid var(--line);">
+                    </td>
+                    <td>
+                        <strong>${e(c.name)}</strong>
+                        <div class="text-muted small">${e(c.full_name)}</div>
+                    </td>
+                    <td>${e(c.set_name)} <span class="text-muted">#${e(c.number)}</span></td>
+                    <td>
+                        <span class="badge bg-light text-dark border">${e(c.grading_company)}</span>
+                        <span class="badge ${gradeBadgeColor(c.grade?.final)}">${e(c.grade?.final)}</span>
+                    </td>
+                    <td class="text-end">
+                        <a href="admin.html?edit_id=${encodeURIComponent(c.id)}" class="btn btn-sm btn-line me-1">
+                            <i class="bi bi-pencil"></i> Editar
+                        </a>
+                        <button class="btn btn-sm btn-outline-danger" data-delete-card="${e(c.id)}">
+                            <i class="bi bi-trash"></i> Excluir
+                        </button>
+                    </td>
+                </tr>`).join('') : '<tr><td colspan="5" class="text-center text-muted py-4">Nenhuma carta cadastrada.</td></tr>';
+        }
+
+        $('cardsTable').addEventListener('click', async (ev) => {
+            const id = ev.target.closest('[data-delete-card]')?.dataset.deleteCard;
+            if (!id || !confirm('Tem certeza que deseja excluir esta carta definitivamente?')) return;
+            const { data, error } = await supabase.from('cards').delete().eq('id', id).select('id');
+            if (error || !data.length) return alert('Erro ao excluir: ' + errorMessage(error || { message: 'Carta não encontrada' }));
+            window.location.href = 'admin.html';
+        });
+
+        async function uploadImage(file) {
+            const ext = (file.name.split('.').pop() || 'jpg').toLowerCase();
+            const path = `${crypto.randomUUID().replaceAll('-', '')}.${ext}`;
+            const { error } = await supabase.storage.from(IMAGE_BUCKET)
+                .upload(path, file, { contentType: file.type, cacheControl: '31536000' });
+            if (error) throw new Error('Erro no upload da imagem: ' + errorMessage(error));
+            return supabase.storage.from(IMAGE_BUCKET).getPublicUrl(path).data.publicUrl;
+        }
+
+        function fillForm(card) {
+            const set = (id, value) => { $(id).value = value ?? ''; };
+            for (const f of ['name', 'number', 'full_name', 'set_name', 'year', 'rarity', 'pokemon_type', 'language',
+                'illustrator_name', 'acquisition_price', 'grading_company', 'certificate_number', 'grading_year',
+                'cert_link', 'grader_notes_markdown', 'card_history']) set(f, card[f]);
+            if (card.added_date) set('added_date_display', card.added_date);
+            const grade = card.grade || {};
+            for (const f of ['final', 'centering', 'corners', 'edges', 'surface', 'description']) set(`grade_${f}`, grade[f]);
+            const links = card.links || {};
+            set('link_tcg', links.tcg_player);
+            set('link_price', links.price_charting);
+            set('link_liga', links.liga_pokemon);
+            set('link_myp', links.myp_cards);
+            set('link_ebay', links.ebay);
+
+            existingFrontUrl = card.image_front_url;
+            existingBackUrl = card.image_back_url;
+            $('formTitle').textContent = 'Editar Carta';
+            $('btnSubmit').textContent = 'Atualizar Carta';
+            $('imageFront').required = false;
+            $('imageBack').required = false;
+        }
+
+        const numOrNull = (id) => ($(id).value ? parseFloat($(id).value) : null);
+        const textOrNull = (id) => $(id).value.trim() || null;
+
+        function readForm() {
+            return {
+                name: $('name').value,
+                number: $('number').value,
+                full_name: $('full_name').value,
+                set_name: $('set_name').value,
+                year: parseInt($('year').value),
+                rarity: $('rarity').value,
+                pokemon_type: $('pokemon_type').value,
+                language: $('language').value,
+                illustrator_name: $('illustrator_name').value,
+                acquisition_price: numOrNull('acquisition_price'),
+                grading_company: $('grading_company').value,
+                certificate_number: $('certificate_number').value,
+                grading_year: parseInt($('grading_year').value),
+                cert_link: textOrNull('cert_link'),
+                grade: {
+                    centering: numOrNull('grade_centering'),
+                    corners: numOrNull('grade_corners'),
+                    edges: numOrNull('grade_edges'),
+                    surface: numOrNull('grade_surface'),
+                    final: parseFloat($('grade_final').value),
+                    description: $('grade_description').value,
+                },
+                links: {
+                    tcg_player: textOrNull('link_tcg'),
+                    price_charting: textOrNull('link_price'),
+                    liga_pokemon: textOrNull('link_liga'),
+                    myp_cards: textOrNull('link_myp'),
+                    ebay: textOrNull('link_ebay'),
+                },
+                grader_notes_markdown: textOrNull('grader_notes_markdown'),
+                card_history: textOrNull('card_history'),
+            };
+        }
+
+        $('cardForm').addEventListener('submit', async (ev) => {
+            ev.preventDefault();
+            const btnSubmit = $('btnSubmit');
+            try {
+                btnSubmit.disabled = true;
+                btnSubmit.innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Fazendo upload das imagens...';
+
+                const frontFile = $('imageFront').files[0];
+                const backFile = $('imageBack').files[0];
+                const image_front_url = frontFile ? await uploadImage(frontFile) : existingFrontUrl;
+                const image_back_url = backFile ? await uploadImage(backFile) : existingBackUrl;
+
+                btnSubmit.innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Salvando dados...';
+                const payload = { ...readForm(), image_front_url, image_back_url };
+
+                if (editId) {
+                    // added_date e available_for_trade ficam de fora: não são editados por este formulário.
+                    const { data, error } = await supabase.from('cards').update(payload).eq('id', editId).select('id');
+                    if (error || !data.length) throw new Error('Erro ao atualizar carta no banco: ' + errorMessage(error || { message: 'carta não encontrada' }));
+                    existingFrontUrl = image_front_url;
+                    existingBackUrl = image_back_url;
+                    showAlert('success', `Carta atualizada com sucesso! <a href="laudo.html?id=${encodeURIComponent(editId)}" class="alert-link">Ver Laudo</a>`);
+                } else {
+                    const { data, error } = await supabase.from('cards')
+                        .insert({ ...payload, added_date: todayLocal() }).select('id').single();
+                    if (error) throw new Error('Erro ao salvar carta no banco: ' + errorMessage(error));
+                    showAlert('success', `Carta cadastrada com sucesso! <a href="laudo.html?id=${encodeURIComponent(data.id)}" class="alert-link">Ver Laudo</a>`);
+                    $('cardForm').reset();
+                }
+                await loadCards();
+            } catch (error) {
+                console.error(error);
+                showAlert('danger', e(error.message));
+            } finally {
+                btnSubmit.disabled = false;
+                btnSubmit.textContent = editId ? 'Atualizar Carta' : 'Salvar Nova Carta';
+            }
+        });
+
+        // Inicialização -------------------------------------------------------
+        if (session) {
+            try {
+                await Promise.all([loadGraders(), loadCards()]);
+                if (editId) {
+                    const { data: card, error } = await supabase.from('cards').select('*').eq('id', editId).maybeSingle();
+                    if (error) throw error;
+                    if (card) fillForm(card);
+                    else showAlert('warning', 'Carta para edição não encontrada.');
+                }
+            } catch (error) {
+                console.error(error);
+                showAlert('danger', e(errorMessage(error)));
+            }
+        }
+    </script>
+</body>
+</html>

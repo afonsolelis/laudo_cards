@@ -1,0 +1,9 @@
+{
+  "name": "laudo-cards-migrate",
+  "private": true,
+  "description": "Migração única do MongoDB (Railway) para o Supabase.",
+  "dependencies": {
+    "mongodb": "6.10.0",
+    "pg": "8.13.1"
+  }
+}

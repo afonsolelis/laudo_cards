@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-bs-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Página não encontrada - Laudo Cards</title>
+  <script>
+    // Mantém funcionando os links antigos do backend: /laudo/<id> → laudo.html?id=<id>
+    (function () {
+      var match = location.pathname.match(/^(.*?)\/laudo\/([^/]+)\/?$/);
+      if (match) location.replace(match[1] + '/laudo.html?id=' + encodeURIComponent(match[2]));
+      else if (/\/admin\/?$/.test(location.pathname)) location.replace(location.pathname.replace(/\/admin\/?$/, '/admin.html') + location.search);
+    })();
+  </script>
+  <style>body { background: #0d1117; color: #c9d1d9; font-family: system-ui, sans-serif; text-align: center; padding: 6rem 1rem; }</style>
+</head>
+<body>
+  <h1>Página não encontrada</h1>
+  <p><a href="/laudo_cards/" style="color: #58a6ff;">Voltar ao portfólio</a></p>
+</body>
+</html>

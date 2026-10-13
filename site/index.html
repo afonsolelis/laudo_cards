@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-bs-theme="dark">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <title>Cartas Pokémon TCG Graduadas - Coleção Certificada</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@500;700;800;900&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <link href="css/styles.css?v=4" rel="stylesheet">
+</head>
+
+<body>
+  <a class="visually-hidden-focusable position-absolute top-0 start-0 m-2 p-2 bg-white text-dark rounded" href="#main">Pular para o conteúdo</a>
+
+  <!-- Header -->
+  <nav class="navbar navbar-expand-lg site-nav sticky-top">
+    <div class="container">
+      <a class="navbar-brand site-brand" href="./">Cartas Graduadas</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Alternar navegação">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto align-items-lg-center">
+          <li class="nav-item">
+            <a class="nav-link" href="admin.html">Painel Admin</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section id="main" class="hero">
+    <div class="container fade-up">
+      <span class="eyebrow fade-up delay-1">Coleção certificada</span>
+      <h1 class="hero-title fade-up delay-1">Cartas Pokémon TCG Graduadas</h1>
+      <p class="hero-sub fade-up delay-2">Acervo digital seguro, documentado e precificado de Afonso Brandão.</p>
+      <div class="hero-stats fade-up delay-3">
+        <div>
+          <span class="stat-num" id="statCards">–</span>
+          <span class="stat-label" id="statCardsLabel">Cartas</span>
+        </div>
+        <div>
+          <span class="stat-num" id="statGraders">–</span>
+          <span class="stat-label" id="statGradersLabel">Certificadoras</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Collection Section -->
+  <section id="colecao" class="py-5">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Acervo</span>
+        <h2 class="section-title">Sua Coleção</h2>
+      </div>
+
+      <!-- Search Bar and Filters -->
+      <div class="toolbar">
+        <div class="row g-3">
+          <div class="col-md-6">
+            <input type="text" id="searchInput" class="form-control"
+              placeholder="Buscar por nome, número, conjunto ou certificado..." aria-label="Buscar cartas">
+          </div>
+          <div class="col-md-3">
+            <select id="graderFilter" class="form-select" aria-label="Filtrar por certificadora">
+              <option value="">Todas as certificadoras</option>
+            </select>
+          </div>
+          <div class="col-md-3">
+            <select id="gradeFilter" class="form-select" aria-label="Ordenar por nota">
+              <option value="">Ordenar (Padrão)</option>
+              <option value="desc">Maior Nota para Menor</option>
+              <option value="asc">Menor Nota para Maior</option>
+            </select>
+          </div>
+          <div class="col-12">
+            <div class="form-check form-switch">
+              <input class="form-check-input" type="checkbox" role="switch" id="tradeFilter">
+              <label class="form-check-label" for="tradeFilter">
+                <i class="bi bi-arrow-left-right me-1" aria-hidden="true"></i> Mostrar apenas disponíveis para troca
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row row-cols-1 row-cols-md-2 row-cols-xl-3 g-4" id="cardList" aria-live="polite">
+        <div class="col-12">
+          <div class="empty-state text-center p-5">
+            <span class="spinner-border spinner-border-sm me-2" aria-hidden="true"></span> Carregando acervo...
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container text-center">
+      <p class="mb-1">Desenvolvido por <a href="https://github.com/afonsolelis">Afonso Brandão</a></p>
+      <small>© 2024 Laudo Cards. Todos os direitos reservados.</small>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script type="module">
+    import { supabase, getSession } from './js/supabase.js';
+    import { escapeHtml, safeUrl, gradeBadgeColor, errorMessage, PLACEHOLDER_IMG } from './js/common.js';
+
+    const searchInput = document.getElementById('searchInput');
+    const graderFilter = document.getElementById('graderFilter');
+    const gradeFilter = document.getElementById('gradeFilter');
+    const tradeFilter = document.getElementById('tradeFilter');
+    const cardList = document.getElementById('cardList');
+
+    function emptyState(message, icon = 'bi-inbox') {
+      return `<div class="col-12"><div class="empty-state text-center p-5">
+        <i class="bi ${icon} fs-1 d-block mb-3"></i>${escapeHtml(message)}</div></div>`;
+    }
+
+    function renderCard(card, index, loggedIn) {
+      const id = escapeHtml(card.id);
+      const name = escapeHtml(card.name);
+      const final = card.grade?.final;
+      const search = [card.name, card.set_name, card.certificate_number].join(' ').toLowerCase();
+      const trade = card.available_for_trade;
+      return `
+        <div class="col card-item" data-index="${index}" data-name="${escapeHtml(search)}"
+          data-grade="${escapeHtml(final)}" data-grader="${escapeHtml(String(card.grading_company).toLowerCase())}"
+          data-trade="${trade ? 'true' : 'false'}">
+          <article class="collection-card" role="button" tabindex="0" data-href="laudo.html?id=${encodeURIComponent(card.id)}"
+            aria-label="Ver descritivo de ${name}">
+            <div class="card-stage">
+              <img src="${escapeHtml(safeUrl(card.image_front_url, PLACEHOLDER_IMG))}" alt="${name} - Slab" class="stage-img" loading="lazy">
+              <span class="badge bg-success trade-badge ${trade ? '' : 'd-none'}" id="tradeBadge-${id}">
+                <i class="bi bi-arrow-left-right me-1" aria-hidden="true"></i> Disponível para troca
+              </span>
+            </div>
+            <div class="cc-body">
+              <div class="cc-row">
+                <h3 class="cc-name">${name}</h3>
+                <span class="badge grade-badge ${gradeBadgeColor(final)}">${escapeHtml(final)}</span>
+              </div>
+              <div class="cc-meta">${escapeHtml(card.set_name)} <span class="cc-num">#${escapeHtml(card.number)}</span></div>
+              <div class="cc-foot">
+                <span class="chip">${escapeHtml(card.rarity)}</span>
+                <div class="cc-grader">
+                  <span class="cc-grader-label">Graduadora</span>
+                  <span class="cc-grader-name">${escapeHtml(card.grading_company)}</span>
+                </div>
+              </div>
+              ${loggedIn ? `
+              <div class="form-check form-switch trade-toggle mt-3" data-stop>
+                <input class="form-check-input" type="checkbox" role="switch" id="tradeSwitch-${id}"
+                  data-card-id="${id}" ${trade ? 'checked' : ''}>
+                <label class="form-check-label" for="tradeSwitch-${id}">Disponível para troca</label>
+              </div>` : ''}
+            </div>
+          </article>
+        </div>`;
+    }
+
+    function applyFilters() {
+      const searchTerm = searchInput.value.toLowerCase();
+      const graderValue = graderFilter.value.toLowerCase();
+      const sortOrder = gradeFilter.value;
+      const tradeOnly = tradeFilter.checked;
+      const cards = Array.from(document.querySelectorAll('.card-item'));
+
+      cards.forEach(card => {
+        const matchesSearch = card.dataset.name.includes(searchTerm);
+        const matchesGrader = graderValue === '' || card.dataset.grader === graderValue;
+        const matchesTrade = !tradeOnly || card.dataset.trade === 'true';
+        card.style.display = matchesSearch && matchesGrader && matchesTrade ? '' : 'none';
+      });
+
+      cards.sort((a, b) => {
+        if (sortOrder === 'desc') return parseFloat(b.dataset.grade) - parseFloat(a.dataset.grade);
+        if (sortOrder === 'asc') return parseFloat(a.dataset.grade) - parseFloat(b.dataset.grade);
+        return parseInt(a.dataset.index) - parseInt(b.dataset.index);
+      });
+      cards.forEach(card => cardList.appendChild(card));
+    }
+
+    async function toggleTrade(input) {
+      const cardId = input.dataset.cardId;
+      const available = input.checked;
+      input.disabled = true;
+      try {
+        const { data, error } = await supabase.from('cards')
+          .update({ available_for_trade: available }).eq('id', cardId).select('id');
+        if (error) throw new Error(errorMessage(error));
+        if (!data.length) throw new Error('Falha ao atualizar disponibilidade');
+        document.getElementById(`tradeBadge-${cardId}`)?.classList.toggle('d-none', !available);
+        const cardItem = input.closest('.card-item');
+        cardItem.dataset.trade = available ? 'true' : 'false';
+        applyFilters();
+      } catch (err) {
+        input.checked = !available;
+        alert(err.message);
+      } finally {
+        input.disabled = false;
+      }
+    }
+
+    // Navegação para o laudo (o toggle de troca não deve navegar)
+    cardList.addEventListener('click', (e) => {
+      if (e.target.closest('[data-stop]')) return;
+      const article = e.target.closest('.collection-card');
+      if (article) window.location.href = article.dataset.href;
+    });
+    cardList.addEventListener('keypress', (e) => {
+      if (e.target.closest('[data-stop]')) return;
+      const article = e.target.closest('.collection-card');
+      if (article && (e.key === 'Enter' || e.key === ' ')) window.location.href = article.dataset.href;
+    });
+    cardList.addEventListener('change', (e) => {
+      if (e.target.matches('input[data-card-id]')) toggleTrade(e.target);
+    });
+
+    searchInput.addEventListener('input', applyFilters);
+    graderFilter.addEventListener('change', applyFilters);
+    gradeFilter.addEventListener('change', applyFilters);
+    tradeFilter.addEventListener('change', applyFilters);
+
+    const [session, cardsRes, gradersRes] = await Promise.all([
+      getSession(),
+      supabase.from('cards').select('*').order('created_at'),
+      supabase.from('graders').select('name').order('created_at'),
+    ]);
+
+    if (cardsRes.error || gradersRes.error) {
+      cardList.innerHTML = emptyState('Não foi possível carregar o acervo. Tente novamente em instantes.', 'bi-exclamation-triangle');
+      console.error(cardsRes.error || gradersRes.error);
+    } else {
+      const cards = cardsRes.data;
+      const graders = gradersRes.data;
+      document.getElementById('statCards').textContent = cards.length;
+      document.getElementById('statCardsLabel').textContent = cards.length === 1 ? 'Carta' : 'Cartas';
+      document.getElementById('statGraders').textContent = graders.length;
+      document.getElementById('statGradersLabel').textContent = graders.length === 1 ? 'Certificadora' : 'Certificadoras';
+      for (const g of graders) graderFilter.add(new Option(g.name, g.name));
+      cardList.innerHTML = cards.length
+        ? cards.map((c, i) => renderCard(c, i + 1, Boolean(session))).join('')
+        : emptyState('Nenhuma carta encontrada no banco de dados.');
+    }
+  </script>
+</body>
+
+</html>
