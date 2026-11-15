@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link href="css/styles.css?v=11" rel="stylesheet">
+  <link href="css/styles.css?v=12" rel="stylesheet">
 </head>
 
 <body>
@@ -70,10 +70,12 @@
     function render(card) {
       const grade = card.grade || {};
       const company = e(card.grading_company);
+      // Só mostra as fotos que existem; sem nenhuma, cai no placeholder.
       const photos = [
-        ['Frente', safeUrl(card.image_front_url, PLACEHOLDER_IMG)],
-        ['Verso', safeUrl(card.image_back_url, PLACEHOLDER_IMG)],
-      ];
+        ['Frente', safeUrl(card.image_front_url)],
+        ['Verso', safeUrl(card.image_back_url)],
+      ].filter(([, src]) => src);
+      if (!photos.length) photos.push(['Frente', PLACEHOLDER_IMG]);
       const certLink = safeUrl(card.cert_link);
       const links = card.links || {};
 
@@ -117,7 +119,7 @@
             <button type="button" class="gallery-main" id="galleryMain" aria-label="Ampliar foto">
               <img src="${e(photos[0][1])}" alt="${e(card.name)} — ${photos[0][0]}">
             </button>
-            <div class="gallery-thumbs">
+            <div class="gallery-thumbs" ${photos.length < 2 ? 'hidden' : ''}>
               ${photos.map(([label, src], i) => `
                 <button type="button" data-src="${e(src)}" data-label="${label}" aria-pressed="${i === 0}" aria-label="Mostrar ${label.toLowerCase()}">
                   <img src="${e(src)}" alt="">
