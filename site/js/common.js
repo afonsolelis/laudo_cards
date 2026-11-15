@@ -1,6 +1,24 @@
-// Helpers de renderização usados pelas páginas.
+// Dados e helpers compartilhados pelas páginas.
+// O acervo vive em data/cards.json (site 100% estático, sem backend).
 
 export const PLACEHOLDER_IMG = 'img/placeholder.svg';
+
+// Graduadoras já publicadas no site. As demais aparecem como "Em breve".
+export const ACTIVE_GRADERS = ['GRADD'];
+
+let cardsPromise;
+
+export function loadCards() {
+  cardsPromise ??= fetch('data/cards.json', { cache: 'no-cache' }).then((res) => {
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    return res.json();
+  });
+  return cardsPromise;
+}
+
+export function graderSlug(name) {
+  return String(name ?? '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+}
 
 export function escapeHtml(value) {
   return String(value ?? '')
@@ -11,7 +29,7 @@ export function escapeHtml(value) {
     .replaceAll("'", '&#39;');
 }
 
-// Só aceita http(s): evita `javascript:` vindo do banco em atributos href/src.
+// Só aceita http(s): evita `javascript:` vindo dos dados em atributos href/src.
 export function safeUrl(value, fallback = '') {
   try {
     const url = new URL(value);
@@ -21,10 +39,10 @@ export function safeUrl(value, fallback = '') {
   }
 }
 
-export function gradeBadgeColor(grade) {
-  if (grade >= 9) return 'bg-success';
-  if (grade >= 8) return 'bg-warning text-dark';
-  return 'bg-secondary';
+// Nota exibida: cartas só autenticadas (final 0/nulo) mostram "A".
+export function gradeLabel(grade) {
+  const final = grade?.final;
+  return final ? String(final) : 'A';
 }
 
 export function formatDateBR(isoDate) {
@@ -33,19 +51,5 @@ export function formatDateBR(isoDate) {
 }
 
 export function formatBRL(value) {
-  return Number(value).toFixed(2).replace('.', ',');
-}
-
-export function todayLocal() {
-  const d = new Date();
-  const pad = (n) => String(n).padStart(2, '0');
-  return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`;
-}
-
-export function errorMessage(error) {
-  if (!error) return 'Erro desconhecido';
-  if (error.code === '23503') return 'Graduadora em uso por cartas ou inexistente.';
-  if (error.code === '23505') return 'Registro duplicado.';
-  if (error.code === '42501') return 'Sem permissão. Entre com a conta de administrador.';
-  return error.message || String(error);
+  return Number(value).toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 }

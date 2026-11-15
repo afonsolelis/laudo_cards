@@ -1,21 +1,18 @@
 # Laudo Cards 🎴
 
-Portfólio digital de cartas Pokémon TCG graduadas: galeria pública, laudo por carta (subgrades, certificado, links de mercado) e painel administrativo.
+Portfólio digital de cartas Pokémon TCG graduadas: vitrine pública com cards por graduadora e um laudo por carta (fotos do slab, subgrades, certificado e links de mercado).
 
 ## Stack
 
-- **Site estático** (`site/`): HTML, Bootstrap 5.3 e JavaScript em módulos, publicado no **GitHub Pages**.
-- **Supabase**: Postgres com RLS (leitura pública, escrita só para administradores), Auth (login do admin) e Storage (bucket `card-images`).
+Site 100% estático (`site/`): HTML, CSS e JavaScript em módulos, publicado no **GitHub Pages**. Sem backend nem banco: o acervo fica em `site/data/cards.json` e as imagens no Cloudinary.
 
 ## Graduadoras
 
-ARS · GBA · PSA · GRADD. Na home, cada graduadora vira um botão de filtro com a contagem de cartas. Para incluir outra, cadastre pelo painel admin.
+A home mostra um card por graduadora. Só as listadas em `ACTIVE_GRADERS` (`site/js/common.js`) estão publicadas; as demais aparecem como "Em breve". Hoje: **GRADD**.
 
-## Configuração do Supabase
+## Adicionar ou editar cartas
 
-1. No SQL Editor, rode `supabase/schema.sql` (idempotente).
-2. Em *Authentication → Sign In / Providers*, desative "Allow new users to sign up".
-3. Para zerar o acervo, rode `supabase/reset.sql` e esvazie o bucket `card-images` em *Storage*.
+Edite `site/data/cards.json` e faça push para `main`. Cada carta precisa de um `id` único (usado em `laudo.html?id=`).
 
 ## Rodando localmente
 
@@ -23,20 +20,14 @@ ARS · GBA · PSA · GRADD. Na home, cada graduadora vira um botão de filtro co
 python3 -m http.server -d site 8000
 ```
 
-Acesse `http://localhost:8000`. O site usa o projeto Supabase configurado em `site/js/supabase.js`.
-
 ## Estrutura
 
 ```text
 site/
-├── index.html      # Galeria com busca, filtro por graduadora e ordenação por nota
+├── index.html      # Home: hero, cards de graduadoras e grade de cartas
 ├── laudo.html      # Laudo individual (?id=)
-├── admin.html      # CRUD de cartas e graduadoras
-├── login.html
 ├── 404.html        # Redireciona links antigos /laudo/<id>
+├── data/cards.json # Acervo
 ├── css/styles.css
-└── js/             # Cliente Supabase e helpers
-supabase/
-├── schema.sql      # Tabelas, RLS, bucket e graduadoras
-└── reset.sql       # Zera cartas e recria graduadoras
+└── js/common.js    # Carregamento dos dados e helpers
 ```

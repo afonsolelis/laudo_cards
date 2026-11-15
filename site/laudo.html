@@ -1,283 +1,197 @@
 <!DOCTYPE html>
-<html lang="pt-BR" data-bs-theme="dark">
+<html lang="pt-BR">
 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
-  <title>Descritivo - Laudo Cards</title>
+  <title>Laudo — Laudo Cards</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@500;700;800;900&display=swap" rel="stylesheet">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
-  <link href="css/styles.css?v=5" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="css/styles.css?v=7" rel="stylesheet">
 </head>
 
 <body>
-  <a class="visually-hidden-focusable position-absolute top-0 start-0 m-2 p-2 bg-white text-dark rounded" href="#main">Pular para o conteúdo</a>
+  <a class="skip-link" href="#main">Pular para o conteúdo</a>
 
-  <!-- Navigation -->
-  <nav class="navbar navbar-expand-lg site-nav sticky-top">
+  <header class="site-header">
     <div class="container">
-      <a class="navbar-brand site-brand" href="./">Cartas Graduadas</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-        aria-controls="navbarNav" aria-expanded="false" aria-label="Alternar navegação">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav ms-auto">
-          <li class="nav-item">
-            <a class="nav-link d-inline-flex align-items-center gap-1" href="./">
-              <i class="bi bi-arrow-left" aria-hidden="true"></i> Voltar ao Portfólio
-            </a>
-          </li>
-        </ul>
-      </div>
+      <a class="brand" href="./"><img src="favicon.svg" alt="" width="28" height="28"> Laudo Cards</a>
+      <nav class="main-nav" aria-label="Principal">
+        <a href="./">Início</a>
+        <a href="./#graduadoras">Graduadoras</a>
+      </nav>
     </div>
-  </nav>
+  </header>
 
-  <div id="laudo">
-    <section id="main" class="laudo-head">
-      <div class="container">
-        <span class="eyebrow">Descritivo técnico</span>
-        <h1 class="laudo-title"><span class="spinner-border spinner-border-sm me-2" aria-hidden="true"></span>Carregando...</h1>
-      </div>
-    </section>
-  </div>
+  <main id="main" class="container">
+    <p class="state">Carregando…</p>
+  </main>
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <footer class="site-footer">
+    <div class="container">
+      <span><strong>Laudo Cards</strong> · Coleção pessoal de cartas graduadas</span>
+      <span>Pokémon e seus nomes são marcas de seus respectivos donos.</span>
+    </div>
+  </footer>
+
+  <dialog class="lightbox" id="lightbox" aria-label="Foto ampliada">
+    <button type="button" aria-label="Fechar">&times;</button>
+    <img alt="">
+  </dialog>
+
   <script type="module">
-    import { supabase, getSession } from './js/supabase.js';
-    import { escapeHtml as e, safeUrl, gradeBadgeColor, formatDateBR, formatBRL, PLACEHOLDER_IMG } from './js/common.js';
+    import {
+      loadCards, graderSlug, escapeHtml as e, safeUrl, gradeLabel, formatDateBR, formatBRL, PLACEHOLDER_IMG,
+    } from './js/common.js';
 
-    const root = document.getElementById('laudo');
-
-    function notFound(message) {
-      root.innerHTML = `
-        <section id="main" class="laudo-head"><div class="container">
-          <span class="eyebrow">Descritivo técnico</span>
-          <h1 class="laudo-title">${e(message)}</h1>
-          <p class="laudo-sub"><a href="./">Voltar ao portfólio</a></p>
-        </div></section>`;
-    }
+    const root = document.getElementById('main');
 
     const LINKS = [
-      ['tcg_player', 'TCGPlayer (EUA)'],
-      ['price_charting', 'Price Charting'],
-      ['liga_pokemon', 'Liga Pokémon Brasil'],
+      ['tcg_player', 'TCGPlayer'],
+      ['price_charting', 'PriceCharting'],
+      ['liga_pokemon', 'Liga Pokémon'],
       ['myp_cards', 'MYP Cards'],
       ['ebay', 'eBay'],
     ];
 
     const COMPONENTS = [
-      ['centering', 'Centering (Centralização)'],
-      ['corners', 'Corners (Cantos)'],
-      ['edges', 'Edges (Bordas)'],
-      ['surface', 'Surface (Superfície)'],
+      ['centering', 'Centralização'],
+      ['corners', 'Cantos'],
+      ['edges', 'Bordas'],
+      ['surface', 'Superfície'],
     ];
 
-    function photoModal(id, title, src) {
-      return `
-        <div class="modal fade" id="${id}" tabindex="-1" aria-hidden="true" aria-labelledby="${id}Title">
-          <div class="modal-dialog modal-dialog-centered modal-lg">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h2 class="modal-title h5" id="${id}Title">${title}</h2>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
-              </div>
-              <div class="modal-body text-center p-0"><img src="${e(src)}" alt="${title}" class="img-fluid"></div>
-            </div>
-          </div>
-        </div>`;
+    function message(text) {
+      root.innerHTML = `<p class="state">${e(text)} · <a href="./">Voltar à coleção</a></p>`;
     }
 
-    function render(card, loggedIn) {
+    function render(card) {
       const grade = card.grade || {};
-      const links = card.links || {};
-      const final = grade.final;
-      const front = safeUrl(card.image_front_url, PLACEHOLDER_IMG);
-      const back = safeUrl(card.image_back_url, PLACEHOLDER_IMG);
       const company = e(card.grading_company);
+      const photos = [
+        ['Frente', safeUrl(card.image_front_url, PLACEHOLDER_IMG)],
+        ['Verso', safeUrl(card.image_back_url, PLACEHOLDER_IMG)],
+      ];
       const certLink = safeUrl(card.cert_link);
+      const links = card.links || {};
 
-      document.title = `${card.name} (${card.number}) - Descritivo`;
+      document.title = `${card.name} (${card.number}) — Laudo Cards`;
 
-      const linkButtons = LINKS.filter(([key]) => safeUrl(links[key])).map(([key, label]) => `
-        <div class="col-md-6">
-          <a href="${e(safeUrl(links[key]))}" target="_blank" rel="noopener noreferrer" class="btn btn-line w-100">${label}</a>
+      const meta = [
+        ['Número', `<span class="mono">${e(card.number)}</span>`],
+        ['Coleção', e(card.set_name)],
+        ['Ano', e(card.year)],
+        ['Raridade', e(card.rarity)],
+        ['Tipo', e(card.pokemon_type)],
+        ['Idioma', e(card.language)],
+        ['Ilustrador', e(card.illustrator_name)],
+        ['Certificado', `<span class="mono">${e(card.certificate_number)}</span>`],
+        ['Ano da graduação', e(card.grading_year)],
+        ['Na coleção desde', card.added_date ? e(formatDateBR(card.added_date)) : ''],
+        ['Preço de aquisição', card.acquisition_price != null ? `R$ ${formatBRL(card.acquisition_price)}` : ''],
+      ].filter(([, value]) => value !== '');
+
+      const linkItems = LINKS.filter(([key]) => safeUrl(links[key])).map(([key, label]) => `
+        <li><a href="${e(safeUrl(links[key]))}" target="_blank" rel="noopener noreferrer">${label} <span aria-hidden="true">↗</span></a></li>`).join('');
+
+      const bars = COMPONENTS.filter(([key]) => grade[key] != null).map(([key, label]) => `
+        <div class="bar-row">
+          <div class="bar-label"><span>${label}</span><strong>${e(grade[key])}</strong></div>
+          <div class="bar" role="img" aria-label="${label}: ${e(grade[key])} de 10"><span style="width:${Math.min(100, Number(grade[key]) * 10)}%"></span></div>
         </div>`).join('');
 
-      const componentRows = COMPONENTS.filter(([key]) => grade[key] !== null && grade[key] !== undefined).map(([key, label]) => `
-        <div class="spec-row">
-          <span class="spec-label">${label}</span>
-          <span class="badge ${gradeBadgeColor(grade[key])}">${e(grade[key])}</span>
-        </div>`).join('');
-
-      const noteBox = (title, icon, iconClass, text) => text ? `
-        <div class="mt-4">
-          <h3 class="h6 mb-3">${title}</h3>
-          <div class="note-box"><div class="d-flex">
-            <span class="${iconClass} me-2" aria-hidden="true"><i class="bi ${icon}"></i></span>
-            <div class="small" style="white-space: pre-wrap;">${e(text)}</div>
-          </div></div>
-        </div>` : '';
+      const notes = card.grader_notes_markdown;
+      const history = card.card_history || card.history_markdown;
 
       root.innerHTML = `
-        <section id="main" class="laudo-head">
-          <div class="container">
-            <div class="row align-items-center g-3">
-              <div class="col-md-8">
-                <span class="eyebrow">Descritivo técnico</span>
-                <h1 class="laudo-title">${e(card.full_name || card.name)}</h1>
-                <p class="laudo-sub">${e(card.set_name)} · #${e(card.number)} · ${e(card.year)}</p>
-              </div>
-              <div class="col-md-4 text-md-end">
-                <span class="cert-chip"><span class="cert-key">Cert</span> ${e(card.certificate_number)}</span>
-                ${card.added_date ? `
-                <div class="mt-2">
-                  <span class="cert-chip"><span class="cert-key">Na coleção desde</span> ${e(formatDateBR(card.added_date))}</span>
-                </div>` : ''}
-              </div>
-            </div>
-          </div>
-        </section>
+        <nav class="breadcrumb" aria-label="Trilha">
+          <a href="./">Início</a><span aria-hidden="true">/</span>
+          <a href="./#${e(graderSlug(card.grading_company))}">${company}</a><span aria-hidden="true">/</span>
+          <span>${e(card.name)}</span>
+        </nav>
 
-        <div id="cardContent" class="container my-5">
-          <div class="row g-4 mb-4">
-            <div class="col-lg-6">
-              <section class="panel">
-                <div class="panel-head"><h2 class="panel-title">Fotos da Carta</h2></div>
-                <div class="panel-body is-flush">
-                  <div class="row g-0">
-                    <div class="col-6 photo-cell">
-                      <img src="${e(front)}" alt="Frente" class="img-fluid photo-thumb" data-bs-toggle="modal" data-bs-target="#modalFrente">
-                    </div>
-                    <div class="col-6 photo-cell">
-                      <img src="${e(back)}" alt="Verso" class="img-fluid photo-thumb" data-bs-toggle="modal" data-bs-target="#modalVerso">
-                    </div>
-                  </div>
-                </div>
-              </section>
-            </div>
-
-            <div class="col-lg-6">
-              <section class="panel">
-                <div class="panel-head"><h2 class="panel-title">Identificação</h2></div>
-                <div class="panel-body">
-                  <table class="table id-table">
-                    <tbody>
-                      <tr><td class="id-key">Nome</td><td class="id-val">${e(card.name)}</td></tr>
-                      <tr><td class="id-key">Número</td><td class="id-val">${e(card.number)}</td></tr>
-                      <tr><td class="id-key">Coleção</td><td class="id-val">${e(card.set_name)}</td></tr>
-                      <tr><td class="id-key">Ano</td><td class="id-val">${e(card.year)}</td></tr>
-                      <tr><td class="id-key">Raridade</td><td class="id-val"><span class="chip">${e(card.rarity)}</span></td></tr>
-                      <tr><td class="id-key">Tipo</td><td class="id-val">${e(card.pokemon_type)}</td></tr>
-                      <tr><td class="id-key">Idioma</td><td class="id-val">${e(card.language)}</td></tr>
-                      <tr><td class="id-key">Artista/Ilustrador</td><td class="id-val">${e(card.illustrator_name)}</td></tr>
-                      ${card.acquisition_price !== null ? `
-                      <tr><td class="id-key">Preço de Aquisição</td><td class="id-val"><span class="chip">R$ ${formatBRL(card.acquisition_price)}</span></td></tr>` : ''}
-                    </tbody>
-                  </table>
-                </div>
-              </section>
+        <div class="single">
+          <div class="gallery">
+            <button type="button" class="gallery-main" id="galleryMain" aria-label="Ampliar foto">
+              <img src="${e(photos[0][1])}" alt="${e(card.name)} — ${photos[0][0]}">
+            </button>
+            <div class="gallery-thumbs">
+              ${photos.map(([label, src], i) => `
+                <button type="button" data-src="${e(src)}" data-label="${label}" aria-pressed="${i === 0}" aria-label="Mostrar ${label.toLowerCase()}">
+                  <img src="${e(src)}" alt="">
+                </button>`).join('')}
             </div>
           </div>
 
-          <section class="panel mb-4">
-            <div class="panel-head"><h2 class="panel-title">Graduação ${company}</h2></div>
-            <div class="panel-body">
-              <div class="grade-hero">
-                <div class="grade-number">${e(final)}</div>
-                <div>
-                  <p class="grade-desc">${e(grade.description)}</p>
-                  <p class="grade-company">Avaliada por <strong>${company}</strong></p>
-                </div>
-              </div>
+          <div class="summary">
+            <span class="product-cat">${company} · Graduada</span>
+            <h1>${e(card.name)}</h1>
+            <p class="subtitle">${e(card.full_name || card.set_name)}</p>
 
-              <hr class="my-3" style="border-color: var(--line);">
-
-              <div class="meta-list">
-                <div><div class="meta-key">Graduadora</div><div class="meta-val">${company}</div></div>
-                <div><div class="meta-key">Certificado</div><div class="meta-val font-monospace">${e(card.certificate_number)}</div></div>
-                <div><div class="meta-key">Ano da Certificação</div><div class="meta-val">${e(card.grading_year)}</div></div>
-              </div>
-
-              <div class="d-grid gap-2 mt-4">
-                ${certLink ? `
-                <a href="${e(certLink)}" target="_blank" rel="noopener noreferrer" class="btn btn-ink">Ver Laudo Oficial ${company}</a>` : `
-                <div class="note-box small text-muted" role="status">
-                  <i class="bi bi-info-circle me-1" aria-hidden="true"></i>
-                  Consulta pública do certificado indisponível. Os dados exibidos foram conferidos no rótulo físico da graduadora.
-                </div>`}
-                ${loggedIn ? `
-                <a href="admin.html?edit_id=${encodeURIComponent(card.id)}" class="btn btn-line">
-                  <i class="bi bi-pencil me-1" aria-hidden="true"></i> Editar Carta
-                </a>` : ''}
-              </div>
+            <div class="summary-grade">
+              <strong>${e(gradeLabel(grade))}</strong>
+              <span>${e(grade.description)}</span>
             </div>
-          </section>
 
-          <section class="panel mb-4">
-            <div class="panel-head"><h2 class="panel-title">Links de Referência e Consulta de Preços</h2></div>
-            <div class="panel-body"><div class="row g-2">${linkButtons}</div></div>
-          </section>
+            <dl class="meta">${meta.map(([k, v]) => `<dt>${k}</dt><dd>${v}</dd>`).join('')}</dl>
 
-          <section class="panel mb-4">
-            <div class="panel-head"><h2 class="panel-title">Análise de Condição — ${company}</h2></div>
-            <div class="panel-body">
-              <div class="mb-4">
-                <div class="d-flex justify-content-between align-items-center mb-2">
-                  <span class="fw-bold">Classificação Geral</span>
-                  <span class="badge ${gradeBadgeColor(final)} grade-badge">${e(final)} — ${e(grade.description)}</span>
-                </div>
-                <div class="progress progress-tall">
-                  <div class="progress-bar ${gradeBadgeColor(final)}" role="progressbar"
-                    style="width: ${(final / 10) * 100}%;"
-                    aria-valuenow="${(final / 10) * 100}" aria-valuemin="0" aria-valuemax="100">
-                    <span class="fw-bold">${e(final)}/10</span>
-                  </div>
-                </div>
-              </div>
-
-              <h3 class="h6 mb-3">Análise Detalhada por Componente</h3>
-              ${componentRows}
-              <div class="spec-row is-total">
-                <span class="spec-label">Nota Final (Overall)</span>
-                <span class="badge ${gradeBadgeColor(final)}">${e(final)}</span>
-              </div>
-
-              ${noteBox('Observações Técnicas', 'bi-check-circle-fill', 'text-success', card.grader_notes_markdown)}
-              ${noteBox('Histórico da Carta', 'bi-clock-history', 'text-muted', card.card_history)}
+            <div class="actions">
+              ${certLink
+                ? `<a class="btn btn-block" href="${e(certLink)}" target="_blank" rel="noopener noreferrer">Ver laudo oficial ${company}</a>`
+                : `<p class="notice">Consulta pública do certificado indisponível. Os dados foram conferidos no rótulo físico da graduadora.</p>`}
             </div>
-          </section>
 
-          <div class="text-center mt-4 mb-5">
-            <a href="./" class="btn btn-ink btn-lg">
-              <i class="bi bi-arrow-left me-1" aria-hidden="true"></i> Voltar ao Portfólio
-            </a>
+            ${linkItems ? `<ul class="link-list" aria-label="Referências de preço">${linkItems}</ul>` : ''}
           </div>
         </div>
 
-        ${photoModal('modalFrente', 'Frente', front)}
-        ${photoModal('modalVerso', 'Verso', back)}`;
+        ${bars || notes || history ? `
+        <section class="details">
+          <div class="details-grid">
+            <div>
+              <h2>Análise da graduação</h2>
+              ${bars || '<p class="prose">Esta graduadora não informou notas por componente.</p>'}
+            </div>
+            <div>
+              ${notes ? `<h2>Observações</h2><p class="prose">${e(notes)}</p>` : ''}
+              ${history ? `<h2>Histórico da carta</h2><p class="prose">${e(history)}</p>` : ''}
+            </div>
+          </div>
+        </section>` : ''}`;
+
+      const main = document.getElementById('galleryMain');
+      const mainImg = main.querySelector('img');
+      root.querySelectorAll('.gallery-thumbs button').forEach((btn) => {
+        btn.addEventListener('click', () => {
+          mainImg.src = btn.dataset.src;
+          mainImg.alt = `${card.name} — ${btn.dataset.label}`;
+          root.querySelectorAll('.gallery-thumbs button').forEach((b) => b.setAttribute('aria-pressed', String(b === btn)));
+        });
+      });
+
+      const box = document.getElementById('lightbox');
+      const boxImg = box.querySelector('img');
+      main.addEventListener('click', () => {
+        boxImg.src = mainImg.src;
+        boxImg.alt = mainImg.alt;
+        box.showModal();
+      });
+      box.querySelector('button').addEventListener('click', () => box.close());
+      box.addEventListener('click', (event) => { if (event.target === box) box.close(); });
     }
 
     const id = new URLSearchParams(location.search).get('id');
     if (!id) {
-      notFound('Carta não informada');
+      message('Carta não informada');
     } else {
-      const [session, { data: card, error }] = await Promise.all([
-        getSession(),
-        supabase.from('cards').select('*').eq('id', id).maybeSingle(),
-      ]);
-      if (error) {
-        console.error(error);
-        notFound('Não foi possível carregar a carta');
-      } else if (!card) {
-        notFound('Carta não encontrada');
-      } else {
-        render(card, Boolean(session));
+      try {
+        const card = (await loadCards()).find((c) => c.id === id);
+        card ? render(card) : message('Carta não encontrada');
+      } catch (err) {
+        console.error(err);
+        message('Não foi possível carregar a carta');
       }
     }
   </script>
