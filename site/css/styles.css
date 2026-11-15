@@ -148,7 +148,7 @@ p { margin: 0; }
 
 .grader-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   gap: 24px;
 }
 .grader-card {
@@ -163,6 +163,7 @@ p { margin: 0; }
   overflow: hidden;
   transition: background .2s ease;
 }
+.grader-card > span { position: relative; z-index: 1; }
 .grader-card .grader-name { font-size: 26px; font-weight: 700; letter-spacing: -.01em; }
 .grader-card .grader-meta { font-size: 14px; color: var(--muted); margin-top: 4px; }
 .grader-card .grader-cta {
@@ -178,9 +179,10 @@ p { margin: 0; }
   position: absolute;
   right: -8px;
   top: 18px;
-  height: 150px;
+  height: 130px;
   width: auto;
   transform: rotate(8deg);
+  opacity: .9;
   filter: drop-shadow(0 10px 16px rgba(0, 0, 0, .15));
   transition: transform .3s ease;
 }
