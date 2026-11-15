@@ -1680,46 +1680,6 @@
     "created_at": "2026-08-24T01:28:48+00:00"
   },
   {
-    "id": "gba-p0000259",
-    "name": "Armarouge",
-    "number": "115/091",
-    "full_name": "2024 Pokémon Destinos de Paldea Armarouge 115/091",
-    "set_name": "Destinos de Paldea",
-    "year": 2024,
-    "rarity": "Rara Brilhante (Shiny Rare)",
-    "pokemon_type": "Fire (Fogo)",
-    "language": "Português (Portuguese)",
-    "illustrator_name": null,
-    "acquisition_price": null,
-    "added_date": null,
-    "available_for_trade": false,
-    "grading_company": "GBA Grading",
-    "certificate_number": "P0000259",
-    "grading_year": null,
-    "cert_link": "https://gbagrading.com.br/card-details/68f7946b365948acca203ac7",
-    "image_front_url": "https://ftp.gbagrading.com.br/grading-images/1761615979826.webp",
-    "image_back_url": "https://ftp.gbagrading.com.br/grading-images/1761615979517.webp",
-    "grade": {
-      "edges": 10,
-      "final": 9,
-      "corners": 9.75,
-      "surface": 9.75,
-      "centering": 9.5,
-      "description": "Mint"
-    },
-    "links": {
-      "ebay": null,
-      "myp_cards": null,
-      "tcg_player": null,
-      "liga_pokemon": null,
-      "price_charting": null
-    },
-    "history_markdown": null,
-    "grader_notes_markdown": "Graduada pela GBA Grading com nota 9. Subnotas: Superfície 9,75, Centralização 9,5, Bordas 10 e Cantos 9,75. Ranking 1, população 1. Sem observações do avaliador.",
-    "card_history": null,
-    "created_at": "2026-11-15T00:00:00+00:00"
-  },
-  {
     "id": "gradd-b12602004",
     "name": "Hisuian Growlithe",
     "number": "181",
