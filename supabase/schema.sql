@@ -37,6 +37,14 @@ create table if not exists public.graders (
   created_at timestamptz not null default now()
 );
 
+-- Graduadoras do acervo; a ordem de created_at define a ordem dos botões.
+insert into public.graders (name, created_at) values
+  ('ARS',   now()),
+  ('GBA',   now() + interval '1 second'),
+  ('PSA',   now() + interval '2 seconds'),
+  ('GRADD', now() + interval '3 seconds')
+on conflict (name) do nothing;
+
 -- Cartas ---------------------------------------------------------------------
 
 create table if not exists public.cards (

@@ -11,7 +11,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@500;700;800;900&display=swap" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
-  <link href="css/styles.css?v=4" rel="stylesheet">
+  <link href="css/styles.css?v=5" rel="stylesheet">
 </head>
 
 <body>
@@ -65,21 +65,21 @@
       <!-- Search Bar and Filters -->
       <div class="toolbar">
         <div class="row g-3">
-          <div class="col-md-6">
+          <div class="col-md-8">
             <input type="text" id="searchInput" class="form-control"
               placeholder="Buscar por nome, número, conjunto ou certificado..." aria-label="Buscar cartas">
           </div>
-          <div class="col-md-3">
-            <select id="graderFilter" class="form-select" aria-label="Filtrar por certificadora">
-              <option value="">Todas as certificadoras</option>
-            </select>
-          </div>
-          <div class="col-md-3">
+          <div class="col-md-4">
             <select id="gradeFilter" class="form-select" aria-label="Ordenar por nota">
               <option value="">Ordenar (Padrão)</option>
               <option value="desc">Maior Nota para Menor</option>
               <option value="asc">Menor Nota para Maior</option>
             </select>
+          </div>
+          <div class="col-12">
+            <div class="grader-buttons" id="graderFilter" role="group" aria-label="Filtrar por graduadora">
+              <button type="button" class="grader-btn active" data-grader="" aria-pressed="true">Todas</button>
+            </div>
           </div>
           <div class="col-12">
             <div class="form-check form-switch">
@@ -170,7 +170,7 @@
 
     function applyFilters() {
       const searchTerm = searchInput.value.toLowerCase();
-      const graderValue = graderFilter.value.toLowerCase();
+      const graderValue = graderFilter.querySelector('.grader-btn.active')?.dataset.grader ?? '';
       const sortOrder = gradeFilter.value;
       const tradeOnly = tradeFilter.checked;
       const cards = Array.from(document.querySelectorAll('.card-item'));
@@ -227,7 +227,16 @@
     });
 
     searchInput.addEventListener('input', applyFilters);
-    graderFilter.addEventListener('change', applyFilters);
+    graderFilter.addEventListener('click', (e) => {
+      const btn = e.target.closest('.grader-btn');
+      if (!btn) return;
+      for (const b of graderFilter.querySelectorAll('.grader-btn')) {
+        const on = b === btn;
+        b.classList.toggle('active', on);
+        b.setAttribute('aria-pressed', on ? 'true' : 'false');
+      }
+      applyFilters();
+    });
     gradeFilter.addEventListener('change', applyFilters);
     tradeFilter.addEventListener('change', applyFilters);
 
@@ -247,7 +256,19 @@
       document.getElementById('statCardsLabel').textContent = cards.length === 1 ? 'Carta' : 'Cartas';
       document.getElementById('statGraders').textContent = graders.length;
       document.getElementById('statGradersLabel').textContent = graders.length === 1 ? 'Certificadora' : 'Certificadoras';
-      for (const g of graders) graderFilter.add(new Option(g.name, g.name));
+      const counts = {};
+      for (const c of cards) {
+        const key = String(c.grading_company).toLowerCase();
+        counts[key] = (counts[key] || 0) + 1;
+      }
+      graderFilter.querySelector('[data-grader=""]').insertAdjacentHTML('beforeend',
+        ` <span class="grader-count">${cards.length}</span>`);
+      for (const g of graders) {
+        const key = escapeHtml(g.name.toLowerCase());
+        graderFilter.insertAdjacentHTML('beforeend',
+          `<button type="button" class="grader-btn" data-grader="${key}" aria-pressed="false">${escapeHtml(g.name)}
+            <span class="grader-count">${counts[g.name.toLowerCase()] || 0}</span></button>`);
+      }
       cardList.innerHTML = cards.length
         ? cards.map((c, i) => renderCard(c, i + 1, Boolean(session))).join('')
         : emptyState('Nenhuma carta encontrada no banco de dados.');

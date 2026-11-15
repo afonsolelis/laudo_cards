@@ -220,6 +220,44 @@ a:hover { color: var(--accent-hover); }
   color: var(--ink);
 }
 
+/* Botões de graduadora */
+.grader-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+.grader-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-height: 44px;
+  padding: 0.5rem 1.1rem;
+  background: var(--surface-muted);
+  border: 1px solid var(--line-strong);
+  border-radius: 999px;
+  color: var(--ink);
+  font-family: 'Outfit', sans-serif;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  transition: all 0.2s ease;
+}
+.grader-btn:hover { border-color: var(--accent); }
+.grader-btn:focus-visible { outline: none; box-shadow: 0 0 0 3px var(--accent-soft); border-color: var(--accent); }
+.grader-btn.active {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #141A29;
+}
+.grader-count {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.1rem 0.5rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.08);
+}
+.grader-btn.active .grader-count { background: rgba(20, 26, 41, 0.18); }
+
 /* ===================== Collection card ====================== */
 .collection-card {
   position: relative;
