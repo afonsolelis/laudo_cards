@@ -4,7 +4,7 @@
 export const PLACEHOLDER_IMG = 'img/placeholder.svg';
 
 // Graduadoras já publicadas no site. As demais aparecem como "Em breve".
-export const ACTIVE_GRADERS = ['GRADD'];
+export const ACTIVE_GRADERS = ['GRADD', 'AGS'];
 
 let cardsPromise;
 

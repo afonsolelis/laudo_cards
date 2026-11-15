@@ -10,13 +10,11 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link href="css/styles.css?v=7" rel="stylesheet">
+  <link href="css/styles.css?v=9" rel="stylesheet">
 </head>
 
 <body>
   <a class="skip-link" href="#main">Pular para o conteúdo</a>
-
-  <div class="topbar">Cartas Pokémon TCG graduadas · cada uma com laudo e certificado verificável</div>
 
   <header class="site-header">
     <div class="container">
@@ -24,24 +22,11 @@
       <nav class="main-nav" aria-label="Principal">
         <a href="./" aria-current="page">Início</a>
         <a href="#graduadoras">Graduadoras</a>
-        <a href="#colecao">Coleção</a>
       </nav>
     </div>
   </header>
 
   <main id="main">
-    <section class="hero">
-      <div class="container">
-        <div>
-          <span class="eyebrow">Coleção certificada</span>
-          <h1>Cartas Pokémon graduadas, com laudo de cada uma.</h1>
-          <p>Fotos do slab, notas por componente, certificado oficial e referências de preço, tudo em um só lugar.</p>
-          <a class="btn" href="#colecao">Ver coleção</a>
-        </div>
-        <div class="hero-art" id="heroArt" aria-hidden="true"></div>
-      </div>
-    </section>
-
     <section class="section" id="graduadoras" aria-labelledby="graduadorasTitle">
       <div class="container">
         <div class="section-head">
@@ -54,17 +39,7 @@
       </div>
     </section>
 
-    <section class="section" id="colecao" aria-labelledby="colecaoTitle">
-      <div class="container">
-        <div class="section-head">
-          <h2 id="colecaoTitle">Coleção</h2>
-          <p id="colecaoSub"></p>
-        </div>
-        <div class="card-grid" id="cardGrid" aria-live="polite">
-          <p class="state">Carregando…</p>
-        </div>
-      </div>
-    </section>
+    <div id="collections" aria-live="polite"></div>
   </main>
 
   <footer class="site-footer">
@@ -80,14 +55,15 @@
     } from './js/common.js';
 
     const graderGrid = document.getElementById('graderGrid');
-    const cardGrid = document.getElementById('cardGrid');
+    const collections = document.getElementById('collections');
 
     const front = (card) => safeUrl(card.image_front_url, PLACEHOLDER_IMG);
     const byGrade = (a, b) => (b.grade?.final ?? 0) - (a.grade?.final ?? 0) || a.name.localeCompare(b.name);
 
     function graderCard(name, cards) {
       const count = `${cards.length} ${cards.length === 1 ? 'carta' : 'cartas'}`;
-      const thumb = cards[0] ? `<img class="grader-thumb" src="${e(front(cards[0]))}" alt="" loading="lazy">` : '';
+      const withPhoto = cards.find((card) => safeUrl(card.image_front_url));
+      const thumb = withPhoto ? `<img class="grader-thumb" src="${e(front(withPhoto))}" alt="" loading="lazy">` : '';
       return `
         <a class="grader-card" href="#${e(graderSlug(name))}">
           ${thumb}
@@ -104,7 +80,6 @@
           <div class="product-media">
             <span class="product-badge">${e(card.grading_company)} ${e(gradeLabel(card.grade))}</span>
             <img src="${e(front(card))}" alt="${e(card.name)} — frente do slab" loading="lazy">
-            <span class="product-hover">Ver laudo</span>
           </div>
           <div class="product-body">
             <div class="product-cat">${e(card.set_name)} · ${e(card.year)}</div>
@@ -139,22 +114,25 @@
             <span class="grader-cta">Em breve</span>
           </div>` : '');
 
-      const active = ACTIVE_GRADERS.filter((name) => groups.has(name));
-      const shown = active.flatMap((name) => groups.get(name));
-      const first = active[0];
-      document.getElementById('colecao').id = graderSlug(first ?? 'colecao');
-      document.querySelectorAll('a[href="#colecao"]').forEach((a) => { a.hash = graderSlug(first ?? 'colecao'); });
-      document.getElementById('colecaoTitle').textContent = first ? `Coleção ${first}` : 'Coleção';
-      document.getElementById('colecaoSub').textContent = `${shown.length} ${shown.length === 1 ? 'carta graduada' : 'cartas graduadas'}`;
-      cardGrid.innerHTML = shown.length ? shown.map(productCard).join('') : '<p class="state">Nenhuma carta publicada ainda.</p>';
-
-      document.getElementById('heroArt').innerHTML = shown.slice(0, 3)
-        .map((card) => `<img src="${e(front(card))}" alt="">`).join('');
+      collections.innerHTML = ACTIVE_GRADERS.filter((name) => groups.has(name)).map((name) => {
+        const list = groups.get(name);
+        const slug = e(graderSlug(name));
+        return `
+          <section class="section" id="${slug}" aria-labelledby="${slug}-title">
+            <div class="container">
+              <div class="section-head">
+                <h2 id="${slug}-title">Coleção ${e(name)}</h2>
+                <p>${list.length} ${list.length === 1 ? 'carta graduada' : 'cartas graduadas'}</p>
+              </div>
+              <div class="card-grid">${list.map(productCard).join('')}</div>
+            </div>
+          </section>`;
+      }).join('');
     } catch (err) {
       console.error(err);
       const msg = '<p class="state">Não foi possível carregar a coleção.</p>';
       graderGrid.innerHTML = msg;
-      cardGrid.innerHTML = msg;
+
     }
   </script>
 </body>
